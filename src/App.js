@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { connect, Provider } from "react-redux";
+import store from "./redux/store";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./App.scss";
+import CardsLibraryContainer from './components/CardsLibrary';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	<div>
+		<CardsLibraryContainer />
+	</div>
+  )
 }
 
-export default App;
+const mapStateToProps = state => ({});
+
+const AppContainer = connect(mapStateToProps, {})(App);
+
+const HearthstoneApp = () => {
+  return (
+    <Router>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </Router>
+  );
+};
+
+export default HearthstoneApp;
