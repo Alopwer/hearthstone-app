@@ -7,38 +7,38 @@ import CardsLibraryContainer from './components/CardsLibrary';
 import { initialize } from './redux/appReducer';
 import Preloader from "./components/common/Preloader";
 
-// function App(props) {
-//   if(!props.token) {
-//     return <Preloader />
-//   }
+function App(props) {
+  if(!props.token) {
+    return <Preloader />
+  }
 
-//   return (
-// 	<div>
-//     <Route path='/'>
-// 		  <CardsLibraryContainer />
-//     </Route>
-// 	</div>
-//   )
-// }
+  return (
+	<div>
+    <Route path='/'>
+		  <CardsLibraryContainer />
+    </Route>
+	</div>
+  )
+}
 
-// let AppContainer = ({ initialize, token }) => {
-//   useEffect(() => {
-//     initialize()
-//   }, [])
+let AppContainer = ({ initialize, token }) => {
+  useEffect(() => {
+    initialize()
+  }, [])
 
-//   return <App token={token}/>
-// }
+  return <App token={token}/>
+}
 
-// const mapStateToProps = state => ({
-//   token: state.appReducer.token
-// });
-// const AppSuperContainer = connect(mapStateToProps, {initialize})(AppContainer);
+const mapStateToProps = state => ({
+  token: state.appReducer.token
+});
+const AppSuperContainer = connect(mapStateToProps, {initialize})(AppContainer);
 
 const HearthstoneApp = () => {
   return (
     <Router>
       <Provider store={store}>
-        {/* <AppSuperContainer /> */}
+        <AppSuperContainer />
       </Provider>
     </Router>
   );
