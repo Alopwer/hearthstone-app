@@ -5,13 +5,13 @@ import { requestCards } from '../../redux/cardsReducer';
 import CardsLibrary from './CardsLibrary';
 import Footer from '../Footer';
 
-const CardsLibraryContainer = ({ cards, requestCards, page, isFetching }) => {
+const CardsLibraryContainer = ({ cards, requestCards, page, isFetching, token }) => {
     const [ref, inView] = useInView({
         threshold: 1
     });
 
     useEffect(() => {
-        if (inView && !isFetching) {
+        if (inView && !isFetching && token) {
             console.log(inView)
             requestCards(page)
         }
@@ -25,6 +25,11 @@ const CardsLibraryContainer = ({ cards, requestCards, page, isFetching }) => {
     )
 }
 
-const mapStateToProps = (state) => ({ cards: state.cardsReducer.cards, page: state.cardsReducer.page, isFetching: state.cardsReducer.isFetching })
+const mapStateToProps = (state) => ({ 
+    cards: state.cardsReducer.cards, 
+    page: state.cardsReducer.page, 
+    isFetching: state.cardsReducer.isFetching, 
+    token: state.appReducer.token 
+})
 
 export default connect(mapStateToProps, { requestCards })(CardsLibraryContainer);

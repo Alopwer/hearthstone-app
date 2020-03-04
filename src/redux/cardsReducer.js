@@ -48,11 +48,11 @@ const toggleFetching = (isFetching) => ({
 
 export const requestCards = (page) => async (dispatch) => {
     const cards = await api.getCards(page)
+    debugger
     dispatch(toggleFetching(true))
-    dispatch(getCards(cards.cards))
+    dispatch(getCards(cards))
     dispatch(toggleFetching(false))
     dispatch(incrementPage())
-    console.log(cards)
 }
 
 export default cardsReducer;
