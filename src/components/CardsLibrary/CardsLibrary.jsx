@@ -1,21 +1,14 @@
-import React from 'react';
-import Preloader from '../common/Preloader';
-import SingleCardContainer from './SingleCard';
+import React from "react";
+import CardsSectionContainer from "./CardsSection";
 
-const CardsLibrary = (props) => {
+const CardsLibrary = React.memo(props => {
     return (
         <div>
-            {
-                props.cards.length !== 0
-                ? (
-                    <div>
-                        {props.cards.map(c => <SingleCardContainer key={c.id} image={c.image} />)}
-                    </div>
-                )
-                : <Preloader />
-            }
+            {console.log('cards library render')}
+            {props.totalCards && <p>{props.totalCards} cards found for "Standard Cards"</p>}
+            <CardsSectionContainer />
         </div>
-    )
-}
+    );
+})
 
 export default CardsLibrary;

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Footer = (props) => {
+const Footer = () => {
     return (
-        <footer ref={props.refa}>
+        <footer>
             Footer
         </footer>
     )

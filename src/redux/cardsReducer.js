@@ -1,12 +1,12 @@
-import api from '../api/ApiService';
+import { SET_ACTUAL_SET } from './requestReducer';
 
-const GET_CARDS = 'GET_CARDS';
-const INCREMENT_PAGE = 'INCREMENT_PAGE';
-const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
+const GET_CARDS = 'hsapp/cardsReducer/GET_CARDS';
+const SET_TOTAL_CARDS = 'hsapp/cardsReducer/SET_TOTAL_CARDS';
+const RESET_CARDS = 'hsapp/cardsReducer/RESET_CARDS';
 
 const initialState = {
     cards: [],
-    page: 1,
+    totalCards: null,
     isFetching: false
 }
 
@@ -17,42 +17,38 @@ const cardsReducer = (state = initialState, action) => {
                 ...state,
                 cards: [...state.cards, ...action.cards]
             }
-        case INCREMENT_PAGE:
+        case SET_TOTAL_CARDS:
             return {
                 ...state,
-                page: state.page + 1
+                totalCards: action.totalCards
             }
-        case TOGGLE_FETCHING:
+        case RESET_CARDS:
             return {
                 ...state,
-                isFetching: action.isFetching
+                cards : []
+            }
+        case SET_ACTUAL_SET:
+            return {
+                ...state,
+                cards : []
             }
         default:
             return state
     }
 }
 
-const incrementPage = () => ({
-    type: INCREMENT_PAGE
-})
-
-const getCards = (cards) => ({
+export const getCards = (cards) => ({
     type: GET_CARDS,
     cards
 })
 
-const toggleFetching = (isFetching) => ({
-    type: TOGGLE_FETCHING,
-    isFetching
+export const setTotalCards = (totalCards) => ({
+    type: SET_TOTAL_CARDS,
+    totalCards
 })
 
-export const requestCards = (page) => async (dispatch) => {
-    const cards = await api.getCards(page)
-    debugger
-    dispatch(toggleFetching(true))
-    dispatch(getCards(cards))
-    dispatch(toggleFetching(false))
-    dispatch(incrementPage())
-}
+export const resetCards = () => ({
+    type: RESET_CARDS
+})
 
 export default cardsReducer;

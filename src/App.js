@@ -1,38 +1,45 @@
-import React, { useEffect } from "react";
-import { connect, Provider } from "react-redux";
-import store from "./redux/store";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./App.scss";
+import React, { useEffect } from 'react';
+import { connect, Provider } from 'react-redux';
+import store from './redux/store';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './App.scss';
 import CardsLibraryContainer from './components/CardsLibrary';
 import { initialize } from './redux/appReducer';
-import Preloader from "./components/common/Preloader";
+import Preloader from './components/common/Preloader';
+import Footer from './components/Footer';
+import FilterbarContainer from './components/Filterbar';
 
-function App(props) {
-  if(!props.token) {
-    return <Preloader />
+function App({ isInitialized }) {
+  if (!isInitialized) {
+    return <Preloader />;
   }
 
   return (
-	<div>
-    <Route path='/'>
-		  <CardsLibraryContainer />
-    </Route>
-	</div>
-  )
+    <div>
+      {console.log('app render')}
+      <Route path='/'>
+        <FilterbarContainer />
+        <CardsLibraryContainer />
+      </Route>
+      <Footer />
+    </div>
+  );
 }
 
-let AppContainer = ({ initialize, token }) => {
+let AppContainer = ({ initialize, isInitialized }) => {
   useEffect(() => {
-    initialize()
-  }, [])
+    initialize();
+  }, []);
 
-  return <App token={token}/>
-}
+  return <App isInitialized={isInitialized} />;
+};
 
 const mapStateToProps = state => ({
-  token: state.appReducer.token
+  isInitialized: state.appReducer.isInitialized
 });
-const AppSuperContainer = connect(mapStateToProps, {initialize})(AppContainer);
+const AppSuperContainer = connect(mapStateToProps, { initialize })(
+  AppContainer
+);
 
 const HearthstoneApp = () => {
   return (

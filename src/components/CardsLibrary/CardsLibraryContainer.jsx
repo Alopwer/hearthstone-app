@@ -1,35 +1,40 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useInView } from "react-intersection-observer";
-import { requestCards } from '../../redux/cardsReducer';
+import { requestCards, increasePage } from '../../redux/requestReducer';
 import CardsLibrary from './CardsLibrary';
-import Footer from '../Footer';
 
-const CardsLibraryContainer = ({ cards, requestCards, page, isFetching, token }) => {
+const CardsLibraryContainer = ({ increasePage, requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
         threshold: 1
     });
 
     useEffect(() => {
-        if (inView && !isFetching && token) {
-            console.log(inView)
-            requestCards(page)
+        if (!isFetching) {
+            requestCards(requestOptions)
+        }
+    }, [requestOptions])
+
+    useEffect(() => {
+        if (inView) {
+            increasePage()
         }
     }, [inView])
 
     return (
         <>
-            <CardsLibrary cards={cards}/>
-            <Footer refa={ref}/>
+            {console.log('cards library container render')}
+            <CardsLibrary totalCards={props.totalCards} />
+            <div ref={ref}></div>
         </>
     )
 }
 
-const mapStateToProps = (state) => ({ 
-    cards: state.cardsReducer.cards, 
-    page: state.cardsReducer.page, 
-    isFetching: state.cardsReducer.isFetching, 
-    token: state.appReducer.token 
+const mapStateToProps = (state) => ({
+    cards: state.cardsReducer.cards,
+    totalCards: state.cardsReducer.totalCards,
+    isFetching: state.requestReducer.isFetching,
+    requestOptions: state.requestReducer.options
 })
 
-export default connect(mapStateToProps, { requestCards })(CardsLibraryContainer);
+export default connect(mapStateToProps, { requestCards, increasePage })(CardsLibraryContainer);
