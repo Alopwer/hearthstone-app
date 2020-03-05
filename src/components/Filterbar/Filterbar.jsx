@@ -9,22 +9,20 @@ const Filterbar = (props) => {
         <option value={c.name} key={c.id}>{ c.name }</option>
     ))
 
-    // const manaCost = []
-    // manaCost.push(<option key={11} value={''}>All cost</option>)
-
-    // for (let i = 0; i <= 10; i++) {
-    //     manaCost.push(
-    //         <option key={i} value={i}>{ i }</option>
-    //     )
-    // }
     const manaCost = []
-    // manaCost.push(<button key={11} value={''}>All cost</button>)
-    
     for (let i = 0; i <= 10; i++) {
         manaCost.push(
-            <button key={i} value={i}>{ i }</button>
+            <option key={i} value={i}>{ i }</option>
         )
     }
+    manaCost.push(<option key={11} value={'all'}>All cost</option>)
+    // const manaCost = []
+    
+    // for (let i = 0; i <= 10; i++) {
+    //     manaCost.push(
+    //         <button key={i} value={i}>{ i }</button>
+    //     )
+    // }
 
     return (
         <div>
@@ -38,12 +36,12 @@ const Filterbar = (props) => {
                 <select value={props.class} onChange={(e) => props.handleAction(e, 'class')}>
                     { classes }
                 </select>
-                {/* <select value={props.manaCost} onChange={props.changeManaCost}>
+                <select value={props.manaCost} onChange={(e) => props.handleAction(e, 'manaCostSelect')}>
                     { manaCost }
-                </select> */}
-                <div onClick={(e) => props.handleAction(e, 'manaCost')}>
+                </select>
+                {/* <div onClick={(e) => props.handleAction(e, 'manaCostButton')}>
                     { manaCost }
-                </div>
+                </div> */}
                 <input value={props.search} onChange={props.onChangeSearch}/>
                 <button onClick={() => props.onHandleAction(null, 'search')}>Search</button>
             </div>

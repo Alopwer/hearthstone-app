@@ -11,6 +11,7 @@ const SET_CLASS = 'hsapp/requestReducer/SET_CLASS';
 const SET_MANA_COST = 'hsapp/requestReducer/SET_MANA_COST';
 const REMOVE_MANA_COST = 'hsapp/requestReducer/REMOVE_MANA_COST';
 const SET_TEXT_FILTER = 'hsapp/requestReducer/SET_TEXT_FILTER';
+const RESET_MANA_COST = 'hsapp/requestReducer/RESET_MANA_COST';
 
 const initialState = {
     options: {
@@ -92,6 +93,14 @@ const requestReducer = (state = initialState, action) => {
                     textFilter: action.textFilter
                 }
             }
+        case RESET_MANA_COST:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    manaCost: []
+                }
+            }
         case RESET_PAGE:
             return {
                 ...state,
@@ -147,6 +156,10 @@ export const removeManaCost = (manaCost) => ({
 export const setTextFilter = (textFilter) => ({
     type: SET_TEXT_FILTER,
     textFilter
+})
+
+export const resetManaCost = () => ({
+    type: RESET_MANA_COST
 })
 
 export const requestCards = (requestOptions, page, update) => async (dispatch) => {

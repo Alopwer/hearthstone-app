@@ -9,7 +9,8 @@ import {
     setManaCost,
     removeManaCost,
     resetPage,
-    setTextFilter
+    setTextFilter,
+    resetManaCost
 } from '../../redux/requestReducer';
 
 const FilterbarContainer = props => {
@@ -24,8 +25,11 @@ const FilterbarContainer = props => {
             case 'class':
                 onChangeClass(e)
                 break;
-            case 'manaCost':
-                onChangeManaCost(e)
+            case 'manaCostSelect':
+                onChangeManaCost(e, false)
+                break;
+            case 'manaCostButton':
+                onChangeManaCost(e, true)
                 break;
             case 'search':
                 onHandleSearch()
@@ -47,11 +51,24 @@ const FilterbarContainer = props => {
         props.setClass(classValue);
     };
 
-    const onChangeManaCost = e => {
-        if (props.manaCost.every(m => m !== e.target.value)) {
-            props.setManaCost(e.target.value)
+    const onChangeManaCost = (e, allowAppend) => {
+        if (allowAppend) {
+            if (props.manaCost.every(m => m !== e.target.value)) {
+                if (e.target.value === 'all') {
+                    props.resetManaCost()
+                } else {
+                    props.setManaCost(e.target.value)
+                }
+            } else {
+                props.removeManaCost(e.target.value)
+            }
         } else {
-            props.removeManaCost(e.target.value)
+            if (e.target.value === 'all') {
+                props.resetManaCost()
+            } else {
+                props.resetManaCost()
+                props.setManaCost(e.target.value)
+            }
         }
     };
 
@@ -90,5 +107,6 @@ export default connect(mapStateToProps, {
     setManaCost,
     removeManaCost,
     resetPage,
-    setTextFilter
+    setTextFilter,
+    resetManaCost
 })(FilterbarContainer);
