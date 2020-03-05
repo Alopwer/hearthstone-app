@@ -1,8 +1,6 @@
-import { SET_ACTUAL_SET } from './requestReducer';
-
-const GET_CARDS = 'hsapp/cardsReducer/GET_CARDS';
+const APPEND_CARDS = 'hsapp/cardsReducer/APPEND_CARDS';
 const SET_TOTAL_CARDS = 'hsapp/cardsReducer/SET_TOTAL_CARDS';
-const RESET_CARDS = 'hsapp/cardsReducer/RESET_CARDS';
+const UPDATE_CARDS = 'hsapp/cardsReducer/UPDATE_CARDS';
 
 const initialState = {
     cards: [],
@@ -12,7 +10,7 @@ const initialState = {
 
 const cardsReducer = (state = initialState, action) => {
     switch(action.type) {
-        case GET_CARDS:
+        case APPEND_CARDS:
             return {
                 ...state,
                 cards: [...state.cards, ...action.cards]
@@ -22,23 +20,18 @@ const cardsReducer = (state = initialState, action) => {
                 ...state,
                 totalCards: action.totalCards
             }
-        case RESET_CARDS:
+        case UPDATE_CARDS:
             return {
                 ...state,
-                cards : []
-            }
-        case SET_ACTUAL_SET:
-            return {
-                ...state,
-                cards : []
+                cards : [...action.cards]
             }
         default:
             return state
     }
 }
 
-export const getCards = (cards) => ({
-    type: GET_CARDS,
+export const appendCards = (cards) => ({
+    type: APPEND_CARDS,
     cards
 })
 
@@ -47,8 +40,9 @@ export const setTotalCards = (totalCards) => ({
     totalCards
 })
 
-export const resetCards = () => ({
-    type: RESET_CARDS
+export const updateCards = (cards) => ({
+    type: UPDATE_CARDS,
+    cards
 })
 
 export default cardsReducer;

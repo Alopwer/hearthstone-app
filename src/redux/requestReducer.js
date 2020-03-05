@@ -1,17 +1,23 @@
 import api from '../api/ApiService';
-import { getCards, setTotalCards } from './cardsReducer';
+import { appendCards, setTotalCards, updateCards } from './cardsReducer';
 
 const MAKE_REQUEST_DEFAULT = 'hsapp/requestReducer/MAKE_REQUEST_DEFAULT'
 const TOGGLE_FETCHING = 'hsapp/requestReducer/TOGGLE_FETCHING';
 const INCREASE_PAGE = 'hsapp/requestReducer/INCREASE_PAGE';
-export const SET_ACTUAL_SET = 'hsapp/requestReducer/SET_ACTUAL_SET';
+const RESET_PAGE = 'hsapp/requestReducer/RESET_PAGE';
+const SET_ACTUAL_SET = 'hsapp/requestReducer/SET_ACTUAL_SET';
+const SET_GAME_MODE = 'hsapp/requestReducer/SET_GAME_MODE';
+const SET_CLASS = 'hsapp/requestReducer/SET_CLASS';
+const SET_MANA_COST = 'hsapp/requestReducer/SET_MANA_COST';
+const REMOVE_MANA_COST = 'hsapp/requestReducer/REMOVE_MANA_COST';
+const SET_TEXT_FILTER = 'hsapp/requestReducer/SET_TEXT_FILTER';
 
 const initialState = {
     options: {
         locale: 'en_US',
-        set: 'standard',
+        set: 'Standard',
         class: '',
-        manaCost: null,
+        manaCost: [],
         attack: null,
         health: null,
         collectible: 1,
@@ -21,11 +27,11 @@ const initialState = {
         keyword: '',
         textFilter: '',
         gameMode: '',
-        page: 0,
         pageSize: null,
         sort: '',
         order: '',
     },
+    page: 1,
     isFetching: false
 }
 
@@ -44,12 +50,52 @@ const requestReducer = (state = initialState, action) => {
         case INCREASE_PAGE:
             return {
                 ...state,
-                options : { ...state.options, page: state.options.page + 1 }
+                page: state.page + 1
             }
         case SET_ACTUAL_SET:
             return {
                 ...state,
-                options: { ...state.options, set: action.setName, page: 0 }
+                options: { ...state.options, set: action.setName, gameMode: '' }
+            }
+        case SET_GAME_MODE:
+            return {
+                ...state,
+                options: { ...state.options, gameMode: action.gameMode, set: '' }
+            }
+        case SET_CLASS:
+            return {
+                ...state,
+                options: { ...state.options, class: action.class }
+            }
+        case SET_MANA_COST:
+            return {
+                ...state,
+                options: { 
+                    ...state.options, 
+                    manaCost: [...state.options.manaCost, action.manaCost] 
+                }
+            }
+        case REMOVE_MANA_COST:
+            const index = state.options.manaCost.findIndex((m, i) => m == action.manaCost)
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    manaCost: [ ...state.options.manaCost.slice(0, index), ...state.options.manaCost.slice(index + 1) ],
+                }
+            }
+        case SET_TEXT_FILTER:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    textFilter: action.textFilter
+                }
+            }
+        case RESET_PAGE:
+            return {
+                ...state,
+                page: 1
             }
         default:
             return state
@@ -65,6 +111,10 @@ const toggleFetching = (isFetching) => ({
     isFetching
 })
 
+export const resetPage = () => ({
+    type: RESET_PAGE
+})
+
 export const increasePage = () => ({
     type: INCREASE_PAGE
 })
@@ -74,12 +124,42 @@ export const setActualSet = (setName) => ({
     setName
 })
 
-export const requestCards = (requestOptions) => async (dispatch) => {
+export const setGameMode = (gameMode) => ({
+    type: SET_GAME_MODE,
+    gameMode
+})
+
+export const setClass = (classValue) => ({
+    type: SET_CLASS,
+    class : classValue
+})
+
+export const setManaCost = (manaCost) => ({
+    type: SET_MANA_COST,
+    manaCost
+})
+
+export const removeManaCost = (manaCost) => ({
+    type: REMOVE_MANA_COST,
+    manaCost
+})
+
+export const setTextFilter = (textFilter) => ({
+    type: SET_TEXT_FILTER,
+    textFilter
+})
+
+export const requestCards = (requestOptions, page, update) => async (dispatch) => {
     dispatch(toggleFetching(true))
-    const data = await api.getCards(requestOptions)
+    const data = await api.getCards(requestOptions, page)
+    if (update) {
+        dispatch(updateCards(data.cards))
+    } else {
+        dispatch(appendCards(data.cards))
+    }
     dispatch(setTotalCards(data.cardCount))
-    dispatch(getCards(data.cards))
     dispatch(toggleFetching(false))
+    dispatch(increasePage())
 }
 
 export default requestReducer;

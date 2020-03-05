@@ -15,8 +15,8 @@ class ApiService {
     this._token = response.access_token
   }
 
-  async getResource(resource, requestOptions) {
-    const composedUrl = createComposedUrl(this._baseUrl, resource, this._token, requestOptions)
+  async getResource(resource, requestOptions, page) {
+    const composedUrl = createComposedUrl(this._baseUrl, resource, this._token, requestOptions, page)
     const response = await Axios.get(composedUrl)
     return response
   }
@@ -27,8 +27,8 @@ class ApiService {
     return response.data
   }
 
-  async getCards(requestOptions) {
-    const response = await this.getResource('cards', requestOptions);
+  async getCards(requestOptions, page) {
+    const response = await this.getResource('cards', requestOptions, page);
     // debugger
     return response.data
   }
