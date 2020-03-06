@@ -18,7 +18,7 @@ const initialState = {
         locale: 'en_US',
         set: 'Standard',
         class: '',
-        manaCost: [],
+        manaCost: '',
         attack: null,
         health: null,
         collectible: 1,
@@ -72,17 +72,17 @@ const requestReducer = (state = initialState, action) => {
             return {
                 ...state,
                 options: { 
-                    ...state.options, 
-                    manaCost: [...state.options.manaCost, action.manaCost] 
+                    ...state.options,
+                    manaCost: `${state.options.manaCost}${state.options.manaCost && ','}${action.manaCost}`
                 }
             }
         case REMOVE_MANA_COST:
-            const index = state.options.manaCost.findIndex((m, i) => m == action.manaCost)
+            const index = state.options.manaCost.indexOf(action.manaCost)
             return {
                 ...state,
                 options: {
                     ...state.options,
-                    manaCost: [ ...state.options.manaCost.slice(0, index), ...state.options.manaCost.slice(index + 1) ],
+                    manaCost: state.options.manaCost.slice(0, index) + state.options.manaCost.slice(index + 1)
                 }
             }
         case SET_TEXT_FILTER:
@@ -98,7 +98,7 @@ const requestReducer = (state = initialState, action) => {
                 ...state,
                 options: {
                     ...state.options,
-                    manaCost: []
+                    manaCost: ''
                 }
             }
         case RESET_PAGE:
@@ -170,9 +170,31 @@ export const requestCards = (requestOptions, page, update) => async (dispatch) =
     } else {
         dispatch(appendCards(data.cards))
     }
-    dispatch(setTotalCards(data.cardCount))
     dispatch(toggleFetching(false))
+    dispatch(setTotalCards(data.cardCount))
     dispatch(increasePage())
 }
+
+// export const handleManaCost = (e, wrapper) => dispatch => {
+//     dispatch(resetPage())
+//     if (wrapper === 'select') {
+//         if (e.target.value === 'all') {
+//             dispatch(resetManaCost())
+//         } else {
+//             dispatch(resetManaCost())
+//             dispatch(setManaCost(e.target.value))
+//         }
+//     } else {
+//         if (!store.getState().requestReducer.options.manaCost.includes(e.target.value)) {
+//             if (e.target.value === 'all') {
+//                 dispatch(resetManaCost())
+//             } else {
+//                 dispatch(setManaCost(e.target.value))
+//             }
+//         } else {
+//             dispatch(removeManaCost(e.target.value))
+//         }
+//     }
+// }
 
 export default requestReducer;

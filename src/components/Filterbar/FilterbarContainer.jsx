@@ -1,112 +1,39 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import Filterbar from './Filterbar';
-import {
-    setActualSet,
-    makeRequestDefault,
-    setGameMode,
-    setClass,
-    setManaCost,
-    removeManaCost,
-    resetPage,
-    setTextFilter,
-    resetManaCost
-} from '../../redux/requestReducer';
+// import React, { useState } from 'react';
+// import { connect } from 'react-redux';
+// import Filterbar from './Filterbar';
+// import {
+//     setActualSet,
+//     setGameMode,
+//     setClass,
+//     setManaCost,
+//     removeManaCost,
+//     resetPage,
+//     setTextFilter,
+//     resetManaCost
+// } from '../../redux/requestReducer';
 
-const FilterbarContainer = props => {
-    const [search, setSearch] = useState('')
+// const FilterbarContainer = props => {
+//     return (
+//         <Filterbar />
+//     );
+// };
 
-    const onHandleAction = (e, action) => {
-        props.resetPage()
-        switch (action) {
-            case 'set':
-                onChangeSet(e)
-                break;
-            case 'class':
-                onChangeClass(e)
-                break;
-            case 'manaCostSelect':
-                onChangeManaCost(e, false)
-                break;
-            case 'manaCostButton':
-                onChangeManaCost(e, true)
-                break;
-            case 'search':
-                onHandleSearch()
-                break;
-        }
-    }
+// const mapStateToProps = state => ({
+//     sets: state.appReducer.sets,
+//     classes: state.appReducer.classes,
+//     set: state.requestReducer.options.set,
+//     class: state.requestReducer.options.class,
+//     gameMode: state.requestReducer.options.gameMode,
+//     manaCost: state.requestReducer.options.manaCost
+// });
 
-    const onChangeSet = e => {
-        if (e.target.value === 'Arena') {
-            props.setGameMode(e.target.value);
-        } else {
-            props.setActualSet(e.target.value);
-        }
-    };
-
-    const onChangeClass = e => {
-        const classValue =
-            e.target.value === 'All Classes' ? 'all' : e.target.value;
-        props.setClass(classValue);
-    };
-
-    const onChangeManaCost = (e, allowAppend) => {
-        if (allowAppend) {
-            if (props.manaCost.every(m => m !== e.target.value)) {
-                if (e.target.value === 'all') {
-                    props.resetManaCost()
-                } else {
-                    props.setManaCost(e.target.value)
-                }
-            } else {
-                props.removeManaCost(e.target.value)
-            }
-        } else {
-            if (e.target.value === 'all') {
-                props.resetManaCost()
-            } else {
-                props.resetManaCost()
-                props.setManaCost(e.target.value)
-            }
-        }
-    };
-
-    const onChangeSearch = e => {
-        setSearch(e.target.value)
-    }
-
-    const onHandleSearch = () => {
-        props.setTextFilter(search)
-    }
-
-    return (
-        <Filterbar
-            handleAction={onHandleAction}
-            search={search}
-            onChangeSearch={onChangeSearch}
-            {...props}
-        />
-    );
-};
-
-const mapStateToProps = state => ({
-    sets: state.appReducer.sets,
-    classes: state.appReducer.classes,
-    set: state.requestReducer.options.set,
-    class: state.requestReducer.options.class,
-    gameMode: state.requestReducer.options.gameMode,
-    manaCost: state.requestReducer.options.manaCost
-});
-
-export default connect(mapStateToProps, {
-    makeRequestDefault,
-    setActualSet,
-    setGameMode,
-    setClass,
-    setManaCost,
-    removeManaCost,
-    resetPage,
-    setTextFilter,
-    resetManaCost
-})(FilterbarContainer);
+// export default connect(mapStateToProps, {
+//     setActualSet,
+//     setGameMode,
+//     setClass,
+//     setManaCost,
+//     removeManaCost,
+//     resetPage,
+//     setTextFilter,
+//     resetManaCost
+// })(FilterbarContainer);

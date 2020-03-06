@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect, Provider } from 'react-redux';
 import store from './redux/store';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './App.scss';
-import CardsLibraryContainer from './components/CardsLibrary';
 import { initialize } from './redux/appReducer';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Preloader from './components/common/Preloader';
+import CardsLibraryContainer from './components/CardsLibrary';
+import Filterbar from './components/Filterbar';
 import Footer from './components/Footer';
-import FilterbarContainer from './components/Filterbar';
+import './App.scss';
 
 function App({ isInitialized }) {
   if (!isInitialized) {
@@ -18,7 +18,7 @@ function App({ isInitialized }) {
     <div>
       {console.log('app render')}
       <Route path='/'>
-        <FilterbarContainer />
+        <Filterbar />
         <CardsLibraryContainer />
       </Route>
       <Footer />

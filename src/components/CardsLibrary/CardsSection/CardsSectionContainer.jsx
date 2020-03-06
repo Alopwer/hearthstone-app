@@ -5,16 +5,14 @@ import CardsSection from './CardsSection';
 const CardsSectionContainer = ({ classes, cards }) => {
     const sections = classes.map((c, i) => {
         const availableCardsForClass = cards.filter(card => card.classId === c.id);
-        const render = availableCardsForClass.length !== 0 && i !== 0;
-        return (
-            render && (
+        const canRender = availableCardsForClass.length !== 0 && i !== 0;
+        return canRender && (
                 <CardsSection
                     key={c.id}
                     cards={availableCardsForClass}
                     nameClass={c.name}
                 />
             )
-        );
     });
 
     return (

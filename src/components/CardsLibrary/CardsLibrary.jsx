@@ -9,6 +9,7 @@ const CardsLibrary = React.memo(props => {
             {console.log('cards library render')}
             {<p>{props.totalCards || 0} cards found for {props.gameMode || props.set} Cards</p>}
             {/* {manaCostBar} */}
+            {props.textFilter}
             <CardsSectionContainer />
         </div>
     );

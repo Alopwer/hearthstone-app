@@ -10,16 +10,18 @@ const CardsLibraryContainer = ({ page, cards, requestCards, isFetching, requestO
     });
 
     useEffect(() => {
-        if (inView) {
-            if (!isFetching && cards.length !== props.totalCards) {
-                requestCards(requestOptions, page, false)
-            }
+        debugger
+        if (!isFetching) {
+            requestCards(requestOptions, page, true)
         }
-    }, [inView])
+    }, [requestOptions])
 
     useEffect(() => {
-        requestCards(requestOptions, page, true)
-    }, [requestOptions])
+        debugger
+        if (!isFetching && inView && cards.length !== props.totalCards) {
+            requestCards(requestOptions, page, false)
+        }
+    }, [inView])
 
     return (
         <>
@@ -29,6 +31,7 @@ const CardsLibraryContainer = ({ page, cards, requestCards, isFetching, requestO
                 gameMode={props.gameMode} 
                 totalCards={props.totalCards}
                 manaCost={props.manaCost}
+                textFilter={props.textFilter}
             />
             <div ref={ref}></div>
         </>
@@ -43,7 +46,8 @@ const mapStateToProps = (state) => ({
     manaCost: state.requestReducer.options.manaCost,
     totalCards: state.cardsReducer.totalCards,
     isFetching: state.requestReducer.isFetching,
-    requestOptions: state.requestReducer.options
+    requestOptions: state.requestReducer.options,
+    textFilter: state.requestReducer.options.textFilter
 })
 
 export default connect(mapStateToProps, { requestCards })(CardsLibraryContainer);
