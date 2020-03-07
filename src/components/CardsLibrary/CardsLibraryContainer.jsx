@@ -1,27 +1,35 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useInView } from "react-intersection-observer";
-import { requestCards } from '../../redux/requestReducer';
+import { requestCards, removeManaCost, setTextFilter } from '../../redux/requestReducer';
 import CardsLibrary from './CardsLibrary';
 
-const CardsLibraryContainer = ({ page, cards, requestCards, isFetching, requestOptions, ...props }) => {
+const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
-        threshold: 1
+        threshold: 0,
+        rootMargin: '0px 0px 1000px'
     });
 
     useEffect(() => {
-        debugger
+        // debugger
+        if (!isFetching && inView && props.cards.length !== props.totalCards) {
+            requestCards(requestOptions, props.page, false)
+        }
+    }, [inView])
+
+    useEffect(() => {
+        // debugger
         if (!isFetching) {
-            requestCards(requestOptions, page, true)
+            requestCards(requestOptions, 1, true)
         }
     }, [requestOptions])
 
-    useEffect(() => {
-        debugger
-        if (!isFetching && inView && cards.length !== props.totalCards) {
-            requestCards(requestOptions, page, false)
-        }
-    }, [inView])
+    const onRemoveManaCost = (manaCost) => {
+        props.removeManaCost(manaCost)
+    }
+    const onRemoveTextFilter = () => {
+        props.setTextFilter('')
+    }
 
     return (
         <>
@@ -32,6 +40,8 @@ const CardsLibraryContainer = ({ page, cards, requestCards, isFetching, requestO
                 totalCards={props.totalCards}
                 manaCost={props.manaCost}
                 textFilter={props.textFilter}
+                onRemoveManaCost={onRemoveManaCost}
+                onRemoveTextFilter={onRemoveTextFilter}
             />
             <div ref={ref}></div>
         </>
@@ -50,4 +60,4 @@ const mapStateToProps = (state) => ({
     textFilter: state.requestReducer.options.textFilter
 })
 
-export default connect(mapStateToProps, { requestCards })(CardsLibraryContainer);
+export default connect(mapStateToProps, { requestCards, removeManaCost, setTextFilter })(CardsLibraryContainer);

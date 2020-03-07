@@ -3,12 +3,12 @@ import React from 'react';
 const ManaCost = (props) => {
     return (
         <>
-            <select value={props.manaCost || 'all'} onChange={props.onChangeManaCostSelect}>
+            {/* <select value={props.manaCost || 'all'} onChange={props.onChangeManaCostSelect}>
                 { props.manaCostItems }
-            </select>
-            {/* <div onClick={props.onChangeManaCostButton}>
+            </select> */}
+            <div onClick={props.onChangeManaCostButton}>
                 { props.manaCostItems }
-            </div> */}
+            </div>
         </>
     )
 }

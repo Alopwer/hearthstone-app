@@ -1,7 +1,7 @@
 import React from 'react';
 import { SetsContainer, ClassesContainer, ManaCostContainer, SearchContainer } from './Filters';
 
-const Filterbar = () => {
+const Filterbar = props => {
   return (
     <div>
       <div>
@@ -9,8 +9,12 @@ const Filterbar = () => {
         <ClassesContainer />
         <ManaCostContainer />
         <SearchContainer />
+        <button onClick={props.toggleAdditionalFilterbars}>Filters</button>
       </div>
-      <div></div>
+      {
+        props.additionalFilterbars &&
+        <div>filters</div>
+      }
     </div>
   );
 };

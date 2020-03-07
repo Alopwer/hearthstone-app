@@ -1,2 +1,2 @@
-import Filterbar from "./Filterbar";
-export default Filterbar;
+import FilterbarContainer from "./FilterbarContainer";
+export default FilterbarContainer;

@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Search from './Search';
 import { connect } from 'react-redux';
 import {
-    resetPage,
     setTextFilter
 } from '../../../../redux/requestReducer';
 
 const SearchContainer = (props) => {
     const [search, setSearch] = useState('')
 
+    useEffect(() => {
+        setSearch(props.textFilter)
+    }, [props.textFilter])
+
     const onChangeSearch = e => {
         setSearch(e.target.value)
     }
 
     const onHandleSearch = () => {
-        props.resetPage()
         props.setTextFilter(search)
     }
     return <Search search={search} onChangeSearch={onChangeSearch} onHandleSearch={onHandleSearch}/>
 }
 
-export default connect(null, {setTextFilter, resetPage})(SearchContainer)
+const mapStateToProps = (state) => ({ textFilter: state.requestReducer.options.textFilter })
+
+export default connect(mapStateToProps, {setTextFilter})(SearchContainer)

@@ -1,39 +1,18 @@
-// import React, { useState } from 'react';
-// import { connect } from 'react-redux';
-// import Filterbar from './Filterbar';
-// import {
-//     setActualSet,
-//     setGameMode,
-//     setClass,
-//     setManaCost,
-//     removeManaCost,
-//     resetPage,
-//     setTextFilter,
-//     resetManaCost
-// } from '../../redux/requestReducer';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import Filterbar from './Filterbar';
+import { toggleAdditionalFilterbars } from '../../redux/requestReducer';
 
-// const FilterbarContainer = props => {
-//     return (
-//         <Filterbar />
-//     );
-// };
+const FilterbarContainer = props => {
+    return (
+        <Filterbar {...props}/>
+    );
+};
 
-// const mapStateToProps = state => ({
-//     sets: state.appReducer.sets,
-//     classes: state.appReducer.classes,
-//     set: state.requestReducer.options.set,
-//     class: state.requestReducer.options.class,
-//     gameMode: state.requestReducer.options.gameMode,
-//     manaCost: state.requestReducer.options.manaCost
-// });
+const mapStateToProps = state => ({
+    additionalFilterbars: state.requestReducer.additionalFilterbars
+});
 
-// export default connect(mapStateToProps, {
-//     setActualSet,
-//     setGameMode,
-//     setClass,
-//     setManaCost,
-//     removeManaCost,
-//     resetPage,
-//     setTextFilter,
-//     resetManaCost
-// })(FilterbarContainer);
+export default connect(mapStateToProps, {
+    toggleAdditionalFilterbars
+})(FilterbarContainer);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setClass, resetPage } from '../../../../redux/requestReducer';
+import { setClass } from '../../../../redux/requestReducer';
 import Classes from './Classes';
 
 const ClassesContainer = (props) => {
@@ -9,7 +9,6 @@ const ClassesContainer = (props) => {
     ))
 
     const onChangeClass = e => {
-        props.resetPage()
         const classValue =
             e.target.value === 'All Classes' ? 'all' : e.target.value;
         props.setClass(classValue);
@@ -23,4 +22,4 @@ const mapStateToProps = (state) => ({
     class: state.requestReducer.options.class
 })
 
-export default connect(mapStateToProps, { setClass, resetPage })(ClassesContainer)
+export default connect(mapStateToProps, { setClass })(ClassesContainer)

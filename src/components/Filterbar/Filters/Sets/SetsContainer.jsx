@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
     setActualSet,
-    setGameMode,
-    resetPage
+    setGameMode
 } from '../../../../redux/requestReducer';
 import Sets from './Sets';
 
@@ -13,7 +12,6 @@ const SetsContainer = (props) => {
     ))
 
     const onChangeSet = e => {
-        props.resetPage()
         if (e.target.value === 'Arena') {
             props.setGameMode(e.target.value);
         } else {
@@ -30,4 +28,4 @@ const mapStateToProps = (state) => ({
     gameMode: state.requestReducer.options.gameMode
 })
 
-export default connect(mapStateToProps, { setGameMode, setActualSet, resetPage })(SetsContainer)
+export default connect(mapStateToProps, { setGameMode, setActualSet })(SetsContainer)
