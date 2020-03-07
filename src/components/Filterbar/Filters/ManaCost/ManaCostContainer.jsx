@@ -10,18 +10,18 @@ import {
 const ManaCostContainer = (props) => {
 
     const manaCostItems = []
-    // for (let i = 0; i <= 10; i++) {
-    //     manaCostItems.push(
-    //         <option key={i} value={i}>{ i }</option>
-    //     )
-    // }
-    // manaCostItems.push(<option key={11} value={'all'}>All cost</option>)
-    
     for (let i = 0; i <= 10; i++) {
         manaCostItems.push(
-            <button key={i} value={i}>{ i }</button>
+            <option key={i} value={i}>{ i }</option>
         )
     }
+    manaCostItems.push(<option key={11} value={'all'}>All cost</option>)
+    
+    // for (let i = 0; i <= 10; i++) {
+    //     manaCostItems.push(
+    //         <button key={i} value={i}>{ i }</button>
+    //     )
+    // }
     
     const onChangeManaCostSelect = (e) => {
         if (e.target.value === 'all') {

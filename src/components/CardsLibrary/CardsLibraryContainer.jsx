@@ -6,8 +6,7 @@ import CardsLibrary from './CardsLibrary';
 
 const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
-        threshold: 0,
-        rootMargin: '0px 0px 1000px'
+        rootMargin: '2000px'
     });
 
     useEffect(() => {
@@ -42,8 +41,9 @@ const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...pr
                 textFilter={props.textFilter}
                 onRemoveManaCost={onRemoveManaCost}
                 onRemoveTextFilter={onRemoveTextFilter}
+                observer={ref}
             />
-            <div ref={ref}></div>
+            {/* <div ref={ref}></div> */}
         </>
     )
 }

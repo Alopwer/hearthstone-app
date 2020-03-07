@@ -12,14 +12,13 @@ const SET_MANA_COST = 'hsapp/requestReducer/SET_MANA_COST';
 const REMOVE_MANA_COST = 'hsapp/requestReducer/REMOVE_MANA_COST';
 const RESET_MANA_COST = 'hsapp/requestReducer/RESET_MANA_COST';
 const SET_TEXT_FILTER = 'hsapp/requestReducer/SET_TEXT_FILTER';
-const TOGGLE_ADDITIONAL_FILTERBARS = 'hsapp/requestReducer/TOGGLE_ADDITIONAL_FILTERBARS';
 
 const initialState = {
     options: {
         locale: 'en_US',
         set: 'Standard',
         class: '',
-        manaCost: '',
+        manaCost: [],
         attack: null,
         health: null,
         collectible: 1,
@@ -34,8 +33,7 @@ const initialState = {
         order: ''
     },
     page: 1,
-    isFetching: false,
-    additionalFilterbars: false
+    isFetching: false
 };
 
 const requestReducer = (state = initialState, action) => {
@@ -71,24 +69,25 @@ const requestReducer = (state = initialState, action) => {
                 options: { ...state.options, class: action.class }
             };
         case SET_MANA_COST:
-            const newManaCost = `${state.options.manaCost}${state.options.manaCost &&
-                ','}${action.manaCost}`;
+            // const newManaCost = `${state.options.manaCost}${state.options.manaCost &&
+            //     ','}${action.manaCost}`;
             return {
                 ...state,
                 options: {
                     ...state.options,
-                    manaCost: newManaCost
+                    manaCost: [...state.options.manaCost, action.manaCost]
                 }
             };
         case REMOVE_MANA_COST:
-            const remainedManaCost = state.options.manaCost
-                .replace(action.manaCost, '')
-                .slice(0, -1);
+            // const remainedManaCost = state.options.manaCost
+            //     .replace(action.manaCost, '')
+            //     .slice(0, -1);
+            const index = state.options.manaCost.indexOf(action.manaCost)
             return {
                 ...state,
                 options: {
                     ...state.options,
-                    manaCost: remainedManaCost
+                    manaCost: [...state.options.manaCost.slice(0, index), ...state.options.manaCost.slice(index + 1)]
                 }
             };
         case RESET_MANA_COST:
@@ -111,11 +110,6 @@ const requestReducer = (state = initialState, action) => {
             return {
                 ...state,
                 page: 1
-            };
-        case TOGGLE_ADDITIONAL_FILTERBARS:
-            return {
-                ...state,
-                additionalFilterbars: !state.additionalFilterbars
             };
         default:
             return state;
@@ -171,10 +165,6 @@ export const resetManaCost = () => ({
 export const setTextFilter = textFilter => ({
     type: SET_TEXT_FILTER,
     textFilter
-});
-
-export const toggleAdditionalFilterbars = () => ({
-    type: TOGGLE_ADDITIONAL_FILTERBARS
 });
 
 export const requestCards = (requestOptions, page, update) => async dispatch => {

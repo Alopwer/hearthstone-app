@@ -16,10 +16,12 @@ const CardsSectionContainer = ({ classes, cards }) => {
     });
 
     return (
-        <div>
-            {console.log('cards section container render')}
-            {sections}
-        </div>
+        <>
+            <div>
+                {console.log('cards section container render')}
+                { sections }
+            </div>
+        </>
     );
 };
 
