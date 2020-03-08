@@ -39,10 +39,14 @@ export function createComposedUrl(baseUrl, resource, token, requestOptions, page
     for (const option in requestOptions) {
       if (requestOptions[option]) {
         let reformedOption;
-        if (typeof requestOptions[option] === 'string') {
-            reformedOption = requestOptions[option].toLowerCase().replace('\'', '').split(' ').join('-')
-        } else {
+        if (requestOptions[option] === 'manaCost') {
             reformedOption = requestOptions[option]
+        } else {
+            if (typeof requestOptions[option] === 'string') {
+                reformedOption = requestOptions[option].toLowerCase().replace('\'', '').split(' ').join('-')
+            } else {
+                reformedOption = requestOptions[option]
+            }
         }
         url += `&${option}=${reformedOption}`
       }

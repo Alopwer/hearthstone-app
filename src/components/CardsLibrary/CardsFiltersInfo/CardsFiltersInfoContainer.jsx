@@ -11,10 +11,15 @@ import {
   setCardType,
   setRarity,
   setMinionType,
-  setKeyword
+  setKeyword,
+  setOrderAndSort
 } from '../../../redux/requestReducer';
 
 const CardsFiltersInfoContainer = props => {
+  const onChangeSort = (e) => {
+      props.setOrderAndSort(e.target.value.split(','))
+  }
+
   const manaCostBar =
     props.requestOptions.manaCost.length !== 0 &&
     props.requestOptions.manaCost.map(mC => (
@@ -23,7 +28,7 @@ const CardsFiltersInfoContainer = props => {
       </span>
     ));
 
-  return <CardsFiltersInfo {...props} manaCostBar={manaCostBar} />;
+  return <CardsFiltersInfo {...props} manaCostBar={manaCostBar} onChangeSort={onChangeSort} />;
 };
 
 const mapStateToProps = state => ({
@@ -41,5 +46,6 @@ export default connect(mapStateToProps, {
   setCardType,
   setRarity,
   setMinionType,
-  setKeyword
+  setKeyword,
+  setOrderAndSort
 })(CardsFiltersInfoContainer);

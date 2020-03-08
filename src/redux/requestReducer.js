@@ -17,6 +17,7 @@ const SET_CARD_TYPE = 'hsapp/requestReducer/SET_CARD_TYPE';
 const SET_RARITY = 'hsapp/requestReducer/SET_RARITY';
 const SET_MINION_TYPE = 'hsapp/requestReducer/SET_MINION_TYPE';
 const SET_KEYWORD = 'hsapp/requestReducer/SET_KEYWORD';
+const SET_ORDER_AND_SORT = 'hsapp/requestReducer/SET_ORDER_AND_SORT';
 
 const initialState = {
     options: {
@@ -149,6 +150,15 @@ const requestReducer = (state = initialState, action) => {
                     keyword: action.keyword
                 }
             }
+        case SET_ORDER_AND_SORT:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    sort: action.payload[0],
+                    order: action.payload[1]
+                }
+            }
         case RESET_PAGE:
             return {
                 ...state,
@@ -234,6 +244,11 @@ export const setMinionType = minionType => ({
 export const setKeyword = keyword => ({
     type: SET_KEYWORD,
     keyword
+})
+
+export const setOrderAndSort = payload => ({
+    type: SET_ORDER_AND_SORT,
+    payload
 })
 
 export const requestCards = (requestOptions, page, update) => async dispatch => {
