@@ -1,7 +1,6 @@
 import api from '../api/ApiService';
 import { appendCards, setTotalCards, updateCards } from './cardsReducer';
 
-// const MAKE_REQUEST_DEFAULT = 'hsapp/requestReducer/MAKE_REQUEST_DEFAULT'
 const TOGGLE_FETCHING = 'hsapp/requestReducer/TOGGLE_FETCHING';
 const INCREASE_PAGE = 'hsapp/requestReducer/INCREASE_PAGE';
 const RESET_PAGE = 'hsapp/requestReducer/RESET_PAGE';
@@ -12,6 +11,12 @@ const SET_MANA_COST = 'hsapp/requestReducer/SET_MANA_COST';
 const REMOVE_MANA_COST = 'hsapp/requestReducer/REMOVE_MANA_COST';
 const RESET_MANA_COST = 'hsapp/requestReducer/RESET_MANA_COST';
 const SET_TEXT_FILTER = 'hsapp/requestReducer/SET_TEXT_FILTER';
+const SET_ATTACK = 'hsapp/requestReducer/SET_ATTACK';
+const SET_HEALTH = 'hsapp/requestReducer/SET_HEALTH';
+const SET_CARD_TYPE = 'hsapp/requestReducer/SET_CARD_TYPE';
+const SET_RARITY = 'hsapp/requestReducer/SET_RARITY';
+const SET_MINION_TYPE = 'hsapp/requestReducer/SET_MINION_TYPE';
+const SET_KEYWORD = 'hsapp/requestReducer/SET_KEYWORD';
 
 const initialState = {
     options: {
@@ -19,7 +24,7 @@ const initialState = {
         set: 'Standard',
         class: '',
         manaCost: [],
-        attack: null,
+        attack: '',
         health: null,
         collectible: 1,
         rarity: '',
@@ -38,11 +43,6 @@ const initialState = {
 
 const requestReducer = (state = initialState, action) => {
     switch (action.type) {
-        // case MAKE_REQUEST_DEFAULT:
-        //     return {
-        //         ...state,
-        //         ...initialState.options
-        //     }
         case TOGGLE_FETCHING:
             return {
                 ...state,
@@ -69,8 +69,6 @@ const requestReducer = (state = initialState, action) => {
                 options: { ...state.options, class: action.class }
             };
         case SET_MANA_COST:
-            // const newManaCost = `${state.options.manaCost}${state.options.manaCost &&
-            //     ','}${action.manaCost}`;
             return {
                 ...state,
                 options: {
@@ -79,9 +77,6 @@ const requestReducer = (state = initialState, action) => {
                 }
             };
         case REMOVE_MANA_COST:
-            // const remainedManaCost = state.options.manaCost
-            //     .replace(action.manaCost, '')
-            //     .slice(0, -1);
             const index = state.options.manaCost.indexOf(action.manaCost)
             return {
                 ...state,
@@ -95,7 +90,7 @@ const requestReducer = (state = initialState, action) => {
                 ...state,
                 options: {
                     ...state.options,
-                    manaCost: ''
+                    manaCost: []
                 }
             };
         case SET_TEXT_FILTER:
@@ -106,6 +101,54 @@ const requestReducer = (state = initialState, action) => {
                     textFilter: action.textFilter
                 }
             };
+        case SET_ATTACK:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    attack: action.attack
+                }
+            }
+        case SET_HEALTH:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    health: action.health
+                }
+            }
+        case SET_CARD_TYPE:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    type: action.cardType
+                }
+            }
+        case SET_RARITY:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    rarity: action.rarity
+                }
+            }
+        case SET_MINION_TYPE:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    minionType: action.minionType
+                }
+            }
+        case SET_KEYWORD:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    keyword: action.keyword
+                }
+            }
         case RESET_PAGE:
             return {
                 ...state,
@@ -115,10 +158,6 @@ const requestReducer = (state = initialState, action) => {
             return state;
     }
 };
-
-// export const makeRequestDefault = () => ({
-//     type: MAKE_REQUEST_DEFAULT
-// })
 
 const toggleFetching = isFetching => ({
     type: TOGGLE_FETCHING,
@@ -166,6 +205,36 @@ export const setTextFilter = textFilter => ({
     type: SET_TEXT_FILTER,
     textFilter
 });
+
+export const setAttack = attack => ({
+    type: SET_ATTACK,
+    attack
+})
+
+export const setHealth = health => ({
+    type: SET_HEALTH,
+    health
+})
+
+export const setCardType = cardType => ({
+    type: SET_CARD_TYPE,
+    cardType
+})
+
+export const setRarity = rarity => ({
+    type: SET_RARITY,
+    rarity
+})
+
+export const setMinionType = minionType => ({
+    type: SET_MINION_TYPE,
+    minionType
+})
+
+export const setKeyword = keyword => ({
+    type: SET_KEYWORD,
+    keyword
+})
 
 export const requestCards = (requestOptions, page, update) => async dispatch => {
     dispatch(toggleFetching(true));

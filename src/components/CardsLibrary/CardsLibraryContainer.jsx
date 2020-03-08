@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useInView } from "react-intersection-observer";
-import { requestCards, removeManaCost, setTextFilter } from '../../redux/requestReducer';
+import { requestCards } from '../../redux/requestReducer';
 import CardsLibrary from './CardsLibrary';
 
 const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...props }) => {
@@ -23,41 +23,14 @@ const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...pr
         }
     }, [requestOptions])
 
-    const onRemoveManaCost = (manaCost) => {
-        props.removeManaCost(manaCost)
-    }
-    const onRemoveTextFilter = () => {
-        props.setTextFilter('')
-    }
-
-    return (
-        <>
-            {console.log('cards library container render')}
-            <CardsLibrary 
-                set={props.set} 
-                gameMode={props.gameMode} 
-                totalCards={props.totalCards}
-                manaCost={props.manaCost}
-                textFilter={props.textFilter}
-                onRemoveManaCost={onRemoveManaCost}
-                onRemoveTextFilter={onRemoveTextFilter}
-                observer={ref}
-            />
-            {/* <div ref={ref}></div> */}
-        </>
-    )
+    return <CardsLibrary observer={ref} />
 }
 
 const mapStateToProps = (state) => ({
     cards: state.cardsReducer.cards,
     page: state.requestReducer.page,
-    set: state.requestReducer.options.set,
-    gameMode: state.requestReducer.options.gameMode,
-    manaCost: state.requestReducer.options.manaCost,
-    totalCards: state.cardsReducer.totalCards,
     isFetching: state.requestReducer.isFetching,
     requestOptions: state.requestReducer.options,
-    textFilter: state.requestReducer.options.textFilter
 })
 
-export default connect(mapStateToProps, { requestCards, removeManaCost, setTextFilter })(CardsLibraryContainer);
+export default connect(mapStateToProps, { requestCards })(CardsLibraryContainer);
