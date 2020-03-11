@@ -1,4 +1,4 @@
-const TOGGLE_ADDITIONAL_FILTERBARS = 'hsapp/requestReducer/TOGGLE_ADDITIONAL_FILTERBARS';
+const TOGGLE_ADDITIONAL_FILTERBARS = 'hsapp/uiReducer/TOGGLE_ADDITIONAL_FILTERBARS';
 
 const initialState = {
     additionalFilterbars: false

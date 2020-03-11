@@ -4,7 +4,8 @@ const INITIALIZE_APP = 'hsapp/appReducer/INITIALIZE_APP';
 const INITIALIZE_METADATA = 'hsapp/appReducer/INITIALIZE_METADATA';
 
 const initialState = {
-    isInitialized: false
+    isInitialized: false,
+    metadata: null
 }
 
 const appReducer = (state = initialState, action) => {
@@ -17,7 +18,7 @@ const appReducer = (state = initialState, action) => {
         case INITIALIZE_METADATA:
             return {
                 ...state,
-                ...action.metadata
+                metadata: {...action.metadata}
             }
         default:
             return state

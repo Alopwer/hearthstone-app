@@ -6,7 +6,9 @@ import CardsLibrary from './CardsLibrary';
 
 const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
-        rootMargin: '2000px'
+        // CHANGE!!!
+        // rootMargin: '0px 0px 0px 0px'
+        threshold: 1
     });
 
     useEffect(() => {
@@ -22,8 +24,8 @@ const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...pr
             requestCards(requestOptions, 1, true)
         }
     }, [requestOptions])
-
-    return <CardsLibrary observer={ref} />
+    
+    return <CardsLibrary observer={ref} viewMode={props.viewMode}/>
 }
 
 const mapStateToProps = (state) => ({
@@ -31,6 +33,7 @@ const mapStateToProps = (state) => ({
     page: state.requestReducer.page,
     isFetching: state.requestReducer.isFetching,
     requestOptions: state.requestReducer.options,
+    viewMode: state.requestReducer.options.viewMode
 })
 
 export default connect(mapStateToProps, { requestCards })(CardsLibraryContainer);

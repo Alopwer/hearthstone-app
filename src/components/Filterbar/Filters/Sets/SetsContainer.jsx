@@ -23,7 +23,7 @@ const SetsContainer = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    sets: state.appReducer.sets,
+    sets: state.appReducer.metadata.sets,
     set: state.requestReducer.options.set,
     gameMode: state.requestReducer.options.gameMode
 })

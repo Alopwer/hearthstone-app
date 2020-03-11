@@ -7,7 +7,6 @@ const CardsSection = props => {
 
     return (
         <div>
-            {console.log('cards section render')}
             <h3>{props.nameClass}</h3>
             {singleCards}
         </div>

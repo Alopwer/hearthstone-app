@@ -16,9 +16,8 @@ function App({ isInitialized }) {
 
   return (
     <div>
-      {console.log('app render')}
+      <FilterbarContainer />
       <Route path='/'>
-        <FilterbarContainer />
         <CardsLibraryContainer />
       </Route>
       <Footer />

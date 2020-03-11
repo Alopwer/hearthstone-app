@@ -18,6 +18,8 @@ const SET_RARITY = 'hsapp/requestReducer/SET_RARITY';
 const SET_MINION_TYPE = 'hsapp/requestReducer/SET_MINION_TYPE';
 const SET_KEYWORD = 'hsapp/requestReducer/SET_KEYWORD';
 const SET_ORDER_AND_SORT = 'hsapp/requestReducer/SET_ORDER_AND_SORT';
+const RESET_FILTERS = 'hsapp/requestReducer/RESET_FILTERS';
+const SET_VIEW_MODE = 'hsapp/requestReducer/SET_VIEW_MODE';
 
 const initialState = {
     options: {
@@ -36,7 +38,8 @@ const initialState = {
         gameMode: '',
         pageSize: null,
         sort: '',
-        order: ''
+        order: '',
+        viewMode: ''
     },
     page: 1,
     isFetching: false
@@ -159,6 +162,29 @@ const requestReducer = (state = initialState, action) => {
                     order: action.payload[1]
                 }
             }
+        case SET_VIEW_MODE:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    viewMode: action.viewMode
+                }
+            }
+        case RESET_FILTERS:
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    manaCost: '',
+                    textFilter: '',
+                    attack: '',
+                    health: '',
+                    type: '',
+                    rarity: '',
+                    minionType: '',
+                    keyword: ''
+                }
+            }
         case RESET_PAGE:
             return {
                 ...state,
@@ -249,6 +275,15 @@ export const setKeyword = keyword => ({
 export const setOrderAndSort = payload => ({
     type: SET_ORDER_AND_SORT,
     payload
+})
+
+export const setViewMode = viewMode => ({
+    type: SET_VIEW_MODE,
+    viewMode
+})
+
+export const resetFilters = () => ({
+    type: RESET_FILTERS
 })
 
 export const requestCards = (requestOptions, page, update) => async dispatch => {
