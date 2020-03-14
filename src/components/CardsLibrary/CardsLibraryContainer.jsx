@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { useInView } from "react-intersection-observer";
 import { requestCards } from '../../redux/requestReducer';
 import CardsLibrary from './CardsLibrary';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
@@ -25,7 +27,7 @@ const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...pr
         }
     }, [requestOptions])
     
-    return <CardsLibrary observer={ref} viewMode={props.viewMode}/>
+    return <CardsLibrary observer={ref} viewMode={props.viewMode} match={props.match}/>
 }
 
 const mapStateToProps = (state) => ({
@@ -36,4 +38,7 @@ const mapStateToProps = (state) => ({
     viewMode: state.requestReducer.options.viewMode
 })
 
-export default connect(mapStateToProps, { requestCards })(CardsLibraryContainer);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, { requestCards })
+)(CardsLibraryContainer);

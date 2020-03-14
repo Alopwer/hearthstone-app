@@ -19,15 +19,15 @@ import {
 import SimpleInfo from './SimpleInfo'
 
 const CardsFiltersInfoContainer = props => {
-  const manaCostBar =
-    props.requestOptions.manaCost.length !== 0 &&
-    props.requestOptions.manaCost.map(mC => (
-      <span key={mC} onClick={(e) => { e.stopPropagation() ;props.removeManaCost(mC)}}>
+  const { class: classValue, textFilter, attack, health, type, minionType, keyword, rarity, manaCost } = props.requestOptions
+
+  const manaCostBar = manaCost.length !== 0 &&
+    manaCost.map(mC => (
+      <span key={mC} onClick={(e) => { e.stopPropagation(); props.removeManaCost(mC)}}>
         {mC}{' '}
       </span>
     ));
 
-  const { class: classValue, textFilter, attack, health, type, minionType, keyword, rarity } = props.requestOptions
   const filtersInfo = [
     {
       resetValue: props.setClass,

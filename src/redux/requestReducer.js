@@ -154,6 +154,7 @@ const requestReducer = (state = initialState, action) => {
                 }
             }
         case SET_ORDER_AND_SORT:
+            debugger
             return {
                 ...state,
                 options: {

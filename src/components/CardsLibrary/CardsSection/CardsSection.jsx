@@ -1,8 +1,9 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const CardsSection = props => {
     const singleCards = props.cards.map(c => (
-        <img key={c.id} src={c.image} alt="" />
+        <NavLink key={c.id} to={`/${c.id}`}><img src={c.image} alt="" /></NavLink>
     ))
 
     return (

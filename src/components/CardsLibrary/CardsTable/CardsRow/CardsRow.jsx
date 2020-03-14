@@ -1,10 +1,11 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 const CardsRow = ({ metadata, card, setKeyword, setMinionType }) => {
     const { classes, types, rarities, minionTypes, keywords } = metadata
     const keywordItems = card.keywordIds 
         && keywords.filter(k => card.keywordIds.includes(k.id))
-            .map(k => (<span onClick={() => setKeyword(k.slug)}>{k.name}</span>)) 
+            .map(k => (<span key={k.id} onClick={() => setKeyword(k.slug)}>{k.name}</span>)) 
         || '-'
     const correctMinionType = minionTypes.find(m => m.id === card.minionTypeId)
     const minionTypeItems = card.minionTypeId 
@@ -13,7 +14,7 @@ const CardsRow = ({ metadata, card, setKeyword, setMinionType }) => {
 
     return <tr>
         <td style={{ backgroundImage: `url(${card.cropImage})` }}>
-            {card.name}
+            <NavLink to={`/${card.id}`}>{card.name}</NavLink>
         </td>
         <td>
             {classes.find(cl => cl.id === card.classId).name}

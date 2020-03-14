@@ -15,8 +15,16 @@ class ApiService {
     this._token = response.access_token
   }
 
+  async getSimpleResource(resource, option) {
+    const composedUrl = `${this._baseUrl}${resource}/${option}?locale=en_US&access_token=${this._token}`
+    // debugger
+    const response = await Axios.get(composedUrl)
+    return response
+  }
+
   async getResource(resource, requestOptions, page) {
     const composedUrl = createComposedUrl(this._baseUrl, resource, this._token, requestOptions, page)
+    // debugger
     const response = await Axios.get(composedUrl)
     return response
   }
@@ -29,6 +37,12 @@ class ApiService {
 
   async getCards(requestOptions, page) {
     const response = await this.getResource('cards', requestOptions, page);
+    // debugger
+    return response.data
+  }
+
+  async getCard(cardId) {
+    const response = await this.getSimpleResource('cards', cardId);
     // debugger
     return response.data
   }

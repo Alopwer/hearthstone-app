@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect, Provider } from 'react-redux';
 import store from './redux/store';
 import { initialize } from './redux/appReducer';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Preloader from './components/common/Preloader';
 import CardsLibraryContainer from './components/CardsLibrary';
 import FilterbarContainer from './components/Filterbar';
@@ -16,10 +16,12 @@ const App = ({ isInitialized }) => {
 
   return (
     <div>
-      <FilterbarContainer />
-      <Route path='/'>
-        <CardsLibraryContainer />
-      </Route>
+      <Switch>
+        <Route path='/:cardId?'>
+          <FilterbarContainer />
+          <CardsLibraryContainer />
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );

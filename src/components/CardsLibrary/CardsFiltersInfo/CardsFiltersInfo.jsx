@@ -1,18 +1,10 @@
 import React from 'react';
 import SortFilter from './SortFilter';
+import { NavLink } from 'react-router-dom';
 
 const CardsFiltersInfo = ({ requestOptions, totalCards, ...props }) => {
-    const { gameMode, set, sort, order } = requestOptions
-
+    const { gameMode, set, sort, order, viewMode } = requestOptions
     const totalCardsInfo = totalCards && <p>{totalCards} cards found for {gameMode || set} Cards</p> || ''
-    // const className = classValue && classValue !== 'all' && classValue[0].toUpperCase() + classValue.slice(1)
-    // const manaCostInfo = props.manaCostBar && <p>Mana : {props.manaCostBar}  x</p>
-    // const attackInfo = attack && <p>Attack : {attack}  x</p>
-    // const healthInfo = health && <p>Health : {health}  x</p>
-    // const cardTypeInfo = type && <p>Card Type : {type}  x</p>
-    // const rarityInfo = rarity && <p>Rarity : {rarity}  x</p>
-    // const minionTypeInfo = minionType && <p>Minion Type : {minionType}  x</p>
-    // const keywordsInfo = keyword && <p>Keywords : {keyword}  x</p>
 
     return <div>
         { totalCardsInfo }
@@ -23,9 +15,12 @@ const CardsFiltersInfo = ({ requestOptions, totalCards, ...props }) => {
                 Reset All x
             </div>
         }
-        <SortFilter sort={sort} order={order} onChangeSort={props.onChangeSort}/>
+        {
+            viewMode !== 'table' &&
+            <SortFilter sort={sort} order={order} onChangeSort={props.onChangeSort}/>
+        }
         <div>
-            View: <span onClick={() => props.setViewMode('')}>library </span><span onClick={() => props.setViewMode('table')}>table</span>
+            View: <NavLink to=''onClick={() => props.setViewMode('')}>library </NavLink><NavLink to='?viewMode=table'onClick={() => props.setViewMode('table')}>table</NavLink>
         </div>
     </div>
 }
