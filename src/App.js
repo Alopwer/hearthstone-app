@@ -9,7 +9,7 @@ import FilterbarContainer from './components/Filterbar';
 import Footer from './components/Footer';
 import './App.scss';
 
-function App({ isInitialized }) {
+const App = ({ isInitialized }) => {
   if (!isInitialized) {
     return <Preloader />;
   }

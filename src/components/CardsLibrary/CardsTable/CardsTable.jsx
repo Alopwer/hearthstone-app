@@ -11,6 +11,7 @@ const CardsTable = props => {
                 <th>Health</th>
                 <th>Card Type</th>
                 <th>Rarity</th>
+                <th>Minion Type</th>
                 <th>Keywords</th>
             </tr>
         </thead>

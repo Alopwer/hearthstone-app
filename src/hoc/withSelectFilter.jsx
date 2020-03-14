@@ -8,7 +8,6 @@ const withSelectFilter = props => Component => {
     }
     if (props.options) {
         for (const option of props.options) {
-            // debugger
             renderItems.push(
                 <option key={option.id} value={option.slug}>{ option.name }</option>
             )

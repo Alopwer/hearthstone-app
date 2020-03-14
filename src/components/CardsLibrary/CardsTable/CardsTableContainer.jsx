@@ -1,40 +1,18 @@
 import React from 'react';
 import CardsTable from './CardsTable';
 import { connect } from 'react-redux';
+import CardsRow from './CardsRow/CardsRow';
+import {setKeyword, setMinionType} from '../../../redux/requestReducer';
 
 const CardsTableContainer = props => {
-    const {classes, types, rarities, minionTypes, keywords} = props.metadata
-    const cardsRows = props.cards.map(c => (<tr key={c.id}>
-        <td style={{backgroundImage: `url(${c.cropImage})`}}>
-            {c.name}
-        </td>
-        <td>
-            {classes.find(cl => cl.id === c.classId).name}
-        </td>
-        <td>
-            {c.manaCost}
-        </td>
-        <td>
-            {c.attack || '-'}
-        </td>
-        <td>
-            {c.health || '-'}
-        </td>
-        <td>
-            {types.find(t => t.id === c.cardTypeId).name}
-        </td>
-        <td>
-            {rarities.find(r => r.id === c.rarityId).name}
-        </td>
-        <td>
-            {c.minionTypeId && minionTypes.find(m => m.id === c.minionTypeId).name || '-'}
-        </td>
-        <td>
-            {c.keywordIds && keywords.filter(k => c.keywordIds.includes(k.id)).map(k => k.name).join(', ') || '-'}
-        </td>
-    </tr>))
+    const cardsRows = props.cards.map(c => <CardsRow key={c.id} 
+        card={c} 
+        metadata={props.metadata} 
+        setKeyword={props.setKeyword} 
+        setMinionType={props.setMinionType}
+    />)
 
-    return <CardsTable cardsItems={cardsRows}/>
+    return <CardsTable cardsItems={cardsRows} />
 }
 
 const mapStateToProps = state => ({
@@ -42,4 +20,4 @@ const mapStateToProps = state => ({
     metadata: state.appReducer.metadata
 });
 
-export default connect(mapStateToProps)(CardsTableContainer)
+export default connect(mapStateToProps, {setKeyword, setMinionType})(CardsTableContainer)

@@ -31,15 +31,15 @@ const CardsFiltersInfoContainer = props => {
   const filtersInfo = [
     {
       resetValue: props.setClass,
-      valueInfo: classValue && classValue !== 'all' && classValue[0].toUpperCase() + classValue.slice(1)
+      valueInfo: classValue && classValue !== 'all' && classValue[0].toUpperCase() + classValue.slice(1) + ' x'
     },
     {
       resetValue: props.resetManaCost,
-      valueInfo: manaCostBar && <p>Mana : {manaCostBar}  x</p>
+      valueInfo: manaCostBar && <p>Mana : {manaCostBar} x</p>
     },
     {
       resetValue: props.setTextFilter,
-      valueInfo: textFilter
+      valueInfo: textFilter && <p>{textFilter} x</p>
     },
     {
       resetValue: props.setAttack,
@@ -51,19 +51,19 @@ const CardsFiltersInfoContainer = props => {
     },
     {
       resetValue: props.setCardType,
-      valueInfo: type && <p>Card Type : {type}  x</p>
+      valueInfo: type && <p>Card Type : {type[0].toUpperCase() + type.slice(1)}  x</p>
     },
     {
       resetValue: props.setRarity,
-      valueInfo: rarity && <p>Rarity : {rarity}  x</p>
+      valueInfo: rarity && <p>Rarity : {rarity[0].toUpperCase() + rarity.slice(1)}  x</p>
     },
     {
       resetValue: props.setMinionType,
-      valueInfo: minionType && <p>Minion Type : {minionType}  x</p>
+      valueInfo: minionType && <p>Minion Type : {minionType[0].toUpperCase() + minionType.slice(1)}  x</p>
     },
     {
       resetValue: props.setKeyword,
-      valueInfo: keyword && <p>Keywords : {keyword}  x</p>
+      valueInfo: keyword && <p>Keywords : {props.keywordsMetadata.find(km => km.slug === keyword).name}  x</p>
     }
   ]
   const filterItems = filtersInfo.map((f, i) => <SimpleInfo key={i} resetValue={f.resetValue} valueInfo={f.valueInfo} />)
@@ -81,7 +81,8 @@ const CardsFiltersInfoContainer = props => {
 
 const mapStateToProps = state => ({
   totalCards: state.cardsReducer.totalCards,
-  requestOptions: state.requestReducer.options
+  requestOptions: state.requestReducer.options,
+  keywordsMetadata: state.appReducer.metadata.keywords
 });
 
 export default connect(mapStateToProps, {
@@ -97,5 +98,5 @@ export default connect(mapStateToProps, {
   setKeyword,
   setOrderAndSort,
   resetFilters,
-  setViewMode
+  setViewMode,
 })(CardsFiltersInfoContainer);
