@@ -6,18 +6,21 @@ import { setAttack, setHealth, setCardType, setClass, setRarity, setMinionType, 
 
 const FilterbarContainer = props => {
     return (
-        <Filterbar {...props} usedOptions={props.requestOptions} />
+        <Filterbar {...props} />
     );
 };
 
 const mapStateToProps = state => ({
     additionalFilterbars: state.uiReducer.additionalFilterbars,
     requestOptions: state.requestReducer.options,
-    cardTypes: state.appReducer.metadata.types,
-    classes: state.appReducer.metadata.classes,
-    rarities: state.appReducer.metadata.rarities,
-    minionTypes: state.appReducer.metadata.minionTypes,
-    keywords: state.appReducer.metadata.keywords
+    metadata: state.appReducer.metadata,
+    class: state.requestReducer.options.class,
+    attack: state.requestReducer.options.attack,
+    health: state.requestReducer.options.health,
+    type: state.requestReducer.options.type,
+    rarity: state.requestReducer.options.rarity,
+    minionType: state.requestReducer.options.minionType,
+    keyword: state.requestReducer.options.keyword,
 });
 
 export default connect(mapStateToProps, {

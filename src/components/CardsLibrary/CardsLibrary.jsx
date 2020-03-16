@@ -6,18 +6,23 @@ import ModalCardContainer from "../ModalCard";
 
 const CardsLibrary = props => {
     return (
-        <div>
-            <CardsFiltersInfoContainer />
-            {
-                props.viewMode === 'table' 
-                ? <CardsTableContainer />
-                : <CardsSectionContainer />
-            }
-            {
-                props.match.params.cardId && <ModalCardContainer />
-            }
+        <>
+        {
+            props.cards.length !== 0 &&
+            <div>
+                <CardsFiltersInfoContainer />
+                {
+                    props.viewMode === 'table' 
+                    ? <CardsTableContainer />
+                    : <CardsSectionContainer />
+                }
+                {
+                    props.match.params.cardId && <ModalCardContainer />
+                }
+            </div>
+        }
             <div style={{marginTop: '200px'}}ref={props.observer}></div>
-        </div>
+        </>
     );
 }
 

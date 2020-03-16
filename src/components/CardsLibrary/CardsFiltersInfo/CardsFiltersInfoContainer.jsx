@@ -21,17 +21,16 @@ import SimpleInfo from './SimpleInfo'
 const CardsFiltersInfoContainer = props => {
   const { class: classValue, textFilter, attack, health, type, minionType, keyword, rarity, manaCost } = props.requestOptions
 
-  const manaCostBar = manaCost.length !== 0 &&
-    manaCost.map(mC => (
-      <span key={mC} onClick={(e) => { e.stopPropagation(); props.removeManaCost(mC)}}>
-        {mC}{' '}
-      </span>
-    ));
+  const manaCostBar = manaCost.length !== 0 && manaCost.map(mC => (
+    <span key={mC} onClick={(e) => { e.stopPropagation(); props.removeManaCost(mC) }}>
+      {mC}{' '}
+    </span>
+  ));
 
   const filtersInfo = [
     {
       resetValue: props.setClass,
-      valueInfo: classValue && classValue !== 'all' && classValue[0].toUpperCase() + classValue.slice(1) + ' x'
+      valueInfo: classValue && classValue !== 'all' && <p>Class: {classValue[0].toUpperCase() + classValue.slice(1)} x</p>
     },
     {
       resetValue: props.resetManaCost,
@@ -72,17 +71,18 @@ const CardsFiltersInfoContainer = props => {
     props.setOrderAndSort(e.target.value.split(','))
   }
 
-  return <CardsFiltersInfo {...props} 
-    manaCostBar={manaCostBar} 
-    onChangeSort={onChangeSort} 
-    filterItems={filterItems} 
+  return <CardsFiltersInfo {...props}
+    onChangeSort={onChangeSort}
+    filterItems={filterItems}
+    orderAndSort={props.orderAndSort}
   />;
 };
 
 const mapStateToProps = state => ({
   totalCards: state.cardsReducer.totalCards,
   requestOptions: state.requestReducer.options,
-  keywordsMetadata: state.appReducer.metadata.keywords
+  keywordsMetadata: state.appReducer.metadata.keywords,
+  orderAndSort: state.staticInfoReducer.orderAndSort
 });
 
 export default connect(mapStateToProps, {

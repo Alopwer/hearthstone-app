@@ -28,7 +28,7 @@ const initialState = {
         class: '',
         manaCost: [],
         attack: '',
-        health: null,
+        health: '',
         collectible: 1,
         rarity: '',
         type: '',
@@ -154,7 +154,6 @@ const requestReducer = (state = initialState, action) => {
                 }
             }
         case SET_ORDER_AND_SORT:
-            debugger
             return {
                 ...state,
                 options: {

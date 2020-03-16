@@ -5,13 +5,15 @@ import cardReducer from './cardReducer';
 import appReducer from './appReducer';
 import requestReducer from './requestReducer';
 import uiReducer from './uiReducer';
+import staticInfoReducer from './staticInfoReducer';
 
 const reducers = combineReducers({
     cardsReducer,
     appReducer,
     requestReducer,
     uiReducer,
-    cardReducer
+    cardReducer,
+    staticInfoReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -2,9 +2,8 @@ import React from 'react';
 
 const withSelectFilter = props => Component => {
     const renderItems = []
-    const keyValue = props.options ? props.options.length : 11
     if (props.name) {
-        renderItems.push(<option key={keyValue} value={''}>All {props.name}</option>)
+        renderItems.push(<option key={100} value={''}>All {props.name}</option>)
     }
     if (props.options) {
         for (const option of props.options) {
@@ -19,7 +18,7 @@ const withSelectFilter = props => Component => {
             )
         }
     }
-// debugger
+
     return (
         <Component {...props} renderItems={renderItems}/>
     )

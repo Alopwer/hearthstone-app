@@ -27,7 +27,7 @@ const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...pr
         }
     }, [requestOptions])
     
-    return <CardsLibrary observer={ref} viewMode={props.viewMode} match={props.match}/>
+    return <CardsLibrary cards={props.cards} observer={ref} viewMode={props.viewMode} match={props.match}/>
 }
 
 const mapStateToProps = (state) => ({

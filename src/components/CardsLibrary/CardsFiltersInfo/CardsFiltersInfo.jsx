@@ -1,6 +1,5 @@
 import React from 'react';
-import SortFilter from './SortFilter';
-import { NavLink } from 'react-router-dom';
+import OrderAndSortFilter from './OrderAndSortFilter';
 
 const CardsFiltersInfo = ({ requestOptions, totalCards, ...props }) => {
     const { gameMode, set, sort, order, viewMode } = requestOptions
@@ -17,10 +16,10 @@ const CardsFiltersInfo = ({ requestOptions, totalCards, ...props }) => {
         }
         {
             viewMode !== 'table' &&
-            <SortFilter sort={sort} order={order} onChangeSort={props.onChangeSort}/>
+            <OrderAndSortFilter orderAndSort={props.orderAndSort} sort={sort} order={order} onChangeSort={props.onChangeSort}/>
         }
         <div>
-            View: <NavLink to=''onClick={() => props.setViewMode('')}>library </NavLink><NavLink to='?viewMode=table'onClick={() => props.setViewMode('table')}>table</NavLink>
+            View: <span onClick={() => props.setViewMode('')}>library </span><span onClick={() => props.setViewMode('table')}>table</span>
         </div>
     </div>
 }
