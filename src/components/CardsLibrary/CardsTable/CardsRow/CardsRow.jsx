@@ -14,7 +14,7 @@ const CardsRow = ({ metadata, card, setKeyword, setMinionType }) => {
 
     return <tr>
         <td style={{ backgroundImage: `url(${card.cropImage})` }}>
-            <NavLink to={`/${card.id}`}>{card.name}</NavLink>
+            <NavLink to={`/cards/${card.id}`}>{card.name}</NavLink>
         </td>
         <td>
             {classes.find(cl => cl.id === card.classId).name}

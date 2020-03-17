@@ -1,21 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import {
-    setActualSet,
-    setGameMode
-} from '../../../../redux/requestReducer';
-import Sets from './Sets';
+import React from 'react'
+import { connect } from 'react-redux'
+import { setActualSet, setGameMode } from '../../../../redux/requestReducer'
+import { setActualSetName } from '../../../../redux/staticInfoReducer'
+import Sets from './Sets'
 
 const SetsContainer = (props) => {
     const sets = props.sets.map(s => (
-        <option value={s.name} key={s.id}>{ s.name }</option>
+        <option value={s.slug} key={s.id}>{ s.name }</option>
     ))
 
     const onChangeSet = e => {
-        if (e.target.value === 'Arena') {
-            props.setGameMode(e.target.value);
+        const value = e.target.value
+        if (value === 'Arena') {
+            props.setGameMode(value)
         } else {
-            props.setActualSet(e.target.value);
+            props.setActualSet(value)
+            const set = props.sets.find(s => s.slug === value) || value
+            props.setActualSetName(set.name || set)
         }
     };
 
@@ -28,4 +29,4 @@ const mapStateToProps = (state) => ({
     gameMode: state.requestReducer.options.gameMode
 })
 
-export default connect(mapStateToProps, { setGameMode, setActualSet })(SetsContainer)
+export default connect(mapStateToProps, { setGameMode, setActualSet, setActualSetName })(SetsContainer)

@@ -1,3 +1,5 @@
+const SET_ACTUAL_SET_NAME = 'hsapp/staticInfoReducer/SET_ACTUAL_SET_NAME'
+
 const initialState = {
     orderAndSort: [
         {
@@ -46,15 +48,26 @@ const initialState = {
             id: 0,
             name: ''
         }
-    ]
+    ],
+    actualSetName: 'Standard'
 }
 
 const staticInfoReducer = (state = initialState, action) => {
     switch(action.type) {
+        case SET_ACTUAL_SET_NAME:
+            return {
+                ...state,
+                actualSetName: action.setName
+            }
         default: {
             return state
         }
     }
 }
+
+export const setActualSetName = setName => ({
+    type: SET_ACTUAL_SET_NAME,
+    setName
+})
 
 export default staticInfoReducer

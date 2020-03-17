@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { useInView } from "react-intersection-observer";
-import { requestCards } from '../../redux/requestReducer';
-import CardsLibrary from './CardsLibrary';
-import { compose } from 'redux';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { useInView } from "react-intersection-observer"
+import { requestCards } from '../../redux/requestReducer'
+import CardsLibrary from './CardsLibrary'
+import { compose } from 'redux'
+import { withRouter } from 'react-router-dom'
 
 const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
@@ -27,11 +27,16 @@ const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...pr
         }
     }, [requestOptions])
     
-    return <CardsLibrary cards={props.cards} observer={ref} viewMode={props.viewMode} match={props.match}/>
+    return <CardsLibrary cards={props.cards} 
+        observer={ref} 
+        viewMode={props.viewMode} 
+        match={props.match}
+    />
 }
 
 const mapStateToProps = (state) => ({
     cards: state.cardsReducer.cards,
+    totalCards: state.cardsReducer.totalCards,
     page: state.requestReducer.page,
     isFetching: state.requestReducer.isFetching,
     requestOptions: state.requestReducer.options,
@@ -41,4 +46,4 @@ const mapStateToProps = (state) => ({
 export default compose(
     withRouter,
     connect(mapStateToProps, { requestCards })
-)(CardsLibraryContainer);
+)(CardsLibraryContainer)

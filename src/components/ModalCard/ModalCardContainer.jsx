@@ -10,6 +10,7 @@ Modal.setAppElement('#root')
 
 const ModalCardContainer = props => {
     const [modalIsOpen,setIsOpen] = useState(false);
+
     useEffect(() => {
         if (!props.isFetching && props.match.params.cardId) {
             props.getCard(props.match.params.cardId)
@@ -31,7 +32,7 @@ const ModalCardContainer = props => {
     function closeModal(){
         setIsOpen(false);
         props.resetCard();
-        props.history.push('/')
+        props.history.push('/cards')
     }
 
     const getRelativeCardsIds = () => {
@@ -47,9 +48,9 @@ const ModalCardContainer = props => {
 
     const onRequestCard = (next) => {
         if (next) {
-            props.history.push(`/${props.relativeCardsIds[1]}`)
+            props.history.push(`/cards/${props.relativeCardsIds[1]}`)
         } else {
-            props.history.push(`/${props.relativeCardsIds[0]}`)
+            props.history.push(`/cards/${props.relativeCardsIds[0]}`)
         }   
     }
     

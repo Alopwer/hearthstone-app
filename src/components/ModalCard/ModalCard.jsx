@@ -2,7 +2,7 @@ import React from 'react';
 
 const ModalCard = props => {
     return <div>
-        { props.cards[0].id !== props.cardInfo.id && <span onClick={() => props.onRequestCard(false)}>prev</span> }
+        { props.relativeCardsIds[0] && <span onClick={() => props.onRequestCard(false)}>prev</span> }
          <div>
             <img src={props.cardInfo.image} />
             <div>
@@ -12,7 +12,7 @@ const ModalCard = props => {
                 <ul>
                     <li>Type: {props.metadata.types.find(t => t.id === props.cardInfo.cardTypeId).name}</li>
                     <li>Rarity: {props.metadata.rarities.find(r => r.id === props.cardInfo.rarityId).name}</li>
-                    <li>Set: {props.metadata.sets.find(s => s.id === props.cardInfo.cardSetId).name}</li>
+                    <li>Set: {props.metadata.sets.find(s => s.id === props.cardInfo.cardSetId) && props.metadata.sets.find(s => s.id === props.cardInfo.cardSetId).name}</li>
                     <li>Class: {props.metadata.classes.find(c => c.id === props.cardInfo.classId).name}</li>
                     <li>Cost to craft: {props.metadata.rarities.find(r => r.id === props.cardInfo.rarityId).craftingCost}</li>
                     <li>Disenchanting Yield: {props.metadata.rarities.find(r => r.id === props.cardInfo.rarityId).dustValue}</li>
