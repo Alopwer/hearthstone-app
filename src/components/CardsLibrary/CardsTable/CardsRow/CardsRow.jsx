@@ -1,16 +1,23 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import CardsRowKeywords from './CardsRowKeywords';
+import CardsRowMinionType from './CardsRowMinionType';
 
-const CardsRow = ({ metadata, card, setKeyword, setMinionType }) => {
+const CardsRow = ({ metadata, card, setKeyword, setMinionType, setKeywordName, setMinionTypeName }) => {
     const { classes, types, rarities, minionTypes, keywords } = metadata
     const keywordItems = card.keywordIds 
-        && keywords.filter(k => card.keywordIds.includes(k.id))
-            .map(k => (<span key={k.id} onClick={() => setKeyword(k.slug)}>{k.name}</span>)) 
-        || '-'
-    const correctMinionType = minionTypes.find(m => m.id === card.minionTypeId)
+        && <CardsRowKeywords card={card} 
+            keywords={keywords} 
+            setKeywordName={setKeywordName} 
+            setKeyword={setKeyword}
+        />
+    
     const minionTypeItems = card.minionTypeId 
-        && <span onClick={() => setMinionType(correctMinionType.name)}>{correctMinionType.name}</span> 
-        || '-'
+        && <CardsRowMinionType card={card}
+            minionTypes={minionTypes}
+            setMinionType={setMinionType}
+            setMinionTypeName={setMinionTypeName}
+        />
 
     return <tr>
         <td style={{ backgroundImage: `url(${card.cropImage})` }}>

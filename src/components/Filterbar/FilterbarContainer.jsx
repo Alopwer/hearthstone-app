@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Filterbar from './Filterbar';
 import { toggleAdditionalFilterbars } from '../../redux/uiReducer';
 import { setAttack, setHealth, setCardType, setClass, setRarity, setMinionType, setKeyword } from '../../redux/requestReducer';
+import { setClassName, setTypeName, setRarityName, setMinionTypeName, setKeywordName } from '../../redux/staticInfoReducer';
 
 const FilterbarContainer = props => {
     return (
@@ -31,5 +32,10 @@ export default connect(mapStateToProps, {
     setClass,
     setRarity,
     setMinionType,
-    setKeyword
+    setKeyword,
+    setClassName,
+    setTypeName,
+    setRarityName,
+    setMinionTypeName,
+    setKeywordName,
 })(FilterbarContainer);

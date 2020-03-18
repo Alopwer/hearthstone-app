@@ -1,6 +1,12 @@
 import React from 'react';
 
 const ModalCard = props => {
+    const { types, rarities, sets, classes } = props.metadata
+    const type = types.find(t => t.id === props.cardInfo.cardTypeId)
+    const set = sets.find(s => s.id === props.cardInfo.cardSetId)
+    const classValue = classes.find(c => c.id === props.cardInfo.classId)
+    const rarity = rarities.find(r => r.id === props.cardInfo.rarityId)
+
     return <div>
         { props.relativeCardsIds[0] && <span onClick={() => props.onRequestCard(false)}>prev</span> }
          <div>
@@ -10,12 +16,12 @@ const ModalCard = props => {
                 <p>{props.cardInfo.flavorText}</p>
                 <p dangerouslySetInnerHTML={{__html: props.cardInfo.text}}></p>
                 <ul>
-                    <li>Type: {props.metadata.types.find(t => t.id === props.cardInfo.cardTypeId).name}</li>
-                    <li>Rarity: {props.metadata.rarities.find(r => r.id === props.cardInfo.rarityId).name}</li>
-                    <li>Set: {props.metadata.sets.find(s => s.id === props.cardInfo.cardSetId) && props.metadata.sets.find(s => s.id === props.cardInfo.cardSetId).name}</li>
-                    <li>Class: {props.metadata.classes.find(c => c.id === props.cardInfo.classId).name}</li>
-                    <li>Cost to craft: {props.metadata.rarities.find(r => r.id === props.cardInfo.rarityId).craftingCost}</li>
-                    <li>Disenchanting Yield: {props.metadata.rarities.find(r => r.id === props.cardInfo.rarityId).dustValue}</li>
+                    <li>{type && `Type: ${type.name}`}</li>
+                    <li>{rarity && `Rarity: ${rarity.name}`}</li>
+                    <li>{set && `Set: ${set.name}`}</li>
+                    <li>{classValue && `Class: ${classValue.name}`}</li>
+                    <li>{rarity && `Cost to Craft: ${rarity.craftingCost}`}</li>
+                    <li>{rarity && `Disenchanting Yield: ${rarity.dustValue}`}</li>
                     <li>Artist: {props.cardInfo.artistName}</li>
                     <li>{props.cardInfo.collectible ? 'Collectible' : 'Not Collectible'}</li>
                 </ul>

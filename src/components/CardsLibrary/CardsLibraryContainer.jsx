@@ -30,7 +30,7 @@ const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...pr
     return <CardsLibrary cards={props.cards} 
         observer={ref} 
         viewMode={props.viewMode} 
-        match={props.match}
+        // match={props.match}
     />
 }
 

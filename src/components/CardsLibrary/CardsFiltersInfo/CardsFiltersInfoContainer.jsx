@@ -22,8 +22,7 @@ import { compose } from 'redux';
 
 const CardsFiltersInfoContainer = props => {
 	const { class: classValue, textFilter, attack, health, type, minionType, keyword, rarity, manaCost } = props.requestOptions
-	const { classes, types, rarities, minionTypes, keywords } = props.metadata
-
+	const { className, typeName, rarityName, minionTypeName, keywordName, actualSetName } = props.nameList
 	const manaCostBar = manaCost.length !== 0 && manaCost.map(mC => (
 		<span key={mC} onClick={(e) => { e.stopPropagation(); props.removeManaCost(mC) }}>
 			{mC}{' '}
@@ -33,7 +32,7 @@ const CardsFiltersInfoContainer = props => {
 	const filtersInfo = [
 		{
 			resetValue: props.setClass,
-			valueInfo: classValue && classValue !== 'all' && <p>Class: {classes.find(c => c.slug === classValue).name} x</p>
+			valueInfo: classValue && <p>Class: {className} x</p>
 		},
 		{
 			resetValue: props.resetManaCost,
@@ -53,19 +52,19 @@ const CardsFiltersInfoContainer = props => {
 		},
 		{
 			resetValue: props.setCardType,
-			valueInfo: type && <p>Card Type : {types.find(t => t.slug === type).name}  x</p>
+			valueInfo: type && <p>Card Type : {typeName}  x</p>
 		},
 		{
 			resetValue: props.setRarity,
-			valueInfo: rarity && <p>Rarity : {rarities.find(r => r.slug === rarity).name}  x</p>
+			valueInfo: rarity && <p>Rarity : {rarityName}  x</p>
 		},
 		{
 			resetValue: props.setMinionType,
-			valueInfo: minionType && <p>Minion Type : {minionTypes.find(mT => mT.slug === minionType).name}  x</p>
+			valueInfo: minionType && <p>Minion Type : {minionTypeName}  x</p>
 		},
 		{
 			resetValue: props.setKeyword,
-			valueInfo: keyword && <p>Keywords : {keywords.find(km => km.slug === keyword).name}  x</p>
+			valueInfo: keyword && <p>Keywords : {keywordName}  x</p>
 		}
 	]
 	const filterItems = filtersInfo.map((f, i) => <SimpleInfo key={i} resetValue={f.resetValue} valueInfo={f.valueInfo} />)
@@ -78,15 +77,15 @@ const CardsFiltersInfoContainer = props => {
 		onChangeSort={onChangeSort}
 		filterItems={filterItems}
 		orderAndSort={props.orderAndSort}
+		actualSetName={actualSetName}
 	/>;
 };
 
 const mapStateToProps = state => ({
 	totalCards: state.cardsReducer.totalCards,
 	requestOptions: state.requestReducer.options,
-	metadata: state.appReducer.metadata,
 	orderAndSort: state.staticInfoReducer.orderAndSort,
-	actualSetName: state.staticInfoReducer.actualSetName
+	nameList: state.staticInfoReducer.nameList
 });
 
 export default compose(

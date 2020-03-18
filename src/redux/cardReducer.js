@@ -4,12 +4,12 @@ const TOGGLE_FETCHING = 'hsapp/cardReducer/TOGGLE_FETCHING'
 const UPDATE_CARD = 'hsapp/cardReducer/UPDATE_CARD'
 const RESET_CARD = 'hsapp/cardReducer/RESET_CARD'
 const SET_RELATIVE_CARDS_IDS = 'hsapp/cardReducer/SET_RELATIVE_CARDS_IDS'
-const APPEND_RELATIVE_CARDS = 'hsapp/cardReducer/APPEND_RELATIVE_CARDS'
+const APPEND_VISITED_CARDS = 'hsapp/cardReducer/APPEND_VISITED_CARDS'
 
 const initialState = {
     isFetching: false,
     cardInfo: null,
-    relativeCards: [],
+    visitedCards: [],
     relativeCardsIds: null,
 }
 
@@ -35,10 +35,10 @@ const cardReducer = (state = initialState, action) => {
                 ...state,
                 relativeCardsIds: [action.ids[0], action.ids[1]]
             }
-        case APPEND_RELATIVE_CARDS:
+        case APPEND_VISITED_CARDS:
             return {
                 ...state,
-                relativeCards: [...state.relativeCards, action.cardInfo]
+                visitedCards: [...state.visitedCards, action.cardInfo]
             }
         default:
             return state
@@ -50,8 +50,8 @@ const toggleFetching = (isFetching) => ({
     isFetching
 })
 
-const appendRelativeCards = (cardInfo) => ({
-    type: APPEND_RELATIVE_CARDS,
+const appendVisitedCards = (cardInfo) => ({
+    type: APPEND_VISITED_CARDS,
     cardInfo
 })
 
@@ -70,8 +70,8 @@ export const resetCard = () => ({
 })
 
 export const getCard = (cardId) => async (dispatch, getState) => {
-    const relativeCards = getState().cardReducer.relativeCards
-    const foundCard = relativeCards.find(c => +c.id === +cardId)
+    const visitedCards = getState().cardReducer.visitedCards
+    const foundCard = visitedCards.find(c => +c.id === +cardId)
     if (foundCard) {
         dispatch(updateCard(foundCard))
     } else {
@@ -79,8 +79,8 @@ export const getCard = (cardId) => async (dispatch, getState) => {
         const data = await api.getCard(cardId);
         dispatch(toggleFetching(false));
         dispatch(updateCard(data))
-        if (!relativeCards.includes(data)) {
-            dispatch(appendRelativeCards(data))
+        if (!visitedCards.includes(data)) {
+            dispatch(appendVisitedCards(data))
         }
     }
 }

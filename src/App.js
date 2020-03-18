@@ -7,12 +7,17 @@ import CardsLibraryContainer from './components/CardsLibrary';
 import FilterbarContainer from './components/Filterbar';
 import Footer from './components/Footer';
 import './App.scss';
+import ModalCardContainer from "./components/ModalCard";
 
 const App = ({ isInitialized }) => {
 	return isInitialized ? <>
+		<FilterbarContainer />
 		<Switch>
-			<Route path='/cards/:cardId?'>
-				<FilterbarContainer />
+			<Route path='/cards/:cardId'>
+				<CardsLibraryContainer />
+				<ModalCardContainer />
+			</Route>
+			<Route path='/cards'>
 				<CardsLibraryContainer />
 			</Route>
 			<Route>

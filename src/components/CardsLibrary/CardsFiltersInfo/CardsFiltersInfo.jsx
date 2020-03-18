@@ -2,8 +2,10 @@ import React from 'react';
 import OrderAndSortFilter from './OrderAndSortFilter';
 
 const CardsFiltersInfo = ({ requestOptions, totalCards, ...props }) => {
-    const { gameMode, set, sort, order, viewMode } = requestOptions
-    const totalCardsInfo = totalCards && <p>{totalCards} cards found for {gameMode || props.actualSetName} Cards</p> || ''
+    const { gameMode, sort, order, viewMode } = requestOptions
+    const totalCardsInfo = totalCards 
+        && <p>{totalCards} cards found for {gameMode || props.actualSetName} Cards</p> 
+        || ''
 
     return <div>
         { totalCardsInfo }
@@ -16,7 +18,11 @@ const CardsFiltersInfo = ({ requestOptions, totalCards, ...props }) => {
         }
         {
             viewMode !== 'table' &&
-            <OrderAndSortFilter orderAndSort={props.orderAndSort} sort={sort} order={order} onChangeSort={props.onChangeSort}/>
+            <OrderAndSortFilter orderAndSort={props.orderAndSort} 
+                sort={sort} 
+                order={order} 
+                onChangeSort={props.onChangeSort}
+            />
         }
         <div>
             View: 

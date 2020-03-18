@@ -12,7 +12,13 @@ const withSelectFilter = props => Component => {
             )
         }
     } else {
-        for (let i = 0; i <= 10; i++) {
+        let i;
+        if (props.name === 'Attack') {
+            i = 1
+        } else {
+            i = 0
+        }
+        for (i; i <= 10; i++) {
             renderItems.push(
                 <option key={i} value={i}>{ i }</option>
             )

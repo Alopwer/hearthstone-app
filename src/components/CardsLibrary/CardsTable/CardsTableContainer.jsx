@@ -3,6 +3,7 @@ import CardsTable from './CardsTable';
 import { connect } from 'react-redux';
 import CardsRow from './CardsRow/CardsRow';
 import {setKeyword, setMinionType, setOrderAndSort} from '../../../redux/requestReducer';
+import {setMinionTypeName, setKeywordName } from '../../../redux/staticInfoReducer';
 
 const CardsTableContainer = props => {
     const cardsRows = props.cards.map(c => <CardsRow key={c.id} 
@@ -10,6 +11,8 @@ const CardsTableContainer = props => {
         metadata={props.metadata} 
         setKeyword={props.setKeyword} 
         setMinionType={props.setMinionType}
+        setMinionTypeName={props.setMinionTypeName}
+        setKeywordName={props.setKeywordName}
     />)
 
     const onChangeSort = (value) => {
@@ -29,4 +32,6 @@ const mapStateToProps = state => ({
     metadata: state.appReducer.metadata
 });
 
-export default connect(mapStateToProps, {setKeyword, setMinionType, setOrderAndSort})(CardsTableContainer)
+export default connect(mapStateToProps, {
+    setKeyword, setMinionType, setOrderAndSort, setKeywordName, setMinionTypeName
+})(CardsTableContainer)
