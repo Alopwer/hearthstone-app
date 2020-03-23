@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { initialize } from './redux/appReducer';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Preloader from './components/common/Preloader';
 import CardsLibraryContainer from './components/CardsLibrary';
 import FilterbarContainer from './components/Filterbar';

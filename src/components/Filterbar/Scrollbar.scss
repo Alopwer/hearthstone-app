@@ -1,0 +1,21 @@
+.react-select__menu-list::-webkit-scrollbar {
+    width: 4px;
+    height: 0px;
+}
+.react-select__menu-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.react-select__menu-list::-webkit-scrollbar-thumb {
+    background: red;
+}
+.react-select__menu-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.area {
+    max-height: 200px;    
+    width: 100%;
+}
+// .content {
+//     width: 100px;
+// }

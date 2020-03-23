@@ -1,15 +1,16 @@
-import React from 'react';
+import React from 'react'
+import s from '../../Filterbar.module.scss'
 
 const ManaCost = (props) => {
     return (
-        <>
-            {/* <select value={props.manaCost} onChange={props.onChangeManaCostSelect}>
+        <div className={s['filterbar-top__element']}>
+            <select className={s['filterbar-select']} value={props.manaCost} onChange={props.onChangeManaCostSelect}>
                 { props.manaCostItems }
-            </select> */}
-            <div onClick={props.onChangeManaCostButton}>
+            </select>
+            {/* <div onClick={props.onChangeManaCostButton}>
                 { props.manaCostItems }
-            </div>
-        </>
+            </div> */}
+        </div>
     )
 }
 

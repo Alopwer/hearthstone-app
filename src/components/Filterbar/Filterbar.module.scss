@@ -1,0 +1,26 @@
+.filterbar {
+    // position: fixed;
+    width: 100%;
+    background: #551514;
+    &-main {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 0;
+    }
+    &-top {
+        display: flex;
+        &__element {
+            padding-right: 20px;
+        }
+    }
+    &-additional {
+        padding: 15px 0;
+        border-top: 2px inset rgb(70, 0, 0);
+    }
+    &-select {
+        background-color: #E8D4A7;
+    }
+    .toggleButton {
+        margin-right: 0;
+    }
+}

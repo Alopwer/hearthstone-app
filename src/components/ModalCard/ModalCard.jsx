@@ -20,8 +20,8 @@ const ModalCard = props => {
                     <li>{rarity && `Rarity: ${rarity.name}`}</li>
                     <li>{set && `Set: ${set.name}`}</li>
                     <li>{classValue && `Class: ${classValue.name}`}</li>
-                    <li>{rarity && `Cost to Craft: ${rarity.craftingCost}`}</li>
-                    <li>{rarity && `Disenchanting Yield: ${rarity.dustValue}`}</li>
+                    { rarity.craftingCost.filter(Boolean).length !== 0 && <li>Cost to Craft: {rarity.craftingCost.join(', ')}</li>}
+                    { rarity.dustValue.filter(Boolean).length !== 0 && <li>Disenchanting Yield: {rarity.dustValue.join(', ')}</li> }
                     <li>Artist: {props.cardInfo.artistName}</li>
                     <li>{props.cardInfo.collectible ? 'Collectible' : 'Not Collectible'}</li>
                 </ul>

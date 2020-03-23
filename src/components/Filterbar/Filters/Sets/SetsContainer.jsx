@@ -5,22 +5,34 @@ import { setActualSetName } from '../../../../redux/staticInfoReducer'
 import Sets from './Sets'
 
 const SetsContainer = (props) => {
-    const sets = props.sets.map(s => (
-        <option value={s.slug} key={s.id}>{ s.name }</option>
-    ))
+    let sets = [{
+        value: 'Standard',
+        label: 'Standard cards'
+    },
+    {
+        value: 'Wild',
+        label: 'All cards'
+    },
+    {
+        value: 'Arena',
+        label: 'Arena cards'
+    },
+    ...props.sets.map(s => ({value: s.slug, label: s.name}))]
 
-    const onChangeSet = e => {
-        const value = e.target.value
+    const onChangeSet = option => {
+        const { label, value } = option
         if (value === 'Arena') {
             props.setGameMode(value)
         } else {
             props.setActualSet(value)
-            const set = props.sets.find(s => s.slug === value) || value
-            props.setActualSetName(set.name || set)
+            props.setActualSetName(label)
         }
     };
 
-    return <Sets sets={sets} set={props.set} gameMode={props.gameMode} onChangeSet={onChangeSet}/>
+    return <Sets sets={sets} 
+        set={props.set} 
+        gameMode={props.gameMode}
+        onChangeSet={onChangeSet}/>
 }
 
 const mapStateToProps = (state) => ({
