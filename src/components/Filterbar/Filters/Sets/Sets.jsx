@@ -1,7 +1,7 @@
 import React from 'react'
 import s from '../../Filterbar.module.scss'
-import '../../Scrollbar.scss'
 import withCustomSelect from '../../../../hoc/withCustomSelect'
+import { MdLibraryBooks } from 'react-icons/md'
 
 const Sets = (props) => {
     return <div className={s['filterbar-top__element']}>
@@ -11,9 +11,10 @@ const Sets = (props) => {
                 value: 'Standard', 
                 label: 'Standard Cards'
             },
-            onChangeValue: props.onChangeSet
+            onChangeValue: props.onChangeSet,
+            icon: <MdLibraryBooks />
         })}
-    </div>
+    </div>    
 }
 
 export default Sets
