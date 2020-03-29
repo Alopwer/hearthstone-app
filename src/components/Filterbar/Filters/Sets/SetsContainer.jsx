@@ -17,7 +17,14 @@ const SetsContainer = (props) => {
         value: 'Arena',
         label: 'Arena cards'
     },
-    ...props.sets.map(s => ({value: s.slug, label: s.name}))]
+    {
+        label: 'Standard cards',
+        options: props.sets.filter(s => props.standardSetGroups.includes(s.slug)).map(s => ({value: s.slug, label: s.name}))
+    },
+    {
+        label: 'Wild sets',
+        options: props.sets.filter(s => !props.standardSetGroups.includes(s.slug)).map(s => ({value: s.slug, label: s.name}))
+    }]
 
     const onChangeSet = option => {
         const { label, value } = option
@@ -36,6 +43,7 @@ const SetsContainer = (props) => {
 }
 
 const mapStateToProps = (state) => ({
+    standardSetGroups: state.appReducer.metadata.setGroups[6].cardSets,
     sets: state.appReducer.metadata.sets,
     set: state.requestReducer.options.set,
     gameMode: state.requestReducer.options.gameMode

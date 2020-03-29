@@ -7,6 +7,7 @@ import s from './Filterbar.module.scss';
 const Filterbar = props => {
 	const { class: classValue, attack, health, type, rarity, minionType, keyword } = props
 	const { types, classes, rarities, minionTypes, keywords } = props.metadata
+	
 	return <div className={s.filterbar}>
 		<div className='container'>
 			<div className={s['filterbar-main']}>

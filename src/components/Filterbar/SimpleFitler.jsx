@@ -1,17 +1,17 @@
-import React from 'react'
-import s from './Filterbar.module.scss'
+import withCustomSelect from '../../hoc/withCustomSelect'
 
 const SimpleFilter = (props) => {
-    return (
-        <select className={s['filterbar-select']} value={props.value} onChange={(e) => {
-            props.setValue(e.target.value)
-            const index = e.nativeEvent.target.selectedIndex;
-            const name = e.nativeEvent.target[index].text
-            props.setName && props.setName(name)
-        }}>
-            {props.renderItems}
-        </select>
-    )
+    const onSelectValue = (e) => {
+        props.setValue(e.value)
+        props.setName && props.setName(e.label)
+    }
+
+    return withCustomSelect({
+        options: props.renderItems,
+        value: props.renderItems.find(v => v.value === props.value),
+        onChangeValue: onSelectValue,
+        icon: ''
+    })
 }
 
 export default SimpleFilter;

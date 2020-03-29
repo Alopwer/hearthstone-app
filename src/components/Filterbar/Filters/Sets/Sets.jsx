@@ -1,7 +1,7 @@
 import React from 'react'
 import s from '../../Filterbar.module.scss'
 import withCustomSelect from '../../../../hoc/withCustomSelect'
-import { MdLibraryBooks } from 'react-icons/md'
+import { GiBarbedSun } from 'react-icons/gi'
 
 const Sets = (props) => {
     return <div className={s['filterbar-top__element']}>
@@ -12,7 +12,7 @@ const Sets = (props) => {
                 label: 'Standard Cards'
             },
             onChangeValue: props.onChangeSet,
-            icon: <MdLibraryBooks />
+            icon: <GiBarbedSun />
         })}
     </div>    
 }
