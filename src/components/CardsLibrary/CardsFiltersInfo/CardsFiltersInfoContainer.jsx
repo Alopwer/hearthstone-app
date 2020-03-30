@@ -23,9 +23,9 @@ import { compose } from 'redux';
 const CardsFiltersInfoContainer = props => {
 	const { class: classValue, textFilter, attack, health, type, minionType, keyword, rarity, manaCost } = props.requestOptions
 	const { className, typeName, rarityName, minionTypeName, keywordName, actualSetName } = props.nameList
-	const manaCostBar = manaCost.length !== 0 && manaCost.sort().map(mC => (
+	const manaCostBar = manaCost.length !== 0 && manaCost.sort((a, b) => a - b).map(mC => (
 		<span key={mC} onClick={(e) => { e.stopPropagation(); props.removeManaCost(mC) }}>
-			{mC}{' '}
+			{`${mC} `}
 		</span>
 	));
 

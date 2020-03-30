@@ -2,12 +2,13 @@ import React from 'react'
 import Select, { components } from 'react-select'
 import CustomScroll from 'react-custom-scroll'
 import '../../node_modules/react-custom-scroll/dist/customScroll.css'
+import '../components/Filterbar/Scroll.scss'
 import withSizes from 'react-sizes'
 
-const withCustomSelect = props => {
+const withCustomSelect = (props) => {
     
     const customStyles = {
-        // container: (provided) => ({...provided}),
+        container: (provided) => ({...provided, paddingRight: '30px'}),
         control: (provided, state) => ({
             ...provided,
             background: '#C3B189',
@@ -60,19 +61,26 @@ const withCustomSelect = props => {
             color: '#614326',
             cursor: 'pointer',
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
+            paddingLeft: !props.icon && '20px'
         }),
         valueContainer: (provided) => ({
             ...provided,
             padding: '0px',
-            flexWrap: 'no-wrap'
+            flexWrap: 'no-wrap',
+            minHeight: '30px'
         })
     }
     
     const withScrollbar = props => <CustomScroll heightRelativeToParent="100%" {...props} />
-    const valueViewChecker = componentProps => <components.SingleValue {...componentProps}>
-            {props.icon}{props.isLarge && <span>{componentProps.children}</span>}
+    const valueViewChecker = componentProps => {
+        const selectValue = props.hasOwnProperty('shrinkLg') 
+            ? props.isLarge && <span>{componentProps.children}</span> 
+            : <span>{componentProps.children}</span>
+        return <components.SingleValue {...componentProps}>
+            {props.icon}{selectValue}
         </components.SingleValue>
+    }
 
     return <Select styles={customStyles}
         options={props.options}

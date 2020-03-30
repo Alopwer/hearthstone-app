@@ -1,19 +1,16 @@
 import React from 'react';
+import SimpleFilter from '../components/Filterbar/SimpleFitler';
 
-const withSelectFilter = props => SimpleFilter => {
+const withSelectFilter =  (value, setValue, name, options, setName = null, icon) => {
     const renderItems = []
-    if (props.name) {
-        // renderItems.push(<option key={100} value={''}>All {props.name}</option>)
+    if (name) {
         renderItems.push({
-            label: `All ${props.name}`,
+            label: `All ${name}`,
             value: ''
         })
     }
-    if (props.options) {
-        for (const option of props.options) {
-            // renderItems.push(
-            //     <option key={option.id} value={option.slug}>{ option.name }</option>
-            // )
+    if (options) {
+        for (const option of options) {
             renderItems.push({
                 label: option.name,
                 value: option.slug
@@ -21,25 +18,24 @@ const withSelectFilter = props => SimpleFilter => {
         }
     } else {
         let i;
-        if (props.name === 'Attack') {
+        if (name === 'Attack') {
             i = 0
         } else {
             i = 1
         }
         for (i; i <= 10; i++) {
-            // renderItems.push(
-            //     <option key={i} value={i}>{ i }</option>
-            // )
             renderItems.push({
                 label: i,
                 value: i
             })
         }
     }
-    
-    return (
-        <SimpleFilter {...props} renderItems={renderItems}/>
-    )
+
+    return <SimpleFilter renderItems={renderItems}
+            value={value}
+            setValue={setValue}
+            setName={setName} 
+            icon={icon}/>
 }
 
 export default withSelectFilter;

@@ -10,7 +10,7 @@ const SimpleFilter = (props) => {
         options: props.renderItems,
         value: props.renderItems.find(v => v.value === props.value),
         onChangeValue: onSelectValue,
-        icon: ''
+        icon: props.icon
     })
 }
 

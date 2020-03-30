@@ -1,20 +1,23 @@
 import React from 'react'
 import s from '../../Filterbar.module.scss'
+import withCustomSelect from '../../../../hoc/withCustomSelect'
+import { FiHexagon } from 'react-icons/fi'
 
 const ManaCostSelect = (props) => {
     const manaCostItems = []
-    manaCostItems.push(<option key={11} value={''}>All cost</option>)
+    manaCostItems.push({value: '', label: 'All Cost'})
     for (let i = 0; i <= 10; i++) {
-        manaCostItems.push(
-            <option key={i} value={i}>{ i }</option>
-        )
+        manaCostItems.push({value: i, label: i})
     }
 
     return (
         <div className={s['filterbar-top__element']}>
-            <select className={s['filterbar-select']} value={props.manaCost} onChange={props.onChangeManaCostSelect}>
-                { manaCostItems }
-            </select>
+            {withCustomSelect({
+                options: manaCostItems,
+                value: manaCostItems.find(m => m.value === props.manaCost.join('')),
+                onChangeValue: props.onChangeManaCostSelect,
+                icon: <FiHexagon />
+            })}
         </div>
     )
 }

@@ -12,16 +12,16 @@ import ManaCostButtons from './ManaCostButtons';
 
 const ManaCostContainer = (props) => {
     
-    const onChangeManaCostSelect = (e) => {
+    const onChangeManaCostSelect = (manaCost) => {
         props.resetManaCost()
-        props.setManaCost(e.target.value)
+        manaCost.value && props.setManaCost(manaCost.value)
     }
 
-    const onChangeManaCostButton = (e) => {
-        if (!props.manaCost.includes(e.target.value)) {
-            props.setManaCost(e.target.value)
+    const onChangeManaCostButton = (value) => {
+        if (!props.manaCost.includes(value)) {
+            props.setManaCost(value)
         } else {
-            props.removeManaCost(e.target.value)
+            props.removeManaCost(value)
         }
     }
     

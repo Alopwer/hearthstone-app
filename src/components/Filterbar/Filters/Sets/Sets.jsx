@@ -12,7 +12,8 @@ const Sets = (props) => {
                 label: 'Standard Cards'
             },
             onChangeValue: props.onChangeSet,
-            icon: <GiBarbedSun />
+            icon: <GiBarbedSun />,
+            shrinkLg: true
         })}
     </div>    
 }
