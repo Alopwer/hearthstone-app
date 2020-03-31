@@ -12,6 +12,9 @@
         &__element {
             padding-right: 20px;
         }
+        &__manaCostBar {
+            display: flex;
+        }
     }
     &-additional {
         padding: 15px 0;
@@ -35,49 +38,41 @@
         position: relative;
         background: transparent;
         border: none;
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 34px;
         background-image: url('https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_mana_68x68_@2x-b6ecc2a45a3440ac6cba07297306fbb64d9a224bc12a281224a091aaf92a73da2d0036e6eed920f74a957660354bfafe7831fc291aad49867d04b427737c6e3a.png');
         background-size: contain;
         background-position: center center;
         background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
-    // &::after {
-    //     content: '';
-    //     background-image: url('https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_mana_hoverselected-4b4e72e3465b332fb2535f178dac9db4f5a279dc6432c57bb309c2bd63229e4ef7fea8be1a8b1463410983c2316ae33f95a91a75d2407a6952551bb3c17b1478.png');
-    //     background-size: cover;
-    //     background-repeat: no-repeat;
-    //     z-index: 4;
-    //     position: absolute;
-    // }
+    &::before {
+        background: rgba(0, 0, 0, 0) url("https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_mana_hoverselected-4b4e72e3465b332fb2535f178dac9db4f5a279dc6432c57bb309c2bd63229e4ef7fea8be1a8b1463410983c2316ae33f95a91a75d2407a6952551bb3c17b1478.png") no-repeat scroll center center / contain;
+        background-position-x: center;
+        background-position-y: center;
+        transition: opacity 0.15s ease 0s;
+        position: absolute;
+        inset: -5px;
+        content: "";
+        opacity: 0;
+    }
+    &:hover {
+        &::before {
+            opacity: 1;
+        }
+    }
     &:last-child {
         width: 60px;
         background-image: url('https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_mana_plus-e388a8cbaa495d2a09e2a508288da0c9ffcdc43531087897355a36d79699749ae0196922b5cae9121c6dbff6bf656af097ca05ee916042f18b6d3a3c0af891b7.png');
-        &::after {
-            content: '+';
-            position: relative;
-            display: inline-block;
-            margin-left: 8px;
-            top: -2px;
-            color: white;
-            font-size: 1.2rem;
-            text-shadow: rgb(0, 0, 0) 2px 0px 0px, 
-                rgb(0, 0, 0) 1.75517px 0.95885px 0px, 
-                rgb(0, 0, 0) 1.0806px 1.68294px 0px, 
-                rgb(0, 0, 0) 0.14147px 1.99499px 0px, 
-                rgb(0, 0, 0) -0.83229px 1.81859px 0px, 
-                rgb(0, 0, 0) -1.60229px 1.19694px 0px, 
-                rgb(0, 0, 0) -1.97998px 0.28224px 0px, 
-                rgb(0, 0, 0) -1.87291px -0.70157px 0px, 
-                rgb(0, 0, 0) -1.30729px -1.5136px 0px, 
-                rgb(0, 0, 0) -0.42159px -1.95506px 0px, 
-                rgb(0, 0, 0) 0.56732px -1.91785px 0px, 
-                rgb(0, 0, 0) 1.41734px -1.41108px 0px, 
-                rgb(0, 0, 0) 1.92034px -0.55883px 0px;
+        &::before {
+            background-position: left center;
         }
     }
     &__text {
         color: white;
+        position: relative;
         font-size: 1.2rem;
         text-shadow: rgb(0, 0, 0) 2px 0px 0px, 
             rgb(0, 0, 0) 1.75517px 0.95885px 0px, 

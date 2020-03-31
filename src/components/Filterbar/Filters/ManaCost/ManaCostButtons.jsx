@@ -10,7 +10,7 @@ const ManaCostButtons = (props) => {
 
     return (
         <div className={s['filterbar-top__element']}>
-            <div>
+            <div className={s['filterbar-top__manaCostBar']}>
                 { manaCostItems }
             </div>
         </div>
