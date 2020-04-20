@@ -13,7 +13,7 @@ const Sets = (props) => {
             },
             onChangeValue: props.onChangeSet,
             icon: <GiBarbedSun />,
-            shrinkLg: true
+            shrinkMd: true
         })}
     </div>    
 }

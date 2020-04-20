@@ -6,8 +6,6 @@
     width: 100%;
     background: #551514;
     &-main {
-        // display: flex;
-        // justify-content: space-between;
         padding: 15px 0;
     }
     &-top {
@@ -26,7 +24,7 @@
                 border: 3px solid white;
             }
         }
-        @media screen and (max-width: 964px) {
+        @media screen and (max-width: 963.5px) {
             &__search {
                 display: flex;
                 flex: 1;
@@ -43,7 +41,7 @@
         background: #3E0E0E;
         flex-direction: row;
         position: relative;
-        @media screen and (max-width: 964px) {
+        @media screen and (max-width: 963.5px) {
             flex: 1;
         }
         &:hover {
@@ -56,7 +54,7 @@
             max-width: 270px;
             min-width: 0;
             width: 100%;
-            padding-right: 35px;
+            padding-right: 30px;
         }
     }
     &-search_active {
@@ -80,13 +78,19 @@
                 padding-right: 30px;
                 opacity: 1;
                 transition: opacity 0.5s linear;
-                transition-delay: 0.1s
+                transition-delay: 0.1s;
+                &:last-child {
+                    padding-right: 0px;
+                }
             }
         }
         & > div { 
             padding-right: 30px;
             opacity: 0;
             transition: opacity 0.2s linear;
+            &:last-child {
+                padding-right: 0px;
+            }
         }
     }
     &-select {
@@ -97,10 +101,7 @@
     display: flex;
     justify-content: flex-end;
     flex: 1;
-    // @media (max-width: 600px) {
-    //     flex: unset;
-    // }
-    @media screen and (max-width: 964px) {
+    @media screen and (max-width: 963.5px) {
         flex: unset;
     }
     &__btn, &__btn_active {

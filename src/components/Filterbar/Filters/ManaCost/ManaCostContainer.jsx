@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapSizesToProps = (sizes) => ({
-    isLarge: sizes.width > 1200,
+    isLarge: sizes.width > 1260,
     isSmall: sizes.width < 964
 })
 

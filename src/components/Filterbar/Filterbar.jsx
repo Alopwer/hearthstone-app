@@ -10,16 +10,12 @@ const Filterbar = props => {
 			<div className='container'>
 				<div className={s['filterbar-main']}>
 					<FilterbarTop
-						classValue={props.class}
-						classes={props.metadata.classes}
-						setClass={props.setClass}
-						setClassName={props.setClassName}
 						isLarge={props.isLarge}
 						isSmall={props.isSmall}
 						additionalFilterbars={props.additionalFilterbars}
 						toggleAdditionalFilterbars={props.toggleAdditionalFilterbars}/>
 				</div>
-				<FilterbarAdditionalContainer />
+				<FilterbarAdditionalContainer isSmall={props.isSmall} />
 			</div>
 		</div>
 	</IconContext.Provider>

@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Filterbar from './Filterbar';
 import { toggleAdditionalFilterbars } from '../../redux/uiReducer';
-import { setClass } from '../../redux/requestReducer';
-import { setClassName } from '../../redux/staticInfoReducer';
 import { compose } from 'redux';
 import WithSizes from 'react-sizes';
 
@@ -28,8 +26,6 @@ const mapSizesToProps = (sizes) => ({
 export default compose(
     WithSizes(mapSizesToProps),
     connect(mapStateToProps, {
-        toggleAdditionalFilterbars,
-        setClass,
-        setClassName,
+        toggleAdditionalFilterbars
     })
 )(FilterbarContainer);

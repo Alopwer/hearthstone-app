@@ -2,14 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { setOrderAndSort } from '../../../../redux/requestReducer';
 import OrderAndSortFilter from './OrderAndSortFilter';
+import { compose } from 'redux';
+import WithSizes from 'react-sizes';
 
-const OrderAndSortFilterContainer = ({ setOrderAndSort, orderAndSort, sort, order}) => {
+const OrderAndSortFilterContainer = ({ setOrderAndSort, orderAndSort, sort, order, isSmall}) => {
 	const onChangeSort = (elem) => {
 		setOrderAndSort(elem.value.split(','))
     }
 
     const orderAndSortFilterItems = orderAndSort.map(s => ({value: s.value, label: s.name}))
-    return <OrderAndSortFilter 
+    return !isSmall && <OrderAndSortFilter 
         orderAndSortFilterItems={orderAndSortFilterItems} 
         sort={sort} 
         order={order} 
@@ -22,6 +24,13 @@ const mapStateToProps = (state) => ({
 	orderAndSort: state.staticInfoReducer.orderAndSort,
 })
 
-export default connect(mapStateToProps, {
-    setOrderAndSort
-})(OrderAndSortFilterContainer)
+const mapSizesToProps = ({ width }) => ({
+    isSmall: width < 992
+})
+
+export default compose(
+    WithSizes(mapSizesToProps), 
+    connect(mapStateToProps, {
+        setOrderAndSort
+    })
+)(OrderAndSortFilterContainer)
