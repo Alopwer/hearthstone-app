@@ -8,18 +8,23 @@ import withSizes from 'react-sizes'
 const withCustomSelect = (props) => {
     
     const customStyles = {
-        container: (provided) => ({...provided, paddingRight: '30px'}),
+        container: (provided) => ({
+            ...provided, 
+            paddingRight: '30px',
+        }),
         control: (provided, state) => ({
             ...provided,
-            background: '#C3B189',
+            background: state.selectProps.menuIsOpen ? '#FFFF94' : '#C3B189',
             border: 'none',
             borderRadius: '20px',
             boxShadow: 'none',
             flexWrap: 'no-wrap',
             cursor: 'pointer',
             minHeight: '28px',
+            border: `3px solid ${state.selectProps.menuIsOpen ? 'white' : '#F7F3B5'}`,
             ':hover': {
-                background: '#FFFF94'
+                border: '3px solid white',
+                background: '#FFFF94',
             }
         }),
         dropdownIndicator: (provided, state) => {

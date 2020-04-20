@@ -1,13 +1,13 @@
 import React from 'react';
-import OrderAndSortFilter from './OrderAndSortFilter';
+import s from './CardsFilters.module.scss';
+import CardsViewMode from './CardsFiltersInfoParts/CardsViewMode';
+import OrderAndSortFilterContainer from './CardsFiltersInfoParts/OrderAndSortFilterContainer';
 
-const CardsFiltersInfo = ({ requestOptions, totalCards, ...props }) => {
-    const { gameMode, sort, order, viewMode } = requestOptions
-    const totalCardsInfo = totalCards 
-        && <p>{totalCards} cards found for {gameMode || props.actualSetName} Cards</p> 
-        || ''
+const CardsFiltersInfo = props => {
+    const { gameMode, viewMode } = props.requestOptions
+    const totalCardsInfo = props.totalCards && <p>{props.totalCards} cards found for {gameMode || props.actualSetName}</p> 
 
-    return <div>
+    return <div className={s[`filters-info${props.additionalFilterbars ? '_active' : ''}`]}>
         { totalCardsInfo }
         { props.filterItems }
         {
@@ -16,19 +16,8 @@ const CardsFiltersInfo = ({ requestOptions, totalCards, ...props }) => {
                 Reset All x
             </div>
         }
-        {
-            viewMode !== 'table' &&
-            <OrderAndSortFilter orderAndSort={props.orderAndSort} 
-                sort={sort} 
-                order={order} 
-                onChangeSort={props.onChangeSort}
-            />
-        }
-        <div>
-            View: 
-            <span onClick={() => props.setViewMode('')}>library </span>
-            <span onClick={() => props.setViewMode('table')}>table</span>
-        </div>
+        { viewMode !== 'table' && <OrderAndSortFilterContainer /> }
+        <CardsViewMode viewMode={viewMode} setViewMode={props.setViewMode}/>
     </div>
 }
 

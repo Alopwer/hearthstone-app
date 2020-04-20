@@ -22,7 +22,7 @@ const cardsReducer = (state = initialState, action) => {
         case SET_TOTAL_CARDS:
             return {
                 ...state,
-                totalCards: action.totalCards
+                totalCards: action.totalCards || '0'
             }
         default:
             return state

@@ -25,9 +25,9 @@ const ManaCostContainer = (props) => {
         }
     }
     
-    return props.isLarge 
-        ? <ManaCostButtons onChangeManaCostButton={onChangeManaCostButton} />
-        : <ManaCostSelect manaCost={props.manaCost} onChangeManaCostSelect={onChangeManaCostSelect}/> 
+    return !props.isSmall && (props.isLarge 
+        ? <ManaCostButtons manaCost={props.manaCost} onChangeManaCostButton={onChangeManaCostButton} />
+        : <ManaCostSelect manaCost={props.manaCost} onChangeManaCostSelect={onChangeManaCostSelect}/>)
 }
 
 const mapStateToProps = (state) => ({
@@ -35,7 +35,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapSizesToProps = (sizes) => ({
-    isLarge: sizes.width > 1200
+    isLarge: sizes.width > 1200,
+    isSmall: sizes.width < 964
 })
 
 export default compose(

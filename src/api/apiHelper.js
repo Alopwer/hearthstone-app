@@ -37,7 +37,7 @@ export function createAccessToken(apiKey, apiSecret, region = 'us') {
 export function createComposedUrl(baseUrl, resource, token, requestOptions, page) {
     let url = `${baseUrl}${resource}?region=us&access_token=${token}`
     for (const option in requestOptions) {
-      if (requestOptions[option]) {
+      if (requestOptions[option] || requestOptions[option] == '0') {
         let reformedOption;
         if (requestOptions[option] === 'manaCost') {
             reformedOption = requestOptions[option]

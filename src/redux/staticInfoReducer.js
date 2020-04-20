@@ -49,7 +49,7 @@ const initialState = {
         }
     ],
     nameList: {
-        actualSetName: 'Standard',
+        actualSetName: 'Standard cards',
         className: '',
         typeName: '',
         rarityName: '',

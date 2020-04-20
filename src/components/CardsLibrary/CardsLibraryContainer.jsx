@@ -9,8 +9,8 @@ import { withRouter } from 'react-router-dom'
 const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
         // CHANGE!!!
-        // rootMargin: '0px 0px 0px 0px'
-        threshold: 1
+        rootMargin: '100px 0px 0px 0px',
+        threshold: 0
     });
 
     useEffect(() => {

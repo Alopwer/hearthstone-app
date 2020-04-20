@@ -16,10 +16,17 @@ const SearchContainer = (props) => {
         setSearch(e.target.value)
     }
 
+    const onClearInput = () => {
+        setSearch('')
+    }
+
     const onHandleSearch = () => {
         props.setTextFilter(search)
     }
-    return <Search search={search} onChangeSearch={onChangeSearch} onHandleSearch={onHandleSearch}/>
+    return <Search search={search} 
+        onClearInput={onClearInput} 
+        onChangeSearch={onChangeSearch} 
+        onHandleSearch={onHandleSearch}/>
 }
 
 const mapStateToProps = (state) => ({ textFilter: state.requestReducer.options.textFilter })

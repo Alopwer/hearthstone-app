@@ -18,7 +18,7 @@ const CardsLibrary = props => {
                 }
             </div>
         }
-            <div style={{marginTop: '200px'}}ref={props.observer}></div>
+            <div style={{height: '50px'}}ref={props.observer}></div>
         </>
     );
 }

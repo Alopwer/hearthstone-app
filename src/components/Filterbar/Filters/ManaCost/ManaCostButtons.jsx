@@ -5,7 +5,10 @@ import ManaButton from './ManaButton'
 const ManaCostButtons = (props) => {
     const manaCostItems = []
     for (let i = 0; i <= 10; i++) {
-        manaCostItems.push(<ManaButton onChangeManaCostButton={props.onChangeManaCostButton} key={i} value={i} />)
+        manaCostItems.push(<ManaButton onChangeManaCostButton={props.onChangeManaCostButton} 
+            key={i} 
+            value={i}
+            manaCost={props.manaCost} />)
     }
 
     return (

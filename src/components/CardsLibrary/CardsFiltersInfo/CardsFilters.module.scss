@@ -1,0 +1,50 @@
+.filters-info, .filters-info_active {
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    transition: all 0.3s linear;
+    &_active {
+        margin-top: 170px;
+    }
+    p {
+        color: #614326;
+    }
+}
+
+.viewmode {
+    display: flex;
+    align-items: center;
+    &__btns {
+        display: flex;
+        background-color: #C3B189;
+        border: 3px solid white;
+        border-radius: 20px;
+        margin-left: 5px;
+        span {
+            height: 26px;
+            cursor: pointer;
+            &:first-child {
+                border-top-left-radius: 20px;
+                border-bottom-left-radius: 20px;
+            }
+            &:last-child {
+                border-top-right-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+            &:hover {
+                background: #FFFF94;
+                color: #614326;
+            }   
+        }
+    }
+}
+
+.react-icons {
+    color: #614326;
+    border: none;
+    border-radius: 0;
+    font-size: 26px;
+    min-width: 32px;
+    margin-right: 0px;
+    padding: 3px;
+}

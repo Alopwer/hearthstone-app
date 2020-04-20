@@ -1,5 +1,7 @@
 .filterbar {
-    // position: fixed;
+    position: fixed;
+    top: 0;
+    box-shadow: 0 0 15px black;
     width: 100%;
     background: #551514;
     &-main {
@@ -14,32 +16,101 @@
         }
         &__manaCostBar {
             display: flex;
+            background: #3E0E0E;
+            border: 3px solid #F7F3B5;
+            border-radius: 20px;
+            padding: 0px 5px;
+            &:hover {
+                border: 3px solid white;
+            }
         }
     }
-    &-additional {
-        padding: 15px 0;
-        border-top: 2px inset rgb(70, 0, 0);
+    &-search, &-search_active {
         display: flex;
+        align-items: center;
+        border: 3px solid #F7F3B5;
+        border-radius: 20px;
+        background: #3E0E0E;
+        flex-direction: row;
+        position: relative;
+        &:hover {
+            border: 3px solid white;
+        }
+        &__search {
+            background-color: transparent;
+            border: none;
+            color: white;
+            max-width: 170px;
+            padding-right: 35px;
+        }
+    }
+    &-search_active {
+        border: 3px solid white;
+    }
+    &-additional {
+        display: flex;
+        overflow: hidden;
         justify-content: center;
+        max-height: 0px;
+        border-top: 2px inset transparent;
+        transition: all 0.3s linear;
+        &_active {
+            display: flex;
+            justify-content: center;
+            transition: all 0.3s linear;
+            padding: 15px 0;
+            border-top: 2px solid rgb(70, 0, 0);
+            max-height: 70px;
+            & > div {
+                opacity: 1;
+                transition: opacity 0.5s linear;
+                transition-delay: 0.1s
+            }
+        }
+        & > div { 
+            opacity: 0;
+            transition: opacity 0.2s linear;
+        }
     }
     &-select {
         background-color: #E8D4A7;
     }
-    .toggleButton {
-        margin-right: 0;
+}
+.toggleButton, .toggleButton_active {
+    margin-right: 0;
+    border-radius: 20px;
+    border: 3px solid #F7F3B5;
+    background: #C3B189;
+    cursor: pointer;
+    margin: 0;
+    padding: 0 10px 0 0;
+    display: flex;
+    align-items: center;
+    color: #614326;
+    &:focus {
+        outline: none
     }
+    &:hover {
+        background: #FFFF94;
+    }
+}
+.toggleButton_active {
+    background: #FFFF94;
+    border: 3px solid white;
 }
 
 .rcs-inner-handle {
     background : red !important
 }
 
-.manaBtn {
+.manaBtn, .manaBtn_active {
         position: relative;
         background: transparent;
         border: none;
         width: 36px;
         height: 34px;
+        padding: 0;
+        margin: 0;
         background-image: url('https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_mana_68x68_@2x-b6ecc2a45a3440ac6cba07297306fbb64d9a224bc12a281224a091aaf92a73da2d0036e6eed920f74a957660354bfafe7831fc291aad49867d04b427737c6e3a.png');
         background-size: contain;
         background-position: center center;
@@ -62,6 +133,9 @@
         &::before {
             opacity: 1;
         }
+    }
+    &:focus {
+        outline: none;
     }
     &:last-child {
         width: 60px;
@@ -90,6 +164,19 @@
     }
 }
 
-.mewmewmew {
-    background : red
+.manaBtn_active {
+    &::before {
+        opacity: 1;
+    }
+}
+
+.react-icons {
+    color: #FFD700;
+    background: #390C0C;
+    border: 3px solid #FFD700;
+    border-radius: 50%;
+    padding: 3px;
+    font-size: 32px;
+    min-width: 32px;
+    margin-right: 3px;
 }

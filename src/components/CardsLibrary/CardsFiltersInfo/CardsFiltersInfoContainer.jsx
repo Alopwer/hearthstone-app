@@ -12,7 +12,6 @@ import {
 	setRarity,
 	setMinionType,
 	setKeyword,
-	setOrderAndSort,
 	resetFilters,
 	setViewMode
 } from '../../../redux/requestReducer';
@@ -23,9 +22,10 @@ import { compose } from 'redux';
 const CardsFiltersInfoContainer = props => {
 	const { class: classValue, textFilter, attack, health, type, minionType, keyword, rarity, manaCost } = props.requestOptions
 	const { className, typeName, rarityName, minionTypeName, keywordName, actualSetName } = props.nameList
-	const manaCostBar = manaCost.length !== 0 && manaCost.sort((a, b) => a - b).map(mC => (
-		<span key={mC} onClick={(e) => { e.stopPropagation(); props.removeManaCost(mC) }}>
-			{`${mC} `}
+	
+	const manaCostBar = manaCost.length !== 0 && manaCost.sort((a, b) => a - b).join(', ').split(' ').map(mC => (
+		<span key={mC} onClick={(e) => { e.stopPropagation(); props.removeManaCost(parseInt(mC)) }}>
+			{`${mC}`}
 		</span>
 	));
 
@@ -44,7 +44,7 @@ const CardsFiltersInfoContainer = props => {
 		},
 		{
 			resetValue: props.setAttack,
-			valueInfo: attack && <p>Attack : {attack}  x</p>
+			valueInfo: attack + '' && <p>Attack : {attack}  x</p>
 		},
 		{
 			resetValue: props.setHealth,
@@ -69,23 +69,18 @@ const CardsFiltersInfoContainer = props => {
 	]
 	const filterItems = filtersInfo.map((f, i) => <SimpleInfo key={i} resetValue={f.resetValue} valueInfo={f.valueInfo} />)
 
-	const onChangeSort = (e) => {
-		props.setOrderAndSort(e.target.value.split(','))
-	}
-
 	return <CardsFiltersInfo {...props}
-		onChangeSort={onChangeSort}
 		filterItems={filterItems}
-		orderAndSort={props.orderAndSort}
 		actualSetName={actualSetName}
+		additionalFilterbars={props.additionalFilterbars}
 	/>;
 };
 
 const mapStateToProps = state => ({
 	totalCards: state.cardsReducer.totalCards,
 	requestOptions: state.requestReducer.options,
-	orderAndSort: state.staticInfoReducer.orderAndSort,
-	nameList: state.staticInfoReducer.nameList
+	nameList: state.staticInfoReducer.nameList,
+	additionalFilterbars: state.uiReducer.additionalFilterbars
 });
 
 export default compose(
@@ -101,7 +96,6 @@ export default compose(
 		setRarity,
 		setMinionType,
 		setKeyword,
-		setOrderAndSort,
 		resetFilters,
 		setViewMode,
 	})
