@@ -9,8 +9,7 @@ const withCustomSelect = (props) => {
     
     const customStyles = {
         container: (provided) => ({
-            ...provided, 
-            paddingRight: '30px',
+            ...provided,
         }),
         control: (provided, state) => ({
             ...provided,

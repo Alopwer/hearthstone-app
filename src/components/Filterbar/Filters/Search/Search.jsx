@@ -4,7 +4,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { MdClear } from 'react-icons/md'
 
 const Search = (props) => {
-    return <div className={s['filterbar-top__element']}>
+    return <div className={`${s['filterbar-top__element']} ${s['filterbar-top__search']}`}>
         <div className={s[`filterbar-search${props.search && '_active'}`]}>
             <div onClick={props.onHandleSearch}>
                 <AiOutlineSearch style={{

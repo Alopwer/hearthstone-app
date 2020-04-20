@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './Filterbar.module.scss';
 import FilterbarTop from './FilterbarParts/FilterbarTop';
-import FilterbarBtn from './FilterbarParts/FilterbarBtn';
 import FilterbarAdditionalContainer from './FilterbarParts/FilterbarAdditionalContainer'
 import { IconContext } from 'react-icons'
 
@@ -16,8 +15,7 @@ const Filterbar = props => {
 						setClass={props.setClass}
 						setClassName={props.setClassName}
 						isLarge={props.isLarge}
-						isSmall={props.isSmall}/>
-					<FilterbarBtn 
+						isSmall={props.isSmall}
 						additionalFilterbars={props.additionalFilterbars}
 						toggleAdditionalFilterbars={props.toggleAdditionalFilterbars}/>
 				</div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { SetsContainer, ManaCostContainer, SearchContainer } from '../Filters';
+import FilterbarBtn from '../FilterbarParts/FilterbarBtn';
 import withSelectFilter from '../../../hoc/withSelectFilter';
 import s from '../Filterbar.module.scss';
 import { TiSpiral } from 'react-icons/ti'
@@ -12,6 +13,10 @@ const FilterbarTop = ({ classValue, classes, setClass, setClassName, ...props })
         </div> }
         <ManaCostContainer />
         <SearchContainer />
+        <FilterbarBtn 
+            isLarge={props.isLarge}
+            additionalFilterbars={props.additionalFilterbars}
+            toggleAdditionalFilterbars={props.toggleAdditionalFilterbars}/>
     </div>
 };
 
