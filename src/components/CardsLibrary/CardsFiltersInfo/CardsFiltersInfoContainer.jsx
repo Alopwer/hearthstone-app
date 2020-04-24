@@ -18,53 +18,51 @@ import {
 import SimpleInfo from './SimpleInfo'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux';
+import WithSizes from 'react-sizes';
 
 const CardsFiltersInfoContainer = props => {
 	const { class: classValue, textFilter, attack, health, type, minionType, keyword, rarity, manaCost } = props.requestOptions
 	const { className, typeName, rarityName, minionTypeName, keywordName, actualSetName } = props.nameList
 
-	const manaCostBar = manaCost.length !== 0 && manaCost.sort((a, b) => a - b).join(', ').split(' ').map(mC => (
-		<span key={mC} onClick={(e) => { e.stopPropagation(); props.removeManaCost(parseInt(mC)) }}>
-			{`${mC}`}
-		</span>
-	));
-
+	const manaCostBar = manaCost.length !== 0 && manaCost.sort((a, b) => a - b)
+		.join(', ')
+		
 	const filtersInfo = [
 		{
 			resetValue: props.setClass,
-			valueInfo: classValue && <p>Class: {className} x</p>
+			valueInfo: classValue && `${className}`
 		},
 		{
 			resetValue: props.resetManaCost,
-			valueInfo: manaCost.length !== 0 && <p>Mana : {manaCostBar} x</p>
+			valueInfo: manaCost.length !== 0 && `Mana : ${manaCostBar}`
 		},
 		{
 			resetValue: props.setTextFilter,
-			valueInfo: textFilter && <p>{textFilter} x</p>
+			valueInfo: textFilter && `${textFilter}`
 		},
 		{
 			resetValue: props.setAttack,
-			valueInfo: attack + '' && <p>Attack : {attack}  x</p>
+			valueInfo: attack + '' && `Attack : ${attack}`
 		},
 		{
 			resetValue: props.setHealth,
-			valueInfo: health && <p>Health : {health}  x</p>
+			valueInfo: health && `Health : ${health}`
 		},
 		{
 			resetValue: props.setCardType,
-			valueInfo: type && <p>Card Type : {typeName}  x</p>
+			valueInfo: type && `${typeName}`
 		},
 		{
 			resetValue: props.setRarity,
-			valueInfo: rarity && <p>Rarity : {rarityName}  x</p>
+			valueInfo: rarity && `${rarityName}`
 		},
 		{
 			resetValue: props.setMinionType,
-			valueInfo: minionType && <p>Minion Type : {minionTypeName}  x</p>
+			valueInfo: minionType && `${minionTypeName}`
 		},
 		{
 			resetValue: props.setKeyword,
-			valueInfo: keyword && <p>Keywords : {keywordName}  x</p>
+			valueInfo: keyword && `${keywordName}`
 		}
 	]
 	const filterItems = filtersInfo.map((f, i) => <SimpleInfo key={i} resetValue={f.resetValue} valueInfo={f.valueInfo} />)
@@ -83,7 +81,13 @@ const mapStateToProps = state => ({
 	additionalFilterbars: state.uiReducer.additionalFilterbars
 });
 
+
+const mapSizesToProps = ({ width }) => ({
+    isSmall: width < 992
+})
+
 export default compose(
+    WithSizes(mapSizesToProps), 
 	withRouter,
 	connect(mapStateToProps, {
 		setTextFilter,

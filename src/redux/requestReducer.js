@@ -176,7 +176,7 @@ const requestReducer = (state = initialState, action) => {
                 options: {
                     ...state.options,
                     class: '',
-                    manaCost: '',
+                    manaCost: [],
                     textFilter: '',
                     attack: '',
                     health: '',

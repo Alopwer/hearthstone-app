@@ -7,7 +7,7 @@ import ManaAndClassFilters from './ManaAndClassFilters';
 const FilterbarTop = ({ classValue, classes, setClass, setClassName, ...props }) => {
 	return <div className={s['filterbar-top']}>
         <SetsContainer />
-        <ManaAndClassFilters />
+        {!props.isSmall && <ManaAndClassFilters />}
         <SearchContainer />
         <FilterbarBtn 
             isLarge={props.isLarge}

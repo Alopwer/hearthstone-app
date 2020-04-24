@@ -79,7 +79,7 @@ const withCustomSelect = (props) => {
     const withScrollbar = props => <CustomScroll heightRelativeToParent="100%" {...props} />
     const valueViewChecker = componentProps => {
         const selectValue = props.hasOwnProperty('shrinkMd') 
-            ? props.isSmall && <span>{componentProps.children}</span> 
+            ? props.isLarge && <span>{componentProps.children}</span> 
             : <span>{componentProps.children}</span>
         return <components.SingleValue {...componentProps}>
             {props.icon}{selectValue}
@@ -101,8 +101,8 @@ const withCustomSelect = (props) => {
 }
 
 const mapSizesToProps = ({ width }) => ({
-    isLarge: width > 1200,
-    isSmall: width > 964,
+    isLarge: width > 1260,
+    isSmall: width > 991,
 })
 
 export default withSizes(mapSizesToProps)(withCustomSelect)

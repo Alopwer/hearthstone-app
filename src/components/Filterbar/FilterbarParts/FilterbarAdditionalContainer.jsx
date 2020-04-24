@@ -10,7 +10,6 @@ const FilterbarAdditionalContainer = props => {
 
 const mapStateToProps = state => ({
     metadata: state.appReducer.metadata,
-    additionalFilterbars: state.uiReducer.additionalFilterbars,
     attack: state.requestReducer.options.attack,
     health: state.requestReducer.options.health,
     type: state.requestReducer.options.type,

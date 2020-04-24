@@ -15,7 +15,9 @@ const Filterbar = props => {
 						additionalFilterbars={props.additionalFilterbars}
 						toggleAdditionalFilterbars={props.toggleAdditionalFilterbars}/>
 				</div>
-				<FilterbarAdditionalContainer isSmall={props.isSmall} />
+				<FilterbarAdditionalContainer isSmall={props.isSmall} 
+					additionalFilterbars={props.additionalFilterbars}
+					toggleAdditionalFilterbars={props.toggleAdditionalFilterbars}/>
 			</div>
 		</div>
 	</IconContext.Provider>

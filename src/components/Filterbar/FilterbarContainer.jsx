@@ -19,8 +19,8 @@ const mapStateToProps = state => ({
 });
 
 const mapSizesToProps = (sizes) => ({
-    isLarge: sizes.width > 1200,
-    isSmall: sizes.width < 964
+    isLarge: sizes.width > 1260,
+    isSmall: sizes.width < 991
 })
 
 export default compose(

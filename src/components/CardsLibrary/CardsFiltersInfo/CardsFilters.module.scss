@@ -3,11 +3,44 @@
     display: flex;
     justify-content: space-between;
     transition: all 0.3s linear;
+    color: #614326;
     &_active {
-        margin-top: 170px;
+        @media screen and (min-width: 991px) {
+            margin-top: 170px;
+        }
     }
-    p {
-        color: #614326;
+    &__totalCards {
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+    &__left {
+        display: flex;
+        align-items: start;
+        flex-wrap: wrap;
+    }
+    &__right {
+
+    }
+}
+
+.clearInfoBtn {
+    border-radius: 20px;
+    background: #614326;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all 0.1s;
+    span:last-child {
+        padding-left: 10px;
+        color: #fcd144;
+    }
+    &:hover {
+        background: #233A6E;
+        span:last-child {
+            color: white;
+        }
     }
 }
 
