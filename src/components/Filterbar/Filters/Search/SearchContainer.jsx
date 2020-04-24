@@ -18,6 +18,7 @@ const SearchContainer = (props) => {
 
     const onClearInput = () => {
         setSearch('')
+        props.setTextFilter('')
     }
 
     const onHandleSearch = () => {

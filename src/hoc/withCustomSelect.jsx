@@ -9,12 +9,11 @@ const withCustomSelect = (props) => {
     
     const customStyles = {
         container: (provided) => ({
-            ...provided,
+            ...provided
         }),
         control: (provided, state) => ({
             ...provided,
             background: state.selectProps.menuIsOpen ? '#FFFF94' : '#C3B189',
-            border: 'none',
             borderRadius: '20px',
             boxShadow: 'none',
             flexWrap: 'no-wrap',
@@ -51,7 +50,7 @@ const withCustomSelect = (props) => {
             maxHeight: '300px',
             background: '#3D362F',
             borderRadius: '3px',
-            minWidth: '200px'
+            width: '200px'
         }),
         menuList: (provided) => ({...provided}),
         option : (provided, state) => ({

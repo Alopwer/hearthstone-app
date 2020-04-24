@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './CardsFilters.module.scss';
 
-const SimpleInfo = props => {
+const ClearFilterBtn = props => {
     return <>
         { 
             props.valueInfo && 
@@ -12,4 +12,4 @@ const SimpleInfo = props => {
     </>
 }
 
-export default SimpleInfo
+export default ClearFilterBtn

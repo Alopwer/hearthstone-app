@@ -1,15 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import s from './CardsSection.module.scss';
+import SingleCard from './SingleCard';
 
 const CardsSection = props => {
-    const singleCards = props.cards.map(c => (
-        <NavLink key={c.id} to={`/cards/${c.id}`}><img src={c.image} alt="" /></NavLink>
-    ))
+    const singleCards = props.cards.map(c => <SingleCard {...c}/>)
 
     return (
-        <div>
+        <div className={s['card-section']}>
             <h3>{props.nameClass}</h3>
-            {singleCards}
+            <div className={s['section-items']}>{singleCards}</div>
         </div>
     )
 }

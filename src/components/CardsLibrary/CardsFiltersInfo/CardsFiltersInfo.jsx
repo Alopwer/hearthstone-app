@@ -15,14 +15,17 @@ const CardsFiltersInfo = props => {
             { props.filterItems }
             {
                 props.filterItems.filter(i => i.props.valueInfo).length > 1 
-                && <button onClick={props.resetFilters}>
-                    Reset All <ResetFilters />
+                && <button onClick={props.resetFilters} className={`${s['clearInfoBtn']} ${s['clearInfoBtn_reset']}`}>
+                    <ResetFilters /> Reset All
                 </button>
             }
         </div>
         <div className={s['filters-info__right']}>
             { viewMode !== 'table' && !props.isSmall && <OrderAndSortFilterContainer /> }
-            <CardsViewMode viewMode={viewMode} setViewMode={props.setViewMode}/>
+            <CardsViewMode 
+                viewMode={viewMode} 
+                setViewMode={props.setViewMode} 
+                isXSmall={props.isXSmall}/>
         </div>
     </div>
 }

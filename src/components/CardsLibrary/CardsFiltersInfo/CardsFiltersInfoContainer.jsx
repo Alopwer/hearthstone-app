@@ -15,7 +15,7 @@ import {
 	resetFilters,
 	setViewMode
 } from '../../../redux/requestReducer';
-import SimpleInfo from './SimpleInfo'
+import ClearFilterBtn from './ClearFilterBtn'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux';
 import WithSizes from 'react-sizes';
@@ -34,7 +34,7 @@ const CardsFiltersInfoContainer = props => {
 		},
 		{
 			resetValue: props.resetManaCost,
-			valueInfo: manaCost.length !== 0 && `Mana : ${manaCostBar}`
+			valueInfo: manaCost.length !== 0 && `Mana: ${manaCostBar}`
 		},
 		{
 			resetValue: props.setTextFilter,
@@ -42,11 +42,11 @@ const CardsFiltersInfoContainer = props => {
 		},
 		{
 			resetValue: props.setAttack,
-			valueInfo: attack + '' && `Attack : ${attack}`
+			valueInfo: attack + '' && `Attack: ${attack}`
 		},
 		{
 			resetValue: props.setHealth,
-			valueInfo: health && `Health : ${health}`
+			valueInfo: health && `Health: ${health}`
 		},
 		{
 			resetValue: props.setCardType,
@@ -65,7 +65,7 @@ const CardsFiltersInfoContainer = props => {
 			valueInfo: keyword && `${keywordName}`
 		}
 	]
-	const filterItems = filtersInfo.map((f, i) => <SimpleInfo key={i} resetValue={f.resetValue} valueInfo={f.valueInfo} />)
+	const filterItems = filtersInfo.map((f, i) => <ClearFilterBtn key={i} resetValue={f.resetValue} valueInfo={f.valueInfo} />)
 
 	return <CardsFiltersInfo {...props}
 		filterItems={filterItems}
@@ -83,7 +83,8 @@ const mapStateToProps = state => ({
 
 
 const mapSizesToProps = ({ width }) => ({
-    isSmall: width < 992
+	isSmall: width < 992,
+	isXSmall: width < 621
 })
 
 export default compose(

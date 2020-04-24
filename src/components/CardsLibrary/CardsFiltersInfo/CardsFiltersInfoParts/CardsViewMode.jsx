@@ -3,9 +3,9 @@ import s from '../CardsFilters.module.scss';
 import { FaGripHorizontal } from 'react-icons/fa'
 import { MdViewHeadline } from 'react-icons/md'
 
-const CardsViewMode = ({ setViewMode, viewMode }) => {
+const CardsViewMode = ({ setViewMode, viewMode, isXSmall }) => {
     return <div className={s['viewmode']}>
-            View: 
+            { !isXSmall && <span>View:</span> }
             <div className={s[`viewmode__btns`]}>
                 <span onClick={() => setViewMode('')}><FaGripHorizontal className={s['react-icons']} style={{
                     background: `${viewMode === 'table' ? 'transparent' : '#FFFF94'}`,
