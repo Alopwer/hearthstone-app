@@ -37,8 +37,8 @@ const initialState = {
         textFilter: '',
         gameMode: '',
         pageSize: null,
-        sort: '',
-        order: '',
+        sort: 'manaCost',
+        order: 'asc',
         viewMode: ''
     },
     page: 1,

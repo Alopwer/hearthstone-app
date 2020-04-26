@@ -71,7 +71,7 @@ const withCustomSelect = (props) => {
             ...provided,
             padding: '0px',
             flexWrap: 'no-wrap',
-            minHeight: '30px'
+            minHeight: '30px',
         })
     }
     
