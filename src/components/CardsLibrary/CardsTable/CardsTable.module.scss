@@ -1,3 +1,51 @@
 .table {
     width: 100%;
+    margin-top: 20px;
+    thead tr{
+        position: relative;
+        height: 60px;
+        color: #614326;
+        &::after {
+            content: '';
+            top: 0;
+            left: 0;
+            right: 0;
+            position: absolute;
+            border: 3px solid #C7B186;
+            border-radius: 10px;
+            height: 50px;
+            pointer-events: none;
+        }
+        button {
+            outline: none;
+            background: transparent;
+            border: none;
+            padding: 0px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #614326;
+        }
+        svg {
+            width: 16px;
+            height: 16px;
+            margin: -5px 0;
+            color: #CDB28A;
+        }
+        .sortBtns {
+            margin-top: 4px;
+            margin-left: 1px;
+            display: flex;
+            flex-direction: column;
+        }
+        th {
+            text-align: left;
+            padding: 15px 15px;
+            white-space: nowrap;
+            &:first-child {
+                padding-left: 30px;
+                width: 305px;
+            }
+        }
+    }
 }

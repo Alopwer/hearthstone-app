@@ -5,7 +5,7 @@ import s from './CardsTable.module.scss';
 
 const CardsTable = props => {
     return <table className={s['table']}>
-        <CardsTableHeader onChangeSort={props.onChangeSort}/>
+        <CardsTableHeader onChangeSort={props.onChangeSort} order={props.order} sort={props.sort}/>
         <CardsTableBody cardsItems={props.cardsItems}/>
     </table>
 }
