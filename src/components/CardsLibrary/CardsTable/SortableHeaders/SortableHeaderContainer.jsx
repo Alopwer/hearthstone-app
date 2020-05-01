@@ -5,7 +5,7 @@ import SortableHeader from './SortableHeader';
 
 const SortableHeaderContainer = (props) => {
 
-    const onChangeSort = (value) => {
+    const onToggleSort = (value) => {
         if (props.name === props.sort) {
             if (props.order === 'desc') {
                 props.setOrderAndSort(`${value},asc`.split(','))
@@ -17,7 +17,7 @@ const SortableHeaderContainer = (props) => {
         }
     }
 
-    return <SortableHeader onChangeSort={onChangeSort} {...props}/>
+    return <SortableHeader {...props} onToggleSort={onToggleSort} />
 }
 
 const mapStateToProps = state => ({

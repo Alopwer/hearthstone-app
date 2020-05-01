@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import CardsRow from './CardsRow/CardsRow';
 import {setKeyword, setMinionType} from '../../../redux/requestReducer';
 import {setMinionTypeName, setKeywordName } from '../../../redux/staticInfoReducer';
+import { compose } from 'redux';
+import WithSizes from 'react-sizes';
 
 const CardsTableContainer = props => {
     const cardsRows = props.cards.map(c => <CardsRow key={c.id} 
@@ -13,9 +15,10 @@ const CardsTableContainer = props => {
         setMinionType={props.setMinionType}
         setMinionTypeName={props.setMinionTypeName}
         setKeywordName={props.setKeywordName}
+        width={props.width}
     />)
 
-    return <CardsTable cardsItems={cardsRows} />
+    return <CardsTable cardsItems={cardsRows} width={props.width}/>
 }
 
 const mapStateToProps = state => ({
@@ -23,6 +26,11 @@ const mapStateToProps = state => ({
     metadata: state.appReducer.metadata
 });
 
-export default connect(mapStateToProps, {
-    setKeyword, setMinionType, setKeywordName, setMinionTypeName
-})(CardsTableContainer)
+const mapSizesToProps = ({width}) => ({
+    width
+});
+
+export default compose( 
+    WithSizes(mapSizesToProps),
+    connect(mapStateToProps, {setKeyword, setMinionType, setKeywordName, setMinionTypeName})
+)(CardsTableContainer)

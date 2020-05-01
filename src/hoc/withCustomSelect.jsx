@@ -100,7 +100,7 @@ const withCustomSelect = (props) => {
 }
 
 const mapSizesToProps = ({ width }) => ({
-    isLarge: width > 1260,
+    isLarge: width > 1300,
     isSmall: width > 991,
 })
 

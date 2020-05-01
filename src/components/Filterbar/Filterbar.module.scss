@@ -1,5 +1,5 @@
 .filterbar {
-    z-index: 3;
+    z-index: 4;
     position: fixed;
     top: 0;
     box-shadow: 0 0 15px black;
@@ -56,6 +56,11 @@
             min-width: 0;
             width: 100%;
             padding-right: 30px;
+            @media screen and (max-width: 349px){
+                &::placeholder {
+                    color: transparent;
+                }
+            }
         }
     }
     &-search_active {

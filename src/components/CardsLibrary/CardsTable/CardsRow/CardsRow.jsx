@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import CardsRowKeywords from './CardsRowKeywords';
 import CardsRowMinionType from './CardsRowMinionType';
+import s from '../CardsTable.module.scss';
 
-const CardsRow = ({ metadata, card, setKeyword, setMinionType, setKeywordName, setMinionTypeName }) => {
+const CardsRow = ({ metadata, card, setKeyword, setMinionType, setKeywordName, setMinionTypeName, ...props }) => {
+    const [isHovered, toggleHovered] = useState(false)
+    const [pos, setPos] = useState(null)
     const { classes, types, rarities, minionTypes, keywords } = metadata
     const keywordItems = card.keywordIds 
         && <CardsRowKeywords card={card} 
@@ -11,21 +14,48 @@ const CardsRow = ({ metadata, card, setKeyword, setMinionType, setKeywordName, s
             setKeywordName={setKeywordName} 
             setKeyword={setKeyword}
         />
-    
     const minionTypeItems = card.minionTypeId 
         && <CardsRowMinionType card={card}
             minionTypes={minionTypes}
             setMinionType={setMinionType}
             setMinionTypeName={setMinionTypeName}
         />
+    const handleFullImgPos = (e) => {
+        const q = e.currentTarget.getBoundingClientRect()
+        setPos(e.currentTarget.getBoundingClientRect())
+    }
 
-    return <tr>
-        <td style={{ backgroundImage: `url(${card.cropImage})` }}>
-            <NavLink to={`/cards/${card.id}`}>{card.name}</NavLink>
+    return <tr className={s['card-row']}>
+        <td className={s['card-row__card']}>
+            <div className={s['card-img']} onMouseEnter={(e) => {
+                handleFullImgPos(e)
+                toggleHovered(true)
+                }} onMouseLeave={(e) => {
+                    handleFullImgPos(e)
+                    toggleHovered(false)
+                    }}>
+                <NavLink 
+                    to={`/cards/${card.id}`} 
+                    className={s['card-img__link']}
+                >
+                    {card.name}
+                </NavLink>
+                <div className={s['card-img__mask']}></div>
+                <div className={s['card-img__img']} style={{ backgroundImage: `url(${card.cropImage})` }}></div>
+            </div>
+            { isHovered && <div 
+                className={s['card-img_full']} 
+                style={{backgroundImage: `url(${card.image})`,
+                left: pos.left + pos.width + 20,
+                top: pos.top - 140}}>
+            </div> }
         </td>
-        <td>
-            {classes.find(cl => cl.id === card.classId).name}
-        </td>
+        {
+            props.width > 500 && 
+            <td className={s['class']}>
+                {classes.find(cl => cl.id === card.classId).name}
+            </td>
+        }
         <td>
             {card.manaCost}
         </td>
@@ -35,18 +65,30 @@ const CardsRow = ({ metadata, card, setKeyword, setMinionType, setKeywordName, s
         <td>
             {card.health || '-'}
         </td>
-        <td>
-            {types.find(t => t.id === card.cardTypeId).name}
-        </td>
-        <td>
-            {rarities.find(r => r.id === card.rarityId).name}
-        </td>
-        <td>
-            {minionTypeItems}
-        </td>
-        <td>
-            {keywordItems}
-        </td>
+        {
+            props.width > 786 && 
+            <td>
+                {types.find(t => t.id === card.cardTypeId).name}
+            </td>
+        }
+        {
+            props.width > 894 && 
+            <td>
+                {rarities.find(r => r.id === card.rarityId).name}
+            </td>
+        }
+        {
+            props.width > 1040 && 
+            <td>
+                {minionTypeItems || '-'}
+            </td>
+        }
+        { 
+            props.width > 1200 && 
+            <td>
+                {keywordItems || '-'}
+            </td> 
+        }
     </tr>
 }
 

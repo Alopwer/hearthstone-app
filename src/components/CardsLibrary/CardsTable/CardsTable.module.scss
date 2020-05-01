@@ -49,3 +49,93 @@
         }
     }
 }
+
+.card-row {
+    position: relative;
+    &:hover {
+        .card-row__card::before {
+            content: '';
+            inset: 0px;
+            position: absolute;
+            background: rgb(97, 67, 38) none repeat scroll 0% 0%;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+    }
+    td {
+        padding: 5px 15px;
+        color: rgb(97, 67, 38);
+        border-bottom: 1px solid rgb(215, 187, 147);
+        &:last-child {
+            margin-right: 20px;
+        }
+    }
+    &__card {
+        padding: 5px 15px;
+        @media screen and (max-width: 500px) {
+            width: 100%;
+        }
+    }
+}
+
+.card-img {
+    position: relative;
+    border-radius: 5px;
+    padding: 6px 20px;
+    cursor: pointer;
+    background: rgb(43, 44, 62) none no-repeat scroll right center;
+    margin-left: 10px;
+    margin-right: 10px;
+    max-width: 250px;
+    border: 1px solid rgb(0, 0, 0);
+    @media screen and (max-width: 500px) {
+        margin: 0 auto;
+    }
+    &:hover {
+        filter: drop-shadow(rgb(255, 255, 255) 0px 0px 5px);
+        border-color: white;
+    }
+    &__mask {
+        position: absolute;
+        z-index: 2;
+        top: 0px;
+        right: 0px;
+        height: 100%;
+        background: rgba(0, 0, 0, 0) url("https://d2q63o9r0h0ohi.cloudfront.net/images/decklist/card_list_mask-23bf424f40855f607e8abbbf8f095325deb6c68d7cbc1aba14919916e386641408fd07a464db21f06e9a61bf62686f893097d75e57916110b5c206c98a822acd.png") repeat scroll left center;
+        width: 150px;
+    }
+    &__img {
+        z-index: 1;
+        background-color: rgb(0, 0, 0);
+        background-size: cover;
+        width: 150px;
+        height: 100%;
+        top: 0px;
+        right: 0px;
+        border-radius: 5px;
+        position: absolute;
+    }
+    &__link {
+        display: block;
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        position: relative;
+        z-index: 3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-shadow: #000 2px 0 0,#000 1.75517px .95885px 0,#000 1.0806px 1.68294px 0,#000 .14147px 1.99499px 0,#000 -.83229px 1.81859px 0,#000 -1.60229px 1.19694px 0,#000 -1.97998px .28224px 0,#000 -1.87291px -.70157px 0,#000 -1.30729px -1.5136px 0,#000 -.42159px -1.95506px 0,#000 .56732px -1.91785px 0,#000 1.41734px -1.41108px 0,#000 1.92034px -.55883px 0;
+        text-overflow: ellipsis;
+    }
+    &_full {
+        width: 240px;
+        height: 350px;
+        position: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 5;
+    }
+}
+
+.class {
+    white-space: nowrap;
+}

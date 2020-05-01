@@ -1,9 +1,9 @@
 import React from 'react';
 import CardsFilterSortNOrder from '../CardsFilterSortNOrder';
 
-const SortableHeader = ({ order, sort, name, label }) => {
+const SortableHeader = ({ order, sort, name, label, onToggleSort }) => {
     return <th>
-        <button onClick={() => onChangeSort(name)}>
+        <button onClick={() => onToggleSort(name)}>
             { label }
             <CardsFilterSortNOrder 
                 name={name} 
