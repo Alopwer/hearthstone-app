@@ -51,19 +51,25 @@ const CardsRow = ({ metadata, card, setKeyword, setMinionType, setKeywordName, s
             </div> }
         </td>
         {
-            props.width > 500 && 
+            props.width > 600 && 
             <td className={s['class']}>
                 {classes.find(cl => cl.id === card.classId).name}
             </td>
         }
-        <td>
-            {card.manaCost}
+        <td className={s['sortable']}>
+            <div className={`${s['mana']} ${(card.manaCost || card.manaCost == 0) && 'textShadow'}`} style={{backgroundImage: `${!card.manaCost && card.manaCost !== 0 && 'none'}`}}> 
+                {card.manaCost}
+            </div>
         </td>
-        <td>
-            {card.attack || '-'}
+        <td className={s['sortable']}>
+            <div className={`${s['attack']} ${(card.attack || card.attack == 0) && 'textShadow'}`} style={{backgroundImage: `${!card.attack && card.attack !== 0 && 'none'}`}}>
+                {card.attack || '-'}
+            </div>
         </td>
-        <td>
-            {card.health || '-'}
+        <td className={s['sortable']}>
+            <div className={`${s['health']} ${(card.health || card.health == 0) && 'textShadow'}`} style={{backgroundImage: `${!card.health && card.health !== 0 && 'none'}`}}>
+                {card.health || '-'}
+            </div>
         </td>
         {
             props.width > 786 && 
@@ -72,7 +78,7 @@ const CardsRow = ({ metadata, card, setKeyword, setMinionType, setKeywordName, s
             </td>
         }
         {
-            props.width > 894 && 
+            props.width > 914 && 
             <td>
                 {rarities.find(r => r.id === card.rarityId).name}
             </td>

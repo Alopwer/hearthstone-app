@@ -3,6 +3,7 @@
     margin-top: 20px;
     thead tr{
         position: relative;
+        padding: 0;
         height: 60px;
         color: #614326;
         &::after {
@@ -11,9 +12,10 @@
             left: 0;
             right: 0;
             position: absolute;
-            border: 3px solid #C7B186;
-            border-radius: 10px;
-            height: 50px;
+            border-style: solid;
+            border-width: 10px;
+            border-image: url("https://d2q63o9r0h0ohi.cloudfront.net/images/esports/schedule/Event_Tab_middle_bg-71a4b645b8966afe4e1d06e5a793d9b3da9c6a99f01fbae3357971d69b48bac22d1e87d884ad5db93e9023e74963b140ada0cc1534d7e5b654ed02cfde2632cd.png") 10 fill / 1 / 0 repeat;
+            height: 60px;
             pointer-events: none;
         }
         button {
@@ -25,26 +27,55 @@
             align-items: center;
             cursor: pointer;
             color: #614326;
+            div {
+                background-size: cover;
+                transform: scale(0.75);
+            }
+            .mana {
+                width: 31px;
+                height: 29px;
+            }
+            .health {
+                width: 34px;
+                height: 36px;
+                background-position: 4px 2px;
+            }
+            .attack {
+                width: 34px;
+                height: 36px;
+                background-size: 120%;
+            }
         }
         svg {
-            width: 16px;
-            height: 16px;
-            margin: -5px 0;
+            width: 12px;
+            height: 12px;
+            margin-left: 5px;
             color: #CDB28A;
         }
         .sortBtns {
-            margin-top: 4px;
-            margin-left: 1px;
             display: flex;
             flex-direction: column;
         }
         th {
             text-align: left;
-            padding: 15px 15px;
+            padding: 0px 15px;
             white-space: nowrap;
+            vertical-align: middle;
+            margin: 0 auto;
+            @media screen and (max-width: 720px){
+                padding: 0px;
+                padding-left: 5px;
+                padding-right: 5px;
+                &:last-child {
+                    padding-right: 15px;
+                }
+            }
             &:first-child {
                 padding-left: 30px;
                 width: 305px;
+                @media screen and (max-width: 500px) {
+                    // width: 180px;
+                }
             }
         }
     }
@@ -69,11 +100,14 @@
         &:last-child {
             margin-right: 20px;
         }
+        @media screen and (max-width: 720px){
+            padding: 5px 0;
+        }
     }
     &__card {
         padding: 5px 15px;
         @media screen and (max-width: 500px) {
-            width: 100%;
+            // width: 100%;
         }
     }
 }
@@ -89,7 +123,7 @@
     max-width: 250px;
     border: 1px solid rgb(0, 0, 0);
     @media screen and (max-width: 500px) {
-        margin: 0 auto;
+        max-width: 180px;
     }
     &:hover {
         filter: drop-shadow(rgb(255, 255, 255) 0px 0px 5px);
@@ -138,4 +172,40 @@
 
 .class {
     white-space: nowrap;
+}
+
+.sortable {
+    margin: 0 auto;
+    div {
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+        margin: 0 auto;
+        color: white;
+        text-align: center;
+        line-height: 1.4;
+        font-size: 22px;
+    }
+    .health {
+        width: 100%;
+    }
+    .attack {
+        width: 100%;
+    }
+}
+
+.mana {
+    background-image: url('https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_mana_68x68_@2x-b6ecc2a45a3440ac6cba07297306fbb64d9a224bc12a281224a091aaf92a73da2d0036e6eed920f74a957660354bfafe7831fc291aad49867d04b427737c6e3a.png');
+    width: 31px;
+    height: 29px;
+}
+.health {
+    background-image: url('https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_health_table-47b6385e38f24db7c03021271075fca56e2dd9ef68cd05da5c130b0ede188fd6f481554cb644ad5152b10a51d7b7d1a10a37d81b2caecb040d53129e34d5d496.png');
+    width: 34px;
+    height: 36px;
+}
+.attack {
+    background-image: url('https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_attack_table-fd27efc96e0708f9f4d03ef50c72cc9cd5aed569f14b60e498e6c903cdaadd7f037cb2bee9b5e4e699a370e95c5d9d9f45464d8b09a99ae79383d5abcf92b8b5.png');
+    width: 34px;
+    height: 36px;
 }

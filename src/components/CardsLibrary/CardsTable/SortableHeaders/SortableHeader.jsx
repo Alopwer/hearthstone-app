@@ -1,10 +1,11 @@
 import React from 'react';
 import CardsFilterSortNOrder from '../CardsFilterSortNOrder';
+import s from '../CardsTable.module.scss';
 
-const SortableHeader = ({ order, sort, name, label, onToggleSort }) => {
+const SortableHeader = ({ order, sort, name, onToggleSort, label, className, width }) => {
     return <th>
         <button onClick={() => onToggleSort(name)}>
-            { label }
+            { !label ? <div className={width > 400 && s[className]}></div> : <span>{ label }</span>}
             <CardsFilterSortNOrder 
                 name={name} 
                 sort={sort} 
