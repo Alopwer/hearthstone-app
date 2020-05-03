@@ -3,8 +3,9 @@ import ModalCard from './ModalCard';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getCard, resetCard, setRelativeCardsIds } from '../../redux/cardReducer';
+import { getCard, resetCard, setRelativeCardsIds, toggleActiveCard, resetCardTA } from '../../redux/cardReducer';
 import Modal from 'react-modal';
+import s from './ModalCard.module.scss';
 
 Modal.setAppElement('#root')
 
@@ -27,11 +28,12 @@ const ModalCardContainer = props => {
     }, [props.cardInfo])
 
     function openModal() {
+        props.toggleActiveCard(true)
         setIsOpen(true);
     }
     function closeModal(){
-        setIsOpen(false);
-        props.resetCard();
+        props.resetCardTA()
+        setIsOpen(false)
         props.history.push('/cards')
     }
 
@@ -54,8 +56,12 @@ const ModalCardContainer = props => {
         }   
     }
     
-    return props.cardInfo 
-    && <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+    return <Modal 
+            isOpen={modalIsOpen} 
+            onRequestClose={closeModal}
+            className={s["card-modal"]}
+            overlayClassName={s["card-overlay"]}
+        >
         <ModalCard cards={props.cards} 
             cardInfo={props.cardInfo} 
             onRequestCard={onRequestCard} 
@@ -73,10 +79,11 @@ const mapStateToProps = (state) => ({
     relativeCards: state.cardReducer.relativeCards,
     cardInfo: state.cardReducer.cardInfo,
     isFetching: state.cardReducer.isFetching,
-    metadata: state.appReducer.metadata
+    metadata: state.appReducer.metadata,
+    cardActive: state.cardReducer.cardActive
 })
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {getCard, resetCard, setRelativeCardsIds})
+    connect(mapStateToProps, { getCard, resetCard, setRelativeCardsIds, toggleActiveCard, resetCardTA })
 )(ModalCardContainer);

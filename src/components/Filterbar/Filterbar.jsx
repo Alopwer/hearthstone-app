@@ -6,7 +6,7 @@ import { IconContext } from 'react-icons'
 
 const Filterbar = props => {
 	return <IconContext.Provider value={{className: s['react-icons']}}>
-		<div className={s['filterbar']}>
+		<div className={s['filterbar']} style={{position: `${props.cardActive ? 'absolute' : 'fixed'}`}}>
 			<div className='container'>
 				<div className={s['filterbar-main']}>
 					<FilterbarTop

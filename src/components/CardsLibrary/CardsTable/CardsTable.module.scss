@@ -1,6 +1,7 @@
 .table {
     width: 100%;
     margin-top: 20px;
+    color: #614326;
     thead tr{
         position: relative;
         padding: 0;
@@ -32,24 +33,19 @@
                 transform: scale(0.75);
             }
             .mana {
-                width: 31px;
-                height: 29px;
+                transform: scale(0.7);
             }
             .health {
-                width: 34px;
-                height: 36px;
-                background-position: 4px 2px;
+                width: 30px;
+                background-position: 0 2px;
             }
             .attack {
-                width: 34px;
-                height: 36px;
-                background-size: 120%;
+                background-size: 110%;
             }
         }
         svg {
             width: 12px;
             height: 12px;
-            margin-left: 5px;
             color: #CDB28A;
         }
         .sortBtns {
@@ -64,17 +60,23 @@
             margin: 0 auto;
             @media screen and (max-width: 720px){
                 padding: 0px;
-                padding-left: 5px;
-                padding-right: 5px;
+                padding-left: 15px;
+                padding-right: 15px;
+                @media screen and (max-width: 490px){
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
                 &:last-child {
-                    padding-right: 15px;
+                    padding-right: 25px;
+                    @media screen and (max-width: 720px){
+                        padding-right: 15px;
+                    }
                 }
             }
             &:first-child {
                 padding-left: 30px;
-                width: 305px;
-                @media screen and (max-width: 500px) {
-                    // width: 180px;
+                span {
+                    margin-right: 10px;
                 }
             }
         }
@@ -97,17 +99,29 @@
         padding: 5px 15px;
         color: rgb(97, 67, 38);
         border-bottom: 1px solid rgb(215, 187, 147);
-        &:last-child {
-            margin-right: 20px;
-        }
+        white-space: nowrap;
+        vertical-align: middle;
         @media screen and (max-width: 720px){
-            padding: 5px 0;
+            padding: 5px 10px 5px 0;
+        }
+        @media screen and (max-width: 490px){
+            padding-right: 0px;
+        }
+    }
+    .filterable {
+        white-space: pre-wrap;
+        line-height: 1.2;
+        span {
+            &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
         }
     }
     &__card {
         padding: 5px 15px;
-        @media screen and (max-width: 500px) {
-            // width: 100%;
+        @media screen and (max-width: 490px){
+            max-width: 190px;
         }
     }
 }
@@ -122,9 +136,6 @@
     margin-right: 10px;
     max-width: 250px;
     border: 1px solid rgb(0, 0, 0);
-    @media screen and (max-width: 500px) {
-        max-width: 180px;
-    }
     &:hover {
         filter: drop-shadow(rgb(255, 255, 255) 0px 0px 5px);
         border-color: white;
@@ -170,12 +181,13 @@
     }
 }
 
-.class {
-    white-space: nowrap;
-}
-
 .sortable {
     margin: 0 auto;
+    text-align: center;
+    @media screen and (max-width: 400px){
+        max-width: 25px;
+    }
+    max-width: 30px;
     div {
         background-repeat: no-repeat;
         background-size: contain;
@@ -185,12 +197,6 @@
         text-align: center;
         line-height: 1.4;
         font-size: 22px;
-    }
-    .health {
-        width: 100%;
-    }
-    .attack {
-        width: 100%;
     }
 }
 

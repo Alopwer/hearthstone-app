@@ -15,10 +15,19 @@ const CardsTableContainer = props => {
         setMinionType={props.setMinionType}
         setMinionTypeName={props.setMinionTypeName}
         setKeywordName={props.setKeywordName}
-        width={props.width}
+        isXLarge={props.isXLarge}
+        isLarge={props.isLarge}
+        isMedium={props.isMedium}
+        isSmall={props.isSmall}
+        isXSmall={props.isXSmall}
     />)
 
-    return <CardsTable cardsItems={cardsRows} width={props.width}/>
+    return <CardsTable cardsItems={cardsRows} 
+        isXLarge={props.isXLarge}
+        isLarge={props.isLarge}
+        isMedium={props.isMedium}
+        isSmall={props.isSmall}
+        isXSmall={props.isXSmall}/>
 }
 
 const mapStateToProps = state => ({
@@ -26,8 +35,12 @@ const mapStateToProps = state => ({
     metadata: state.appReducer.metadata
 });
 
-const mapSizesToProps = ({width}) => ({
-    width
+const mapSizesToProps = ({ width }) => ({
+    isXLarge: width > 1200,
+    isLarge: width > 1039,
+    isMedium: width > 914,
+    isSmall: width > 786,
+    isXSmall: width > 600
 });
 
 export default compose( 

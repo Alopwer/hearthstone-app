@@ -2,6 +2,8 @@ import React from 'react';
 import { setOrderAndSort } from '../../../../redux/requestReducer';
 import { connect } from 'react-redux';
 import SortableHeader from './SortableHeader';
+import { compose } from 'redux';
+import WithSizes from 'react-sizes';
 
 const SortableHeaderContainer = (props) => {
 
@@ -25,4 +27,10 @@ const mapStateToProps = state => ({
     sort: state.requestReducer.options.sort,
 });
 
-export default connect(mapStateToProps, {setOrderAndSort})(SortableHeaderContainer)
+const mapSizesToProps = ({ width }) => ({
+    isSmall: width < 490
+});
+
+export default compose(WithSizes(mapSizesToProps),
+    connect(mapStateToProps, {setOrderAndSort})
+)(SortableHeaderContainer)

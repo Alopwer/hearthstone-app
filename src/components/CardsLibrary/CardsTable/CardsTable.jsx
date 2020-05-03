@@ -5,7 +5,11 @@ import s from './CardsTable.module.scss';
 
 const CardsTable = props => {
     return <table className={s['table']}>
-        <CardsTableHeader width={props.width}/>
+        <CardsTableHeader isXLarge={props.isXLarge}
+    isLarge={props.isLarge}
+    isMedium={props.isMedium}
+    isSmall={props.isSmall}
+    isXSmall={props.isXSmall}/>
         <CardsTableBody cardsItems={props.cardsItems} />
     </table>
 }
