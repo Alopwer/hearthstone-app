@@ -2,6 +2,7 @@
     width: 100%;
     margin-top: 20px;
     color: #614326;
+    position: relative;
     thead tr{
         position: relative;
         padding: 0;
@@ -111,6 +112,7 @@
     .filterable {
         white-space: pre-wrap;
         line-height: 1.2;
+        position: relative;
         span {
             &:hover {
                 text-decoration: underline;
@@ -214,4 +216,17 @@
     background-image: url('https://d2q63o9r0h0ohi.cloudfront.net/images/card-gallery/icon_attack_table-fd27efc96e0708f9f4d03ef50c72cc9cd5aed569f14b60e498e6c903cdaadd7f037cb2bee9b5e4e699a370e95c5d9d9f45464d8b09a99ae79383d5abcf92b8b5.png');
     width: 34px;
     height: 36px;
+}
+
+.sss {
+    &:after {
+        content: ', '
+    }
+    &:last-child::after {
+        content: ''
+    }
+}
+
+.keyword-info__full {
+    background: white;
 }

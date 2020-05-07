@@ -23,3 +23,7 @@ body {
     rgb(0, 0, 0) 1.41734px -1.41108px 0px, 
     rgb(0, 0, 0) 1.92034px -0.55883px 0px;
 }
+
+button, input, button:focus {
+    outline: none;
+}

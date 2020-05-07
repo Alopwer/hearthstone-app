@@ -4,6 +4,7 @@ import CustomScroll from 'react-custom-scroll'
 import '../../node_modules/react-custom-scroll/dist/customScroll.css'
 import '../components/Filterbar/Scroll.scss'
 import withSizes from 'react-sizes'
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const withCustomSelect = (props) => {
     
@@ -47,18 +48,26 @@ const withCustomSelect = (props) => {
         indicatorSeparator: () => ({}),
         menu: (provided) => ({
             ...provided,
+            width: '200px',
             maxHeight: '300px',
             background: '#3D362F',
             borderRadius: '3px',
-            width: '200px'
+            display: 'flex'
         }),
-        menuList: (provided) => ({...provided}),
+        menuList: (provided) => ({
+            // ...provided,
+            overflowY: 'hidden',
+            flex: 1,
+            minHeight: 0,
+            minWidth: 0
+        }),
         option : (provided, state) => ({
             ...provided, 
             color: state.isSelected ? '#FCD144' : 'white', 
             background: state.isFocused && '#12100E' || state.isSelected && 'transparent',
             cursor: 'pointer',
-            padding: '10px 8px 10px 15px'
+            padding: '10px 8px 10px 15px',
+
         }),
         singleValue: () => ({
             color: '#614326',
@@ -75,7 +84,7 @@ const withCustomSelect = (props) => {
         })
     }
     
-    const withScrollbar = props => <CustomScroll heightRelativeToParent="100%" {...props} />
+    const withScrollbar = props => <components.MenuList {...props}><CustomScroll heightRelativeToParent="100%">{props.children}</CustomScroll></components.MenuList>
     const valueViewChecker = componentProps => {
         const selectValue = props.hasOwnProperty('shrinkMd') 
             ? props.isLarge && <span>{componentProps.children}</span> 
@@ -86,6 +95,7 @@ const withCustomSelect = (props) => {
     }
 
     return <Select styles={customStyles}
+        menuIsOpen={true}
         options={props.options}
         defaultValue={{...props.defaultValue}}
         value={props.value && {...props.value}}

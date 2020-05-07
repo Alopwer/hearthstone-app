@@ -1,8 +1,9 @@
 import React from 'react'
+import s from '../../CardsTable.module.scss';
 
 const CardsRowKeyword = (props) => {
     return <>
-        <span onClick={() => props.onKeywordClick(props.kwd.name, props.kwd.slug)}
+        <span className={s['sss']} onClick={() => props.onKeywordClick(props.kwd.name, props.kwd.slug)}
             onMouseEnter={(e) => {
                 props.handleFullInfoPos(e)
                 props.toggleHovered(true)
@@ -15,15 +16,14 @@ const CardsRowKeyword = (props) => {
         </span>
         { 
             props.isHovered && 
-            <div 
-            // className={s['keyword-info_full']} 
+            <div className={s['keyword-info_full']} 
                 style={{
                     position: 'absolute',
                     top: '-80px'
                 }}
             >
-                {props.kwd.name}
-                {props.kwd.refText}
+                <h4>{props.kwd.name}</h4>
+                <p>{props.kwd.refText}</p>
             </div> 
         }
     </>
