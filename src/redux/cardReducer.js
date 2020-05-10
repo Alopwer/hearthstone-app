@@ -1,18 +1,18 @@
 import api from '../api/ApiService';
 
 const TOGGLE_FETCHING = 'hsapp/cardReducer/TOGGLE_FETCHING'
-const TOGGLE_ACTIVE_CARD = 'hsapp/cardReducer/TOGGLE_ACTIVE_CARD'
 const UPDATE_CARD = 'hsapp/cardReducer/UPDATE_CARD'
 const RESET_CARD = 'hsapp/cardReducer/RESET_CARD'
 const SET_RELATIVE_CARDS_IDS = 'hsapp/cardReducer/SET_RELATIVE_CARDS_IDS'
 const APPEND_VISITED_CARDS = 'hsapp/cardReducer/APPEND_VISITED_CARDS'
+const TOGGLE_ACTIVE_CARD = 'hsapp/cardReducer/TOGGLE_ACTIVE_CARD'
 
 const initialState = {
     isFetching: false,
-    cardActive: false,
     cardInfo: null,
     visitedCards: [],
     relativeCardsIds: null,
+    activeCard: false
 }
 
 const cardReducer = (state = initialState, action) => {
@@ -20,22 +20,19 @@ const cardReducer = (state = initialState, action) => {
         case UPDATE_CARD:
             return {
                 ...state,
-                cardInfo: {...action.cardInfo}
+                cardInfo: {...action.cardInfo},
+                activeCard: true
             }
         case TOGGLE_FETCHING:
             return {
                 ...state,
                 isFetching: action.isFetching
             }
-        case TOGGLE_ACTIVE_CARD:
-            return {
-                ...state,
-                cardActive: action.isActive
-            }
         case RESET_CARD:
             return {
                 ...state,
-                cardInfo: null
+                cardInfo: null,
+                activeCard: false
             }
         case SET_RELATIVE_CARDS_IDS:
             return {
@@ -47,6 +44,11 @@ const cardReducer = (state = initialState, action) => {
                 ...state,
                 visitedCards: [...state.visitedCards, action.cardInfo]
             }
+        case TOGGLE_ACTIVE_CARD:
+            return {
+                ...state,
+                activeCard: action.payload
+            }
         default:
             return state
     }
@@ -55,11 +57,6 @@ const cardReducer = (state = initialState, action) => {
 const toggleFetching = (isFetching) => ({
     type: TOGGLE_FETCHING,
     isFetching
-})
-
-export const toggleActiveCard = (isActive) => ({
-    type: TOGGLE_ACTIVE_CARD,
-    isActive
 })
 
 const appendVisitedCards = (cardInfo) => ({
@@ -81,25 +78,25 @@ export const resetCard = () => ({
     type: RESET_CARD
 })
 
+export const toggleActiveCard = (active) => ({
+    type: TOGGLE_ACTIVE_CARD,
+    payload: active
+})
+
 export const getCard = (cardId) => async (dispatch, getState) => {
     const visitedCards = getState().cardReducer.visitedCards
     const foundCard = visitedCards.find(c => +c.id === +cardId)
-    if (foundCard) {
-        dispatch(updateCard(foundCard))
-    } else {
+    // if (foundCard) {
+    //     dispatch(updateCard(foundCard))
+    // } else {
         dispatch(toggleFetching(true));
         const data = await api.getCard(cardId);
         dispatch(toggleFetching(false));
         dispatch(updateCard(data))
-        if (!visitedCards.includes(data)) {
-            dispatch(appendVisitedCards(data))
-        }
-    }
-}
-
-export const resetCardTA = () => async (dispatch) => {
-    dispatch(toggleActiveCard(false))
-    dispatch(resetCard())
+    //     if (!visitedCards.includes(data)) {
+    //         dispatch(appendVisitedCards(data))
+    //     }
+    // }
 }
 
 export default cardReducer;

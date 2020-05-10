@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import 'normalize.css';
 import HearthstoneApp from './HearthstoneApp';
 import * as serviceWorker from './serviceWorker';
 

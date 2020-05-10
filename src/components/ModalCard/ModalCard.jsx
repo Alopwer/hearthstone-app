@@ -1,33 +1,23 @@
 import React from 'react';
+import { animated } from 'react-spring'
+import ModalInfoContainer from './ModalCardParts/ModalInfoContainer';
+import ModalArrows from './ModalCardParts/ModalArrows';
+import ModalImgContainer from './ModalCardParts/ModalImgContainer';
+import s from './ModalCard.module.scss';
 
 const ModalCard = props => {
-    const { types, rarities, sets, classes } = props.metadata
-    const type = types.find(t => t.id === props.cardInfo.cardTypeId)
-    const set = sets.find(s => s.id === props.cardInfo.cardSetId)
-    const classValue = classes.find(c => c.id === props.cardInfo.classId)
-    const rarity = rarities.find(r => r.id === props.cardInfo.rarityId)
-
     return <div>
-        { props.relativeCardsIds[0] && <span onClick={() => props.onRequestCard(false)}>prev</span> }
-         <div>
-            <img src={props.cardInfo.image} />
-            <div>
-                <p>{props.cardInfo.name}</p>
-                <p>{props.cardInfo.flavorText}</p>
-                <p dangerouslySetInnerHTML={{__html: props.cardInfo.text}}></p>
-                <ul>
-                    <li>{type && `Type: ${type.name}`}</li>
-                    <li>{rarity && `Rarity: ${rarity.name}`}</li>
-                    <li>{set && `Set: ${set.name}`}</li>
-                    <li>{classValue && `Class: ${classValue.name}`}</li>
-                    { rarity.craftingCost.filter(Boolean).length !== 0 && <li>Cost to Craft: {rarity.craftingCost.join(', ')}</li>}
-                    { rarity.dustValue.filter(Boolean).length !== 0 && <li>Disenchanting Yield: {rarity.dustValue.join(', ')}</li> }
-                    <li>Artist: {props.cardInfo.artistName}</li>
-                    <li>{props.cardInfo.collectible ? 'Collectible' : 'Not Collectible'}</li>
-                </ul>
-            </div>
-        </div>
-        { props.relativeCardsIds[1] && <span onClick={() => props.onRequestCard(true)}>next</span> }
+        {
+            props.cardInfo && 
+            <animated.div style={props.st}>
+                <div className={s['modal-content']}>
+                    <ModalImgContainer />
+                    <ModalInfoContainer />
+                </div>
+            </animated.div>
+        }
+        <ModalArrows relativeCardsIds={props.relativeCardsIds}
+            onRequestCard={props.onRequestCard}/>
     </div>
 }
 

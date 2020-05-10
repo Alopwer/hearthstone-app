@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Select, { components } from 'react-select'
 import CustomScroll from 'react-custom-scroll'
 import '../../node_modules/react-custom-scroll/dist/customScroll.css'
 import '../components/Filterbar/Scroll.scss'
 import withSizes from 'react-sizes'
-import { Scrollbars } from 'react-custom-scrollbars';
 
 const withCustomSelect = (props) => {
+    const scrollBarRef = useRef(null);
     
     const customStyles = {
         container: (provided) => ({
@@ -52,17 +52,17 @@ const withCustomSelect = (props) => {
             maxHeight: '300px',
             background: '#3D362F',
             borderRadius: '3px',
-            display: 'flex'
+            // display: 'flex'
         }),
         menuList: (provided) => ({
-            // ...provided,
-            overflowY: 'hidden',
-            flex: 1,
-            minHeight: 0,
-            minWidth: 0
+            ...provided,
+            maxHeight: '300px',
+            // flex: 1,
+            // minHeight: 0,
+            // minWidth: 0
         }),
         option : (provided, state) => ({
-            ...provided, 
+            // ...provided, 
             color: state.isSelected ? '#FCD144' : 'white', 
             background: state.isFocused && '#12100E' || state.isSelected && 'transparent',
             cursor: 'pointer',
@@ -84,7 +84,7 @@ const withCustomSelect = (props) => {
         })
     }
     
-    const withScrollbar = props => <components.MenuList {...props}><CustomScroll heightRelativeToParent="100%">{props.children}</CustomScroll></components.MenuList>
+    const withScrollbar = props => <CustomScroll heightRelativeToParent='100%'>{props.children}</CustomScroll>
     const valueViewChecker = componentProps => {
         const selectValue = props.hasOwnProperty('shrinkMd') 
             ? props.isLarge && <span>{componentProps.children}</span> 
@@ -94,8 +94,8 @@ const withCustomSelect = (props) => {
         </components.SingleValue>
     }
 
+
     return <Select styles={customStyles}
-        menuIsOpen={true}
         options={props.options}
         defaultValue={{...props.defaultValue}}
         value={props.value && {...props.value}}

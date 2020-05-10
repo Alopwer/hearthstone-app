@@ -3,15 +3,26 @@ import ModalCard from './ModalCard';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getCard, resetCard, setRelativeCardsIds, toggleActiveCard, resetCardTA } from '../../redux/cardReducer';
+import { getCard, resetCard, setRelativeCardsIds } from '../../redux/cardReducer';
 import Modal from 'react-modal';
 import s from './ModalCard.module.scss';
+import { useTransition } from 'react-spring'
 
 Modal.setAppElement('#root')
 
 const ModalCardContainer = props => {
     const [modalIsOpen,setIsOpen] = useState(false);
 
+    const transitions = useTransition(props.match.params.cardId, null, {
+        from: { opacity: 0, left: 50, position: 'relative' },
+        enter: { opacity: 1, left: 0, position: 'relative' },
+        leave: { opacity: 0, left: -50, position: 'relative' },
+        config: {
+            duration: 1000
+        },
+        reset: true
+    })
+    
     useEffect(() => {
         if (!props.isFetching && props.match.params.cardId) {
             props.getCard(props.match.params.cardId)
@@ -20,19 +31,18 @@ const ModalCardContainer = props => {
 
     useEffect(() => {
         if(props.cardInfo) {
+            getRelativeCardsIds()
             if (!modalIsOpen) {
                 openModal()
             }
-            getRelativeCardsIds()
         }
     }, [props.cardInfo])
 
     function openModal() {
-        props.toggleActiveCard(true)
         setIsOpen(true);
     }
     function closeModal(){
-        props.resetCardTA()
+        props.resetCard()
         setIsOpen(false)
         props.history.push('/cards')
     }
@@ -59,14 +69,15 @@ const ModalCardContainer = props => {
     return <Modal 
             isOpen={modalIsOpen} 
             onRequestClose={closeModal}
-            className={s["card-modal"]}
-            overlayClassName={s["card-overlay"]}
+            className={s["modal"]}
+            overlayClassName={s["overlay"]}
         >
-        <ModalCard cards={props.cards} 
-            cardInfo={props.cardInfo} 
-            onRequestCard={onRequestCard} 
+        <ModalCard onRequestCard={onRequestCard}
             relativeCardsIds={props.relativeCardsIds} 
-            metadata={props.metadata}
+            transitions={transitions}
+            st={transitions[0].props}
+            cardInfo={props.cardInfo}
+            id={props.match.params.cardId}
         />
     </Modal>
     || <></>
@@ -74,16 +85,13 @@ const ModalCardContainer = props => {
 
 const mapStateToProps = (state) => ({
     cards: state.cardsReducer.cards,
-    requestedCardId: state.cardReducer.requestedCardId,
     relativeCardsIds: state.cardReducer.relativeCardsIds,
-    relativeCards: state.cardReducer.relativeCards,
     cardInfo: state.cardReducer.cardInfo,
     isFetching: state.cardReducer.isFetching,
-    metadata: state.appReducer.metadata,
-    cardActive: state.cardReducer.cardActive
+    activeCard: state.cardReducer.activeCard
 })
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { getCard, resetCard, setRelativeCardsIds, toggleActiveCard, resetCardTA })
+    connect(mapStateToProps, { getCard, resetCard, setRelativeCardsIds })
 )(ModalCardContainer);

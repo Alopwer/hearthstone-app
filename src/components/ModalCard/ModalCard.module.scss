@@ -1,12 +1,102 @@
-.card-modal {
+.modal {
     position: absolute;
-    top: 100px;
-    left: 40px;
-    right: 40px;
-    bottom: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    max-width: 980px;
+    width: 100%;
+    & > div {
+        position: relative;
+    }
+    &-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: center;
+        padding: 50px 30px 30px;
+        &__image {
+            width: 100%;
+            max-width: 375px;
+            position: relative;
+            margin-right: 25px;
+            img {
+
+            }
+        }
+    }
+    &-info {
+        padding: 50px 20px 20px;
+        width: 460px;
+        line-height: 1.5;
+        font-size: 1.2rem;
+        h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        &__flavorText {
+            font-style: italic;
+            color: #868686;
+            margin: 5px 0;
+        }
+        &__text {
+            margin: 5px 0;
+        }
+        ul {
+            font-size: 1rem;
+            margin: 20px 0 25px;
+            list-style: disc;
+            li {
+                margin-left: 20px;
+                color: rgb(255, 229, 172);
+                font-weight: bold;
+                span {
+                    color: white;
+                    font-weight: normal;
+                }
+            }
+        }
+    }
 }
 
-.card-overlay {
+.arrow_left, .arrow_right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    height: 120px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    pointer-events: all;
+    display: flex;
+}
+.arrow_left {
+    left: -120px;
+}
+.arrow_right {
+    right: -120px;
+}
+
+.arrow-img_left, .arrow-img_right {
+    background-image: url("https://d2q63o9r0h0ohi.cloudfront.net/images/esports/global-games/navArrows-9c1ca6beda271e6ff1421e54014ef85f833b17c92d7ab317b96ee14aad15a4cd04fe6954a748e0d967839a0ad10644a119e49475496ff106ee3df4908c00515d.png");
+    background-repeat: no-repeat;
+    width: 78px;
+    height: 69px;
+    content: '';
+    position: relative;
+}
+.arrow-img_left {
+    background-position: -2px -3px;
+}
+.arrow-img_right {
+    background-position: -102px -3px;
+}
+
+.overlay {
     z-index: 5;
     position: fixed;
     top: 0;

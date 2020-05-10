@@ -3,6 +3,7 @@ import { SetsContainer, SearchContainer } from '../Filters';
 import FilterbarBtn from '../FilterbarParts/FilterbarBtn';
 import s from '../Filterbar.module.scss';
 import ManaAndClassFilters from './ManaAndClassFilters';
+import CustomScroll from 'react-custom-scroll'
 
 const FilterbarTop = ({ classValue, classes, setClass, setClassName, ...props }) => {
 	return <div className={s['filterbar-top']}>
