@@ -4,7 +4,8 @@ const UPDATE_CARDS = 'hsapp/cardsReducer/UPDATE_CARDS';
 
 const initialState = {
     cards: [],
-    totalCards: null
+    totalCards: null,
+    cardsInitialized: false
 }
 
 const cardsReducer = (state = initialState, action) => {
@@ -12,7 +13,8 @@ const cardsReducer = (state = initialState, action) => {
         case UPDATE_CARDS:
             return {
                 ...state,
-                cards : [...action.cards]
+                cards : [...action.cards],
+                cardsInitialized: true
             }
         case APPEND_CARDS:
             return {

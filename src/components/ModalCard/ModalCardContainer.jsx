@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCard, resetCard, setRelativeCardsIds } from '../../redux/cardReducer';
 import Modal from 'react-modal';
-import s from './ModalCard.module.scss';
 import { useTransition } from 'react-spring'
+import s from './ModalCard.module.scss';
 
 Modal.setAppElement('#root')
 
@@ -18,25 +18,27 @@ const ModalCardContainer = props => {
         enter: { opacity: 1, left: 0, position: 'relative' },
         leave: { opacity: 0, left: -50, position: 'relative' },
         config: {
-            duration: 1000
+            duration: 300
         },
-        reset: true
     })
     
     useEffect(() => {
-        if (!props.isFetching && props.match.params.cardId) {
-            props.getCard(props.match.params.cardId)
-        }
+        !props.isFetching && 
+        props.match.params.cardId && 
+        props.getCard(props.match.params.cardId)
     }, [props.match.params.cardId])
 
     useEffect(() => {
-        if(props.cardInfo) {
-            getRelativeCardsIds()
-            if (!modalIsOpen) {
-                openModal()
-            }
-        }
+        props.cardInfo && 
+        !modalIsOpen && 
+        openModal()
     }, [props.cardInfo])
+
+    useEffect(() => {
+        props.cardInfo && 
+        props.cardsInitialized && 
+        getRelativeCardsIds()
+    }, [props.cardsInitialized, props.cardInfo])
 
     function openModal() {
         setIsOpen(true);
@@ -88,7 +90,8 @@ const mapStateToProps = (state) => ({
     relativeCardsIds: state.cardReducer.relativeCardsIds,
     cardInfo: state.cardReducer.cardInfo,
     isFetching: state.cardReducer.isFetching,
-    activeCard: state.cardReducer.activeCard
+    activeCard: state.cardReducer.activeCard,
+    cardsInitialized: state.cardsReducer.cardsInitialized
 })
 
 export default compose(

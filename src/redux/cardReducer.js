@@ -84,8 +84,8 @@ export const toggleActiveCard = (active) => ({
 })
 
 export const getCard = (cardId) => async (dispatch, getState) => {
-    const visitedCards = getState().cardReducer.visitedCards
-    const foundCard = visitedCards.find(c => +c.id === +cardId)
+    // const visitedCards = getState().cardReducer.visitedCards
+    // const foundCard = visitedCards.find(c => +c.id === +cardId)
     // if (foundCard) {
     //     dispatch(updateCard(foundCard))
     // } else {
