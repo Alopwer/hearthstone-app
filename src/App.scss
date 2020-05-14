@@ -27,3 +27,7 @@ body {
 button, input, button:focus {
     outline: none;
 }
+
+.ReactModal__Body--open {
+    overflow: hidden;
+}

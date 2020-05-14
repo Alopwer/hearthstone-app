@@ -90,6 +90,7 @@ export const getCard = (cardId) => async (dispatch, getState) => {
     //     dispatch(updateCard(foundCard))
     // } else {
         dispatch(toggleFetching(true));
+        // dispatch(resetCard())
         const data = await api.getCard(cardId);
         dispatch(toggleFetching(false));
         dispatch(updateCard(data))

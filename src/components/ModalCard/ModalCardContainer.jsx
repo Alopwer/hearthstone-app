@@ -14,12 +14,12 @@ const ModalCardContainer = props => {
     const [modalIsOpen,setIsOpen] = useState(false);
 
     const transitions = useTransition(props.match.params.cardId, null, {
-        from: { opacity: 0, left: 50, position: 'relative' },
+        from: { opacity: 0, left: 300, position: 'relative' },
         enter: { opacity: 1, left: 0, position: 'relative' },
-        leave: { opacity: 0, left: -50, position: 'relative' },
+        leave: { opacity: 0, left: -300, position: 'relative' },
         config: {
             duration: 300
-        },
+        }
     })
     
     useEffect(() => {
@@ -80,6 +80,7 @@ const ModalCardContainer = props => {
             st={transitions[0].props}
             cardInfo={props.cardInfo}
             id={props.match.params.cardId}
+            closeModal={closeModal}
         />
     </Modal>
     || <></>

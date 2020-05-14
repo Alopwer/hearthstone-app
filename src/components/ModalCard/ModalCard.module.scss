@@ -4,32 +4,57 @@
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    max-width: 980px;
     width: 100%;
-    & > div {
-        position: relative;
-    }
-    &-content {
+    height: 100%;
+    overflow-y: scroll;
+    &-main {
         position: absolute;
         top: 50%;
         left: 50%;
+        max-width: 980px;
         transform: translate(-50%, -50%);
+        @media screen and (max-width: 992px) {
+            width: 100%;
+            top: 0px;
+            transform: translateX(-50%);
+        }
+    }
+    &-content {
         display: flex;
         justify-content: center;
+        @media screen and (max-width: 992px) {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
         padding: 50px 30px 30px;
         &__image {
-            width: 100%;
-            max-width: 375px;
             position: relative;
             margin-right: 25px;
-            img {
-
+            @media screen and (max-width: 992px) {
+                margin-right: 0px;
+            }
+            @media screen and (max-width: 470px) {
+                width: 100%;
+            }
+            img {  
+                @media screen and (max-width: 470px) {
+                    width: 100%;
+                    max-width: 80%;
+                    margin: 0 auto;
+                    display: block;
+                }
             }
         }
     }
     &-info {
         padding: 50px 20px 20px;
         width: 460px;
+        position: relative;
+        @media screen and (max-width: 470px) {
+            width: 100%;
+            max-width: 100%;
+        }
         line-height: 1.5;
         font-size: 1.2rem;
         h3 {
@@ -60,6 +85,18 @@
             }
         }
     }
+    &-close {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        color: white;
+        cursor: pointer;
+        pointer-events: all;
+        z-index: 100;
+        svg {
+            fill: rgb(252, 209, 68);
+        }
+    }
 }
 
 .arrow_left, .arrow_right {
@@ -73,12 +110,21 @@
     cursor: pointer;
     pointer-events: all;
     display: flex;
+    @media screen and (max-width: 992px){
+        display: none;
+    }
 }
 .arrow_left {
     left: -120px;
+    @media screen and (max-width: 1100px) {
+        left: -50px;
+    }
 }
 .arrow_right {
     right: -120px;
+    @media screen and (max-width: 1100px) {
+        right: -50px;
+    }
 }
 
 .arrow-img_left, .arrow-img_right {
@@ -88,6 +134,9 @@
     height: 69px;
     content: '';
     position: relative;
+    @media screen and (max-width: 992px){
+        display: none;
+    }
 }
 .arrow-img_left {
     background-position: -2px -3px;

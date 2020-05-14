@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSpring } from 'react-spring'
 import AnimatedCard from './AnimatedCard';
+import WithSizes from 'react-sizes';
 
 const calc = (x, y, top, left, coef) => [(y - top) / coef, -(x - left) / coef,  1.1]
 const trans = (x, y, s) => `perspective(1000px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
@@ -19,7 +20,12 @@ const AnimatedCardContainer = props => {
         styleProps={styleProps} 
         setStyleProps={setStyleProps}
         trans={trans} 
+        isLarge={props.isLarge}
         {...props}/>
 }
 
-export default AnimatedCardContainer;
+const mapSizesToProps = ({ width }) => ({
+    isLarge: width >= 992
+})
+
+export default WithSizes(mapSizesToProps)(AnimatedCardContainer);
