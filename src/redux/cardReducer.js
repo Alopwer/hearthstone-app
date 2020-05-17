@@ -10,6 +10,7 @@ const TOGGLE_ACTIVE_CARD = 'hsapp/cardReducer/TOGGLE_ACTIVE_CARD'
 const initialState = {
     isFetching: false,
     cardInfo: null,
+    id: '',
     visitedCards: [],
     relativeCardsIds: null,
     activeCard: false
@@ -21,6 +22,7 @@ const cardReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cardInfo: {...action.cardInfo},
+                id: action.cardInfo.id,
                 activeCard: true
             }
         case TOGGLE_FETCHING:

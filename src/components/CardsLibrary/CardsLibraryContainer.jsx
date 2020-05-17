@@ -6,7 +6,7 @@ import CardsLibrary from './CardsLibrary'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 
-const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...props }) => {
+const CardsLibraryContainer = ({ id, requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
         // CHANGE!!!
         rootMargin: '100px 0px 0px 0px',
@@ -36,6 +36,7 @@ const CardsLibraryContainer = ({ requestCards, isFetching, requestOptions, ...pr
 
 const mapStateToProps = (state) => ({
     cards: state.cardsReducer.cards,
+    id: state.cardReducer.id,
     totalCards: state.cardsReducer.totalCards,
     page: state.requestReducer.page,
     isFetching: state.requestReducer.isFetching,
