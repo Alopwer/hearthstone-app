@@ -5,8 +5,7 @@ import CardsFiltersInfoContainer from "./CardsFiltersInfo/";
 
 
 const CardsLibrary = props => {
-    return (
-        <>
+    return <>
         <CardsFiltersInfoContainer />
         {
             props.cards.length !== 0 &&
@@ -18,9 +17,8 @@ const CardsLibrary = props => {
                 }
             </div>
         }
-            <div style={{height: '50px'}}ref={props.observer}></div>
-        </>
-    );
+        <div style={{position: 'relative', bottom: 1000, height: '1px'}} ref={props.observer}></div>
+    </>
 }
 
 export default CardsLibrary;

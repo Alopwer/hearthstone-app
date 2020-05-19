@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import './App.scss';
 import ModalCardContainer from "./components/ModalCard";
 
-const App = ({ isInitialized, cardsInitialized }) => {
+const App = ({ isInitialized }) => {
 	return isInitialized ? <>
 		<FilterbarContainer />
 		<div className='container'>
@@ -17,7 +17,6 @@ const App = ({ isInitialized, cardsInitialized }) => {
 				<Route path='/cards/:cardId'>
 					<CardsLibraryContainer />
 					<ModalCardContainer />
-					{/* { cardsInitialized && <ModalCardContainer />} */}
 				</Route>
 				<Route path='/cards'>
 					<CardsLibraryContainer />
@@ -26,23 +25,22 @@ const App = ({ isInitialized, cardsInitialized }) => {
 					<Redirect to='/cards' />
 				</Route>
 			</Switch>
-			<Footer />
 		</div>
+		<Footer />
 	</> 
 	: <Preloader />
 }
 
-let AppContainer = ({ initialize, isInitialized, cardsInitialized }) => {
+let AppContainer = ({ initialize, isInitialized }) => {
 	useEffect(() => {
 		initialize();
 	}, []);
 
-	return <App isInitialized={isInitialized} cardsInitialized={cardsInitialized}/>;
+	return <App isInitialized={isInitialized}/>;
 };
 
 const mapStateToProps = state => ({
-	isInitialized: state.appReducer.isInitialized,
-	cardsInitialized: state.cardsReducer.cardsInitialized
+	isInitialized: state.appReducer.isInitialized
 });
 
 export default connect(mapStateToProps, { initialize })(AppContainer)

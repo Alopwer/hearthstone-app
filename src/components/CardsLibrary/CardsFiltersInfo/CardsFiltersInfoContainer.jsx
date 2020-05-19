@@ -12,8 +12,7 @@ import {
 	setRarity,
 	setMinionType,
 	setKeyword,
-	resetFilters,
-	setViewMode
+	resetFilters
 } from '../../../redux/requestReducer';
 import ClearFilterBtn from './ClearFilterBtn'
 import { withRouter } from 'react-router-dom'
@@ -24,8 +23,7 @@ const CardsFiltersInfoContainer = props => {
 	const { class: classValue, textFilter, attack, health, type, minionType, keyword, rarity, manaCost } = props.requestOptions
 	const { className, typeName, rarityName, minionTypeName, keywordName, actualSetName } = props.nameList
 
-	const manaCostBar = manaCost.length !== 0 && manaCost.sort((a, b) => a - b)
-		.join(', ')
+	const manaCostBar = manaCost.length !== 0 && manaCost.sort((a, b) => a - b).join(', ')
 		
 	const filtersInfo = [
 		{
@@ -71,6 +69,8 @@ const CardsFiltersInfoContainer = props => {
 		filterItems={filterItems}
 		actualSetName={actualSetName}
 		additionalFilterbars={props.additionalFilterbars}
+		gameMode={props.requestOptions.gameMode}
+		viewMode={props.requestOptions.viewMode}
 	/>;
 };
 
@@ -81,10 +81,8 @@ const mapStateToProps = state => ({
 	additionalFilterbars: state.uiReducer.additionalFilterbars
 });
 
-
 const mapSizesToProps = ({ width }) => ({
-	isSmall: width < 992,
-	isXSmall: width < 621
+	isSmall: width < 992
 })
 
 export default compose(
@@ -101,7 +99,6 @@ export default compose(
 		setRarity,
 		setMinionType,
 		setKeyword,
-		resetFilters,
-		setViewMode,
+		resetFilters
 	})
 )(CardsFiltersInfoContainer);

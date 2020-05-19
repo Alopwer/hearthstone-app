@@ -1,6 +1,6 @@
 import React from 'react';
 import ManaAndClassFilters from './ManaAndClassFilters';
-import OrderAndSortFilterContainer from '../../CardsLibrary/CardsFiltersInfo/CardsFiltersInfoParts/OrderAndSortFilterContainer';
+import OrderAndSortFilterContainer from '../../CardsLibrary/CardsFiltersInfo/CardsFiltersInfoParts/OrderAndSort/OrderAndSortFilterContainer';
 import s from '../Filterbar.module.scss';
 import { MdClear } from 'react-icons/md'
 

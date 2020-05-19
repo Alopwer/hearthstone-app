@@ -6,22 +6,23 @@ import CardsLibrary from './CardsLibrary'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 
-const CardsLibraryContainer = ({ id, requestCards, isFetching, requestOptions, ...props }) => {
+const CardsLibraryContainer = ({ modalCardId, requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
-        // CHANGE!!!
-        rootMargin: '100px 0px 0px 0px',
         threshold: 0
     });
 
     useEffect(() => {
-        // debugger
-        if (!isFetching && inView && props.cards.length !== props.totalCards) {
-            requestCards(requestOptions, props.page, false)
+        if (!isFetching && props.cards.length !== props.totalCards) {
+            if (inView) {
+                requestCards(requestOptions, props.page, false)
+            } else if (modalCardId && !inView){
+                const cardIndex = props.cards.findIndex(c => c.id === modalCardId)
+                props.cards.length - cardIndex < 10 && requestCards(requestOptions, props.page, false)
+            }
         }
-    }, [inView])
+    }, [inView, modalCardId])
 
     useEffect(() => {
-        // debugger
         if (!isFetching) {
             requestCards(requestOptions, 1, true)
         }
@@ -30,13 +31,12 @@ const CardsLibraryContainer = ({ id, requestCards, isFetching, requestOptions, .
     return <CardsLibrary cards={props.cards} 
         observer={ref} 
         viewMode={props.viewMode} 
-        // match={props.match}
     />
 }
 
 const mapStateToProps = (state) => ({
     cards: state.cardsReducer.cards,
-    id: state.cardReducer.id,
+    modalCardId: state.cardReducer.id,
     totalCards: state.cardsReducer.totalCards,
     page: state.requestReducer.page,
     isFetching: state.requestReducer.isFetching,
