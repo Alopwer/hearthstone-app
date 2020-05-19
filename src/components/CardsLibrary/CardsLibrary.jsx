@@ -17,7 +17,7 @@ const CardsLibrary = props => {
                 }
             </div>
         }
-        <div style={{position: 'relative', bottom: 1000, height: '1px'}} ref={props.observer}></div>
+        <div style={{position: 'relative', bottom: '100vh', height: '1px', content: ''}} ref={props.observer}></div>
     </>
 }
 
