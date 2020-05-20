@@ -2,9 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from '../CardsTable.module.scss';
 
+
 const CardsRowImg = props => (
     <td className={s['card-row__card']}>
-        <div className={s['card-img']} 
+        <NavLink className={s['card-img']} 
             onMouseEnter={(e) => {
                 props.handleFullImgPos(e)
                 props.toggleHovered(true)
@@ -13,16 +14,14 @@ const CardsRowImg = props => (
                 props.handleFullImgPos(e)
                 props.toggleHovered(false)
             }}
+            to={`/cards/${props.id}`} 
         >
-            <NavLink 
-                to={`/cards/${props.id}`} 
-                className={s['card-img__link']}
-            >
+            <span className={s['card-img__link']}>
                 { props.name }
-            </NavLink>
+            </span>
             <div className={s['card-img__mask']}></div>
             <div className={s['card-img__img']} style={{ backgroundImage: `url(${props.cropImg})` }}></div>
-        </div>
+        </NavLink>
         { props.isHovered && <div 
             className={s['card-img_full']} 
             style={{

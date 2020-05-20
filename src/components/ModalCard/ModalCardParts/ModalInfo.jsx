@@ -18,6 +18,15 @@ const ModalInfo = props => {
             { cardInfo.artistName && <li>Artist: <span>{cardInfo.artistName}</span></li> }
             { cardInfo.collectible && <li>Collectible</li> }
         </ul>
+        {
+            props.keywordList && 
+            <div>
+                <p>Learn more:</p>
+                {
+                    props.keywordList.map((k, i) => <span>{ k.name }{ i !== props.keywordList.length - 1 && ', '}</span>)
+                }
+            </div>
+        }
     </div>
 }
 

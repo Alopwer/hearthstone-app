@@ -129,6 +129,8 @@
 }
 
 .card-img {
+    outline: none;
+    display: block;
     position: relative;
     border-radius: 5px;
     padding: 6px 20px;
@@ -164,6 +166,8 @@
     }
     &__link {
         display: block;
+        width: 100%;
+        height: 100%;
         text-decoration: none;
         color: rgb(255, 255, 255);
         position: relative;
@@ -218,15 +222,27 @@
     height: 36px;
 }
 
-.sss {
-    &:after {
-        content: ', '
+.keyword {
+    &__name {
+        word-break: none;
     }
-    &:last-child::after {
-        content: ''
-    }
-}
+    &-info__full {
+        color: white;
+        min-width: 150px;
+        background: #551514;
+        border-radius: 5px;
+        border: 5px solid rgb(255, 240, 100);
+        padding: 10px 8px;  
+        position: absolute;
+        bottom: 50px;
+        left: 0px;
+        box-shadow: 10px 5px 15px black;
+        h4 {
+            padding-bottom: 10px;
+            font-weight: bold;
+        }
+        p {
 
-.keyword-info__full {
-    background: white;
+        }
+    }
 }

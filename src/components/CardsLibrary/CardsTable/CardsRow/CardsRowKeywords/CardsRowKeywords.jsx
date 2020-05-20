@@ -10,9 +10,9 @@ const CardsRowKeywords = ({ keywords, card, setKeyword, setKeywordName }) => {
     }
 
     const keywordItems = filteredKeywords.length !== 0 
-        ? filteredKeywords.map(k => (<CardsRowKeywordContainer key={k.id} 
+        ? filteredKeywords.map((k, i) => (<><CardsRowKeywordContainer key={k.id} 
             onKeywordClick={onKeywordClick} 
-            kwd={k} />))
+        kwd={k} />{ i !== filteredKeywords.length - 1 && ', '}</>))
         : '-'
         
     return <>{keywordItems}</>

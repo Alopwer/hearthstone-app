@@ -24,7 +24,7 @@ const ModalCard = memo(props => {
         <div className={s['modal-main']}>
         {
             props.transitions.map(item => {
-                return item && <animated.div key={item.key} style={item.props}>
+                return <animated.div key={item.key} style={item.props}>
                     <div className={s['modal-content']}>
                         <ModalImgContainer />
                         <ModalInfoContainer />

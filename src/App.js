@@ -26,7 +26,7 @@ const App = ({ isInitialized }) => {
 				</Route>
 			</Switch>
 		</div>
-		<Footer />
+		{/* <Footer /> */}
 	</> 
 	: <Preloader />
 }

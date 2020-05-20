@@ -15,6 +15,7 @@ const ModalCardContainer = props => {
     const [side, toggleSide] = useState(true)
 
     const transitions = useTransition(props.id, null, {
+        initial: { opacity: 1, left: 0,  position: 'absolute'  },
         from: { opacity: 0, left: side ? 50 : -50, position: 'absolute' },
         enter: { opacity: 1, left: 0, position: 'relative' },
         leave: { display: 'none' },
