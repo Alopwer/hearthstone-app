@@ -1,5 +1,5 @@
 import React from 'react'
-import CardsRowKeywordContainer from './CardsRowKeywordContainer'
+import KeywordInfoContainer from '../../../common/KeywordInfo/KeywordInfoContainer'
 
 const CardsRowKeywords = ({ keywords, card, setKeyword, setKeywordName }) => {
     const filteredKeywords = keywords.filter(k => card.keywordIds.includes(k.id))
@@ -10,9 +10,10 @@ const CardsRowKeywords = ({ keywords, card, setKeyword, setKeywordName }) => {
     }
 
     const keywordItems = filteredKeywords.length !== 0 
-        ? filteredKeywords.map((k, i) => (<><CardsRowKeywordContainer key={k.id} 
+        ? filteredKeywords.map((k, i) => (<><KeywordInfoContainer key={k.id} 
             onKeywordClick={onKeywordClick} 
-        kwd={k} />{ i !== filteredKeywords.length - 1 && ', '}</>))
+            kwd={k} 
+            style={{bottom: 80, left: 0}}/>{ i !== filteredKeywords.length - 1 && ', '}</>))
         : '-'
         
     return <>{keywordItems}</>

@@ -1,7 +1,7 @@
 import React from 'react'
-import s from '../../CardsTable.module.scss';
+import s from './KeywordInfo.module.scss';
 
-const CardsRowKeyword = (props) => {
+const KeywordInfo = (props) => {
     return <>
         <span className={s['keyword__name']} onClick={() => props.onKeywordClick(props.kwd.name, props.kwd.slug)}
             onMouseEnter={() => {
@@ -14,7 +14,7 @@ const CardsRowKeyword = (props) => {
         </span>
         { 
             props.isHovered && 
-            <div className={s['keyword-info__full']}>
+            <div className={s['keyword-info__full']} style={props.style}>
                 <h4 className='textShadow'>{props.kwd.name}</h4>
                 <p>{props.kwd.text}</p>
             </div> 
@@ -22,4 +22,4 @@ const CardsRowKeyword = (props) => {
     </>
 }
 
-export default CardsRowKeyword
+export default KeywordInfo

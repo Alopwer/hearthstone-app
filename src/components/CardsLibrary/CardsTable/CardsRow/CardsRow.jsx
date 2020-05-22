@@ -1,5 +1,5 @@
 import React from 'react'
-import CardsRowKeywords from './CardsRowKeywords/CardsRowKeywords';
+import CardsRowKeywords from './CardsRowKeywords';
 import CardsRowMinionType from './CardsRowMinionType';
 import s from '../CardsTable.module.scss';
 import CardsRowSortable from './CardsRowSortable';

@@ -1,5 +1,7 @@
 import React from 'react';
 import s from '../ModalCard.module.scss';
+import KeywordInfoContainer from '../../common/KeywordInfo/KeywordInfoContainer';
+import KeywordBlock from '../../common/KeywordInfo/KeywordBlock';
 
 const ModalInfo = props => {
     const { type, rarity, set, classValue, cardInfo } = props
@@ -18,15 +20,7 @@ const ModalInfo = props => {
             { cardInfo.artistName && <li>Artist: <span>{cardInfo.artistName}</span></li> }
             { cardInfo.collectible && <li>Collectible</li> }
         </ul>
-        {
-            props.keywordList && 
-            <div>
-                <p>Learn more:</p>
-                {
-                    props.keywordList.map((k, i) => <span>{ k.name }{ i !== props.keywordList.length - 1 && ', '}</span>)
-                }
-            </div>
-        }
+        <KeywordBlock keywordList={props.keywordList} style={{bottom: 100, left: 20}} />
     </div>
 }
 

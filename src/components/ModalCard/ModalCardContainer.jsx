@@ -16,11 +16,11 @@ const ModalCardContainer = props => {
 
     const transitions = useTransition(props.id, null, {
         initial: { opacity: 1, left: 0,  position: 'absolute'  },
-        from: { opacity: 0, left: side ? 50 : -50, position: 'absolute' },
+        from: { opacity: 0, left: side ? 80 : -80, position: 'absolute' },
         enter: { opacity: 1, left: 0, position: 'relative' },
         leave: { display: 'none' },
         config: {
-            duration: 300
+            duration: 350
         }
     })
     
