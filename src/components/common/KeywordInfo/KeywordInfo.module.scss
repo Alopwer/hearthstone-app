@@ -1,9 +1,13 @@
 .keyword {
     &_modal {
-        font-size: 1.1rem;
-        span:hover {
+        font-size: 1rem;
+        position: relative;
+        span{
+            &:hover {
+                cursor: zoom-in;
+            }
+            font-weight: bold;
             text-decoration: underline;
-            cursor: zoom-in;
         }
     }
     &__name {
@@ -21,7 +25,8 @@
         box-shadow: 10px 5px 15px black;
         h4 {
             padding-bottom: 10px;
-            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: 'belwe', serif;
         }
         p {
 

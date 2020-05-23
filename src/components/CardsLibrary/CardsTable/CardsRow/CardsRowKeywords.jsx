@@ -13,7 +13,7 @@ const CardsRowKeywords = ({ keywords, card, setKeyword, setKeywordName }) => {
         ? filteredKeywords.map((k, i) => (<><KeywordInfoContainer key={k.id} 
             onKeywordClick={onKeywordClick} 
             kwd={k} 
-            style={{bottom: 80, left: 0}}/>{ i !== filteredKeywords.length - 1 && ', '}</>))
+            style={{bottom: 50, left: 0}}/>{ i !== filteredKeywords.length - 1 && ', '}</>))
         : '-'
         
     return <>{keywordItems}</>

@@ -1,5 +1,5 @@
 import api from '../api/ApiService';
-import { appendCards, setTotalCards, updateCards } from './cardsReducer';
+import { appendCards, setTotalCards, updateCards, throwCardsError } from './cardsReducer';
 
 const TOGGLE_FETCHING = 'hsapp/requestReducer/TOGGLE_FETCHING';
 const INCREASE_PAGE = 'hsapp/requestReducer/INCREASE_PAGE';
@@ -289,16 +289,20 @@ export const resetFilters = () => ({
 
 export const requestCards = (requestOptions, page, update) => async dispatch => {
     dispatch(toggleFetching(true));
-    const data = await api.getCards(requestOptions, page);
+    const res = await api.getCards(requestOptions, page);
     dispatch(toggleFetching(false));
-    if (update) {
-        dispatch(updateCards(data.cards));
-        dispatch(resetPage());
+    if (res.statusText == 'OK') {
+        if (update) {
+            dispatch(updateCards(res.data.cards));
+            dispatch(resetPage());
+        } else {
+            dispatch(appendCards(res.data.cards));
+        }
+        dispatch(setTotalCards(res.data.cardCount));
+        dispatch(increasePage());
     } else {
-        dispatch(appendCards(data.cards));
+        dispatch(throwCardsError())
     }
-    dispatch(setTotalCards(data.cardCount));
-    dispatch(increasePage());
 };
 
 export default requestReducer;

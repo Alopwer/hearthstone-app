@@ -5,8 +5,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getCard, resetCard, setRelativeCardsIds } from '../../redux/cardReducer';
 import Modal from 'react-modal';
-import { useTransition, useSpring } from 'react-spring'
+import { useTransition } from 'react-spring'
 import s from './ModalCard.module.scss';
+import ErrorBoundaryContainer from '../ErrorBoundary';
 
 Modal.setAppElement('#root')
 
@@ -20,7 +21,7 @@ const ModalCardContainer = props => {
         enter: { opacity: 1, left: 0, position: 'relative' },
         leave: { display: 'none' },
         config: {
-            duration: 350
+            duration: 450
         }
     })
     
@@ -75,20 +76,20 @@ const ModalCardContainer = props => {
             }
         }
     }
-    
-    return <Modal 
-            isOpen={modalIsOpen} 
+
+    return <ErrorBoundaryContainer err={props.cardError}> 
+        <Modal isOpen={modalIsOpen} 
             onRequestClose={closeModal}
             className={s["modal"]}
             overlayClassName={s["overlay"]}
         >
-        <ModalCard onRequestCard={onRequestCard}
-            relativeCardsIds={props.relativeCardsIds} 
-            transitions={transitions}
-            closeModal={closeModal}
-        />
-    </Modal>
-    || <></>
+            <ModalCard onRequestCard={onRequestCard}
+                relativeCardsIds={props.relativeCardsIds} 
+                transitions={transitions}
+                closeModal={closeModal}
+            />
+        </Modal>
+    </ErrorBoundaryContainer>
 }
 
 const mapStateToProps = (state) => ({
@@ -98,7 +99,8 @@ const mapStateToProps = (state) => ({
     id: state.cardReducer.id,
     isFetching: state.cardReducer.isFetching,
     activeCard: state.cardReducer.activeCard,
-    cardsInitialized: state.cardsReducer.cardsInitialized
+    cardsInitialized: state.cardsReducer.cardsInitialized,
+    cardError: state.cardReducer.cardError
 })
 
 export default compose(

@@ -8,7 +8,7 @@ const KeywordBlock = (props) => {
             <p>Learn more:</p>
             {
                 props.keywordList.map((k, i) => <>
-                    <KeywordInfoContainer kwd={k} style={props.style}/>
+                    <KeywordInfoContainer key={k.id} kwd={k} style={props.style}/>
                     { i !== props.keywordList.length - 1 && ', '}
                 </>)
             }

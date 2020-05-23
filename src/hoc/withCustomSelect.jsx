@@ -7,7 +7,8 @@ import withSizes from 'react-sizes'
 
 const customStyles = icon => ({
     container: (provided) => ({
-        ...provided
+        ...provided,
+        fontFamily: 'belwe'
     }),
     control: (provided, state) => ({
         ...provided,

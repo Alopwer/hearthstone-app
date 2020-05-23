@@ -2,10 +2,12 @@ import api from '../api/ApiService';
 
 const INITIALIZE_APP = 'hsapp/appReducer/INITIALIZE_APP';
 const INITIALIZE_METADATA = 'hsapp/appReducer/INITIALIZE_METADATA';
+const THROW_METADATA_ERROR = 'hsapp/appReducer/THROW_METADATA_ERROR';
 
 const initialState = {
     isInitialized: false,
-    metadata: null
+    metadata: null,
+    metadataError: false,
 }
 
 const appReducer = (state = initialState, action) => {
@@ -19,6 +21,11 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 metadata: {...action.metadata}
+            }
+        case THROW_METADATA_ERROR:
+            return {
+                ...state,
+                metadataError: true
             }
         default:
             return state
@@ -34,11 +41,19 @@ const initializeMetadata = (metadata) => ({
     metadata
 })
 
+const throwMetadataError = () => ({
+    type: THROW_METADATA_ERROR
+})
+
 export const initialize = () => async (dispatch) => {
     await api.initialize()
     const metadata = await api.getMetadata()
-    dispatch(initializeMetadata(metadata))
-    dispatch(initializeApp())
+    if (metadata.statusText == 'OK') {
+        dispatch(initializeMetadata(metadata.data))
+        dispatch(initializeApp())
+    } else {
+        dispatch(throwMetadataError())
+    }
 }
 
 export default appReducer;

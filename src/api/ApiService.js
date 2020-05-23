@@ -17,34 +17,29 @@ class ApiService {
 
   async getSimpleResource(resource, option) {
     const composedUrl = `${this._baseUrl}${resource}/${option}?locale=en_US&access_token=${this._token}`
-    // debugger
-    const response = await Axios.get(composedUrl)
+    const response = Axios.get(composedUrl).then((res) => res).catch((err) => err)
     return response
   }
 
   async getResource(resource, requestOptions, page) {
     const composedUrl = createComposedUrl(this._baseUrl, resource, this._token, requestOptions, page)
-    // debugger
-    const response = await Axios.get(composedUrl)
+    const response = Axios.get(composedUrl).then((res) => res).catch((err) => err)
     return response
   }
 
   async getMetadata() {
-    const response = await this.getResource('metadata', { locale: 'en_US' });
-    // debugger
-    return response.data
+    const response = this.getResource('metadata', { locale: 'en_US' }).then((res) => res).catch((err) => err);
+    return response
   }
 
   async getCards(requestOptions, page) {
     const response = await this.getResource('cards', requestOptions, page);
-    // debugger
-    return response.data
+    return response
   }
 
   async getCard(cardId) {
     const response = await this.getSimpleResource('cards', cardId);
-    // debugger
-    return response.data
+    return response
   }
 
 }

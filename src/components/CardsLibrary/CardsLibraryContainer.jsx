@@ -5,6 +5,7 @@ import { requestCards } from '../../redux/requestReducer'
 import CardsLibrary from './CardsLibrary'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import ErrorBoundaryContainer from '../ErrorBoundary'
 
 const CardsLibraryContainer = ({ modalCardId, requestCards, isFetching, requestOptions, ...props }) => {
     const [ref, inView] = useInView({
@@ -28,14 +29,21 @@ const CardsLibraryContainer = ({ modalCardId, requestCards, isFetching, requestO
         }
     }, [requestOptions])
     
-    return <CardsLibrary cards={props.cards} 
-        observer={ref} 
-        viewMode={props.viewMode} 
-    />
+    return <ErrorBoundaryContainer err={props.cardsError}> 
+        {
+            props.cardsInitialized && 
+            <CardsLibrary cards={props.cards} 
+                observer={ref} 
+                viewMode={props.viewMode} 
+            />
+        } 
+    </ErrorBoundaryContainer>
 }
 
 const mapStateToProps = (state) => ({
     cards: state.cardsReducer.cards,
+    cardsInitialized: state.cardsReducer.cardsInitialized,
+    cardsError: state.cardsReducer.cardsError,
     modalCardId: state.cardReducer.id,
     totalCards: state.cardsReducer.totalCards,
     page: state.requestReducer.page,

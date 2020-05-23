@@ -1,8 +1,8 @@
 import React from "react";
 import CardsSectionContainer from "./CardsSection";
 import CardsTableContainer from "./CardsTable";
-import CardsFiltersInfoContainer from "./CardsFiltersInfo/";
-import NoCards from "../common/NoCards";
+import CardsFiltersInfoContainer from "./CardsFiltersInfo";
+import NoCards from "../common/NoCards/NoCards";
 
 const CardsLibrary = props => {
     return <>

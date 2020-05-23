@@ -20,7 +20,7 @@ const ModalInfo = props => {
             { cardInfo.artistName && <li>Artist: <span>{cardInfo.artistName}</span></li> }
             { cardInfo.collectible && <li>Collectible</li> }
         </ul>
-        <KeywordBlock keywordList={props.keywordList} style={{bottom: 100, left: 20}} />
+        <KeywordBlock keywordList={props.keywordList} style={{bottom: 60, left: 0}} />
     </div>
 }
 

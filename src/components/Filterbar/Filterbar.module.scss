@@ -33,6 +33,7 @@
         }
     }
     &-search, &-search_active {
+        font-family: 'belwe', serif;
         display: flex;
         align-items: center;
         max-width: 300px;
@@ -153,6 +154,7 @@
     display: flex;
     justify-content: flex-end;
     flex: 1;
+    font-family: 'belwe', serif;
     @media screen and (max-width: 991px) {
         flex: unset;
     }
@@ -200,6 +202,7 @@
 }
 
 .manaBtn, .manaBtn_active {
+        font-family: 'belwe', serif;
         position: relative;
         background: transparent;
         border: none;
@@ -243,7 +246,7 @@
     &__text {
         color: white;
         position: relative;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         text-shadow: rgb(0, 0, 0) 2px 0px 0px, 
             rgb(0, 0, 0) 1.75517px 0.95885px 0px, 
             rgb(0, 0, 0) 1.0806px 1.68294px 0px, 
